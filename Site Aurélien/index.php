@@ -47,7 +47,7 @@ if (isset($_GET['logout_message'])) {
             <p>Bienvenue sur le site officiel de la plus grande compétition de toute l'histoire du jeu Open Arena ! ce tournois opposera les meilleures équipes de chacunes de ces villes : Monaco, Rouen, Paris et Montcuq.</p>
   
             <h2>Remerciement</h2>
-            <p>Merci bien évidemment à Taher et Horiace pour leur soutien infaillible dans cette mission, ainsi qu'à Antoine et Baptiste pour leur dévouement sur la configuration du serveur !</p>
+            <p>Merci bien évidemment à Aurélien, Taher et Auriace pour leur soutien infaillible dans cette mission, ainsi qu'à Antoine et Baptiste pour leur dévouement sur la configuration du serveur !</p>
             <p>Nous souhaitons également remercier l'ESIGELEC de nous avoir confié ce projet, digne d'étudiants exceptionnels comme ceux de notre équipe.</p>
           </article>
         </main>
