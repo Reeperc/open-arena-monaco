@@ -60,11 +60,11 @@ if (isset($_SESSION['welcome_message2'])) {
         <main>
           <article>
             <h1>Qui sommes nous ?</h1>
-            <p>Nous sommes une association de jeux qui proposent aux visiteurs de notre site de rejoindre des parties, dans leurs jeux favoris. Ils peuvent également ajouter leurs jeux préférés en favori afin d'y accéder plus rapidement. Ils peuvent également, s'ils le souhaitent, consulter les infos de chaque jeu proposé par le site. Ces informations comprennent une image représentative du jeu, les règles du jeu ainsi que d'autres infos.</p>
+            <p>Bienvenue sur le site officiel de la plus grande compétition de toute l'histoire du jeu Open Arena ! ce tournois opposera les meilleures équipes de chacunes de ces villes : Monaco, Rouen, Paris et Montcuq.</p>
   
             <h2>Remerciement</h2>
-            <p>Merci bien évidemment aux deux informaticiens de génie que sont Aurélien MARTINEAU et Alexandre MATIAS pour avoir codé l'intégralité de notre site web.</p>
-            <p>Nous souhaitons également remercier l'ESIGELEC de nous avoir confié leurs deux plus brillants étudiants.</p>
+            <p>Merci bien évidemment à Aurélien, Taher et Auriace pour leur soutien infaillible dans cette mission, ainsi qu'à Antoine et Baptiste pour leur dévouement sur la configuration du serveur !</p>
+            <p>Nous souhaitons également remercier l'ESIGELEC de nous avoir confié ce projet, digne d'étudiants exceptionnels comme ceux de notre équipe.</p>
           </article>
         </main>
 
