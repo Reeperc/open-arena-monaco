@@ -62,21 +62,29 @@ if (isset($_SESSION['membre_username'])) {
 <?php include('MenuMembreF.php'); ?>
 
 <h1>Jeux Favoris</h1>
+    <h2>combat à mort</h2>
+        <p>combat à mort : blablablbalbalba</p>
+    <h2>combat par équipe</h2>
+        <p>blablablablbalblablablablbalbla</p>
+    <h2>capture du drapeau</h2>
+        <p>blab lalbalbalb albla bl abla lablabl</p>
+    <h2>tournoi</h2>   
+        <p>blabl blablablablbalbalblab labl bl ablbalbala</p>
 
 <?php
 // Vérifiez s'il y a des jeux favoris pour afficher
-if ($stmt->rowCount() > 0) {
+//if ($stmt->rowCount() > 0) {
     // Affichez les noms des jeux favoris dans une liste
-    echo '<ul>';
-    
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo '<li>' . $row['Nom'] . '</li>';
-    }
-    
-    echo '</ul>';
-} else {
-    echo 'Aucun jeu favori trouvé pour ce membre.';
-}
+//    echo '<ul>';
+//    
+//    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//        echo '<li>' . $row['Nom'] . '</li>';
+//    }
+//    
+//    echo '</ul>';
+//} else {
+//    echo 'Aucun jeu favori trouvé pour ce membre.';
+//}
 ?>
 <button id="return-button" onclick="window.location.href='AccueilMembreF.php'">Retour</button>
 <?php include('FooterF.php'); ?>
