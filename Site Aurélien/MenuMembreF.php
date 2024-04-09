@@ -61,7 +61,7 @@
 <body>
     <header>
         <a href="AccueilMembreF.php">
-            <img src="logo esigelec.png" alt="Logo du site">
+            <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
             <a href="PlanningF.php">Calendrier</a>

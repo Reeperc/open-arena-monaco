@@ -79,7 +79,7 @@
         // Afficher un message de bienvenue pour l'admin
         echo '<header>';
         echo '<a href="AccueilAdminF.php">';
-        echo '<img src="logo esigelec.png" alt="Logo du site">';
+        echo '<img src="logo site.png" alt="Logo du site">';
         echo '</a>';
         echo '<nav>';
         echo '<a href="CalendrierAdminF.php">Page à définir</a>';
