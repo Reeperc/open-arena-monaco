@@ -5,74 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header Membre</title>
     <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #001F3F; /* Bleu foncé */
-        color: #FFD700; /* Doré */
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #357ABD; /* Bleu */
+            color: #8B4513; /* Doré tirant vers le marron clair */
+        }
 
-    header {
-        background-color: #FFD700; /* Doré */
-        color: #001F3F; /* Bleu foncé */
-        padding: 15px;
-        text-align: center;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        position: relative;
-    }
+        header {
+            background-color: #FFD700; /* Doré */
+            color: #357ABD; /* Bleu */
+            padding: 15px;
+            text-align: center;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            position: relative;
+        }
 
-    header a {
-        display: block; /* Transforme l'élément en bloc pour occuper toute la largeur */
-    }
+        header a {
+            display: block; /* Transforme l'élément en bloc pour occuper toute la largeur */
+        }
 
-    header img {
-        width: 100px; /* Ajustez la taille du logo selon vos besoins */
-        height: auto;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
+        header img {
+            width: 100px; /* Ajustez la taille du logo selon vos besoins */
+            height: auto;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
 
-    header p {
-        background-color: #001F3F; /* Bleu foncé */
-        color: #FFD700; /* Doré */
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-right: 10px;
-    }
+        header p {
+            background-color: #357ABD; /* Bleu */
+            color: #8B4513; /* Doré tirant vers le marron clair */
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
 
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        padding-left: 120px; /* Ajout d'un espace pour le logo avant les liens */
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        overflow: hidden;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-left: 120px; /* Ajout d'un espace pour le logo avant les liens */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            overflow: hidden;
+        }
 
-    nav a {
-        color: #FFD700; /* Doré */
-        text-decoration: none;
-        font-size: 18px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
+        nav a {
+            color: #8B4513; /* Doré tirant vers le marron clair */
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-    nav a:hover {
-        background-color: #FFA500; /* Or */
-    }
+        nav a:hover {
+            background-color: #FFD700; /* Doré */
+        }
 
-    .accueil-link {
-        margin-left: auto; /* Déplace le bouton Déconnexion tout à droite */
-    }
-</style>
+        .accueil-link {
+            margin-left: auto; /* Déplace le bouton Déconnexion tout à droite */
+        }
+    </style>
 
 </head>
 <body>
@@ -96,3 +96,4 @@
     ?>
 </body>
 </html>
+
