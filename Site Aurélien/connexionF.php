@@ -6,18 +6,11 @@ if (isset($_SESSION['success_message'])) {
     unset($_SESSION['success_message']); // Supprimer la variable de session après l'affichage
 }
 
-
-//Ecole :
+// Définir les informations de connexion à la base de données
 $serveur = "localhost";
 $utilisateur = "grp_6_10";
 $motDePasse = "oPkO06vqDtnh";
 $baseDeDonnees = "bdd_6_10";
-
-//Maison :
-//$serveur = "localhost";
-//$utilisateur = "root";
-//$motDePasse = "root";
-//$baseDeDonnees = "mabdd";
 
 try {
     // Créer une connexion PDO
@@ -32,71 +25,60 @@ try {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        try {
-            // Vérifier d'abord dans la table "Membre"
-            $queryMembre = "SELECT * FROM Membre WHERE username = ?";
-            $stmtMembre = $connexion->prepare($queryMembre);
-            $stmtMembre->execute([$username]);
-            $membre = $stmtMembre->fetch();
+        // Vérifier d'abord dans la table "Membre"
+        $queryMembre = "SELECT * FROM Membre WHERE username = ?";
+        $stmtMembre = $connexion->prepare($queryMembre);
+        $stmtMembre->execute([$username]);
+        $membre = $stmtMembre->fetch();
 
-            // Si les identifiants sont dans la table "Membre" et le mot de passe est correct
-            if ($membre && password_verify($password, $membre['password'])) {
-                // Définir la variable de session pour le membre
-                $_SESSION['membre_username'] = $username;
-                $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
-                // Redirection vers la page AccueilMembreF.php
-                header("Location: AccueilMembreF.php");
-                exit();
-            } else {
-                // Si les identifiants ne sont pas dans la table "Membre", vérifier dans la table "Admin"
-                $queryAdmin = "SELECT * FROM Admin WHERE username = ?";
-                $stmtAdmin = $connexion->prepare($queryAdmin);
-                $stmtAdmin->execute([$username]);
-                $admin = $stmtAdmin->fetch();
-
-                // Si les identifiants sont dans la table "Admin" et le mot de passe est correct
-                if ($admin && password_verify($password, $admin['password'])) {
-                    // Définir la variable de session pour l'admin
-                    $_SESSION['admin_username'] = $username;
-                    $_SESSION['welcome_message2'] = "Bienvenue, $username ! Connexion réussie.";
-                    // Redirection vers la page AccueilAdminF.php
-                    header("Location: AccueilAdminF.php");
-                    exit();
-                } else {
-                    // Afficher un message d'erreur si les informations de connexion sont incorrectes
-                    echo "Identifiant ou mot de passe incorrect.";
-                }
-            } else {
-                // Si les identifiants ne sont pas dans la table "Admin" et "Membre", vérifier dans la table "Joueur"
-                $queryJoueur = "SELECT * FROM Joueur WHERE username = ?";
-                $stmtJoueur = $connexion->prepare($queryJoueur);
-                $stmtJoueur->execute([$username]);
-                $joueur = $stmtJoueur->fetch();
-
-                // Si les identifiants sont dans la table "Joueur" et le mot de passe est correct
-                if ($joueur && password_verify($password, $joueur['password'])) {
-                    // Définir la variable de session pour le joueur
-                    $_SESSION['joueur_username'] = $username;
-                    $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
-                    // Redirection vers la page d'accueil des joueurs
-                    header("Location: AccueilJoueur.php");
-                    exit();
-                } else {
-                    // Afficher un message d'erreur si les informations de connexion sont incorrectes
-                    echo "Identifiant ou mot de passe incorrect.";
-                }
-            }
-        } catch (PDOException $e) {
-            // En cas d'erreur, affichez l'erreur
-            die("Erreur lors de l'exécution de la requête : " . $e->getMessage());
-        } finally {
-            // Fermer les statements
-            $stmtMembre = null;
-            $stmtAdmin = null;
+        // Si les identifiants sont dans la table "Membre" et le mot de passe est correct
+        if ($membre && password_verify($password, $membre['password'])) {
+            // Définir la variable de session pour le membre
+            $_SESSION['membre_username'] = $username;
+            $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
+            // Redirection vers la page AccueilMembreF.php
+            header("Location: AccueilMembreF.php");
+            exit();
         }
+
+        // Vérifier dans la table "Admin"
+        $queryAdmin = "SELECT * FROM Admin WHERE username = ?";
+        $stmtAdmin = $connexion->prepare($queryAdmin);
+        $stmtAdmin->execute([$username]);
+        $admin = $stmtAdmin->fetch();
+
+        // Si les identifiants sont dans la table "Admin" et le mot de passe est correct
+        if ($admin && password_verify($password, $admin['password'])) {
+            // Définir la variable de session pour l'admin
+            $_SESSION['admin_username'] = $username;
+            $_SESSION['welcome_message2'] = "Bienvenue, $username ! Connexion réussie.";
+            // Redirection vers la page AccueilAdminF.php
+            header("Location: AccueilAdminF.php");
+            exit();
+        }
+
+        // Vérifier dans la table "Joueur"
+        $queryJoueur = "SELECT * FROM Joueur WHERE username = ?";
+        $stmtJoueur = $connexion->prepare($queryJoueur);
+        $stmtJoueur->execute([$username]);
+        $joueur = $stmtJoueur->fetch();
+
+        // Si les identifiants sont dans la table "Joueur" et le mot de passe est correct
+        if ($joueur && password_verify($password, $joueur['password'])) {
+            // Définir la variable de session pour le joueur
+            $_SESSION['joueur_username'] = $username;
+            $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
+            // Redirection vers la page d'accueil des joueurs
+            header("Location: AccueilJoueur.php");
+            exit();
+        }
+
+        // Afficher un message d'erreur si les informations de connexion sont incorrectes
+        echo "Identifiant ou mot de passe incorrect.";
     }
 
 } catch (PDOException $e) {
+    // En cas d'erreur, affichez l'erreur
     die("La connexion à la base de données a échoué : " . $e->getMessage());
 }
 
