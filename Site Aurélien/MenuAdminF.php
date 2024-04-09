@@ -10,7 +10,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #003462; /* Bleu */
-            color: #054C8A; /* Doré tirant vers le marron clair */
+            color: #BA9E12; /* Doré tirant vers le marron clair */
         }
 
         header {
@@ -66,7 +66,7 @@
         }
 
         nav a:hover {
-            background-color: #BA9E12; /* Doré */
+            background-color: #054C8A; /* Doré */
         }
 
         .accueil-link {
