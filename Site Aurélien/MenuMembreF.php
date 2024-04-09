@@ -68,7 +68,7 @@
         <nav>
             <a href="PlanningF.php">Calendrier</a>
             <a href="ListeJeuxF.php">Liste des Jeux</a>
-            <a href="MesFavorisF.php">Mes Favoris</a>
+            <a href="ModeJeu.php">Mes Favoris</a>
             <a href="HistoriqueF.php">Historique</a>
             <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>

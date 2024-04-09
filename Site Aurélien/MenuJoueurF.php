@@ -66,7 +66,7 @@
             <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
-            <a href="MesFavorisF.php">Modes de jeu</a>
+            <a href="ModeJeu.php">Modes de jeu</a>
             <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>
     </header>
