@@ -9,13 +9,13 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #16337E; /* Bleu */
+            background-color: #003462; /* Bleu */
             color: #8B4513; /* Doré tirant vers le marron clair */
         }
 
         header {
             background-color: #BA9E12; /* Doré */
-            color: #16337E; /* Bleu */
+            color: #003462; /* Bleu */
             padding: 15px;
             text-align: center;
             border-bottom-left-radius: 10px;
