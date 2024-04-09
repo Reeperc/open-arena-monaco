@@ -62,7 +62,7 @@
 </head>
 <body>
     <header>
-        <a href="AccueilMembreF.php">
+        <a href="AccueilJoueurF.php">
             <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
