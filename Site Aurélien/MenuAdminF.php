@@ -37,7 +37,7 @@
 
         header p {
             background-color: #357ABD; /* Bleu */
-            color: #BA9E12; /* Doré tirant vers le marron clair */
+            color: #003462; /* Doré tirant vers le marron clair */
             padding: 10px;
             border-radius: 5px;
             font-weight: bold;
