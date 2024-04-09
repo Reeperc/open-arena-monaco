@@ -26,11 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Préparer la requête SQL d'insertion
-        $query = "INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (?, ?, ?, ?, ?)";
         $stmt = $connexion->prepare($query);
 
         // Exécuter la requête avec les valeurs
-        $stmt->execute([$nom, $prenom, $email, $mot_de_passe]);
+        $stmt->execute([$nom, $prenom, $email, $email, $mot_de_passe]);
+
 
         // Message de succès dans une variable de session
         $_SESSION['message'] = "Ajout du joueur $email réussi.";
