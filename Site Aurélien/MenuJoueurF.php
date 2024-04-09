@@ -66,10 +66,7 @@
             <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
-            <a href="PlanningF.php">à définir</a>
-            <a href="ListeJeuxF.php">à définir</a>
             <a href="MesFavorisF.php">Modes de jeu</a>
-            <a href="HistoriqueF.php">Historique</a>
             <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>
     </header>
