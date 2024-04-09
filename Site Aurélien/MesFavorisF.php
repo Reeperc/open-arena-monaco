@@ -59,7 +59,7 @@ if (isset($_SESSION['joueur_username'])) {
 </head>
 <body>
 
-<?php include('MenuMembreF.php'); ?>
+<?php include('MenuJoueurF.php'); ?>
 
 <h1>Les modes de jeux dans OpenArena</h1>
     <h2>combat à mort</h2>
