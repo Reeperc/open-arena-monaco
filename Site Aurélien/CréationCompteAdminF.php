@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données du formulaire
     $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
-    $tel = $_POST["tel"];
     $email = $_POST["email"];
     $mot_de_passe = password_hash($_POST["mot_de_passe"], PASSWORD_DEFAULT);
 
@@ -27,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Préparer la requête SQL d'insertion
-        $query = "INSERT INTO Joueur (Nom, Prénom, Tel, Email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $connexion->prepare($query);
 
         // Exécuter la requête avec les valeurs
-        $stmt->execute([$nom, $prenom, $tel, $email, $email, $mot_de_passe]);
+        $stmt->execute([$nom, $prenom, $email, $mot_de_passe]);
 
         // Message de succès dans une variable de session
         $_SESSION['message'] = "Ajout du joueur $email réussi.";
@@ -114,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Récupérer les données du formulaire
         $nom = $_POST["nom"];
         $prenom = $_POST["prenom"];
-        $tel = $_POST["tel"];
         $email = $_POST["email"];
         $mot_de_passe = $_POST["mot_de_passe"];
     }
@@ -123,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div id="contact">
         <p id="content"> Nom <input type="text" name="nom" placeholder="DUPONT" required></p>
         <p id="content"> Prenom <input type="text" name="prenom" placeholder="Jean" required> </p>
-        <p id="content"> Tel <input type="tel" name="tel" placeholder="Ex : 0665******" required></p>
         <p id="content"> Email <input type="email" name="email" placeholder="Ex : TOTO@gmail.com" required></p>
         <p id="content"> Nouveau Mot de passe : <input type="password" name="mot_de_passe" required> </p>
         <button type="submit"> Enregistrer les données </button>
