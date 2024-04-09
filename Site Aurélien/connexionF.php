@@ -69,7 +69,23 @@ try {
             $_SESSION['joueur_username'] = $username;
             $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
             // Redirection vers la page d'accueil des joueurs
-            header("Location: AccueilJoueurF.php");
+            header("Location: AccueilJoueur.php");
+            exit();
+        }
+
+        // Vérifier dans la table "Organisateur"
+        $queryOrganisateur = "SELECT * FROM Organisateur WHERE username = ?";
+        $stmtOrganisateur = $connexion->prepare($queryOrganisateur);
+        $stmtOrganisateur->execute([$username]);
+        $organisateur = $stmtOrganisateur->fetch();
+
+        // Si les identifiants sont dans la table "Organisateur" et le mot de passe est correct
+        if ($organisateur && password_verify($password, $organisateur['password'])) {
+            // Définir la variable de session pour l'organisateur
+            $_SESSION['organisateur_username'] = $username;
+            $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
+            // Redirection vers la page d'accueil des organisateurs
+            header("Location: AccueilOrganisateurF.php");
             exit();
         }
 
