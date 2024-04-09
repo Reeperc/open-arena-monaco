@@ -120,8 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
     <form action="" method="post">
       <div id="contact">
+        <p id="content"> Prenom <input type="text" name="prenom" placeholder="Jean" required> </p>        
         <p id="content"> Nom <input type="text" name="nom" placeholder="DUPONT" required></p>
-        <p id="content"> Prenom <input type="text" name="prenom" placeholder="Jean" required> </p>
         <p id="content"> Email <input type="email" name="email" placeholder="Ex : TOTO@gmail.com" required></p>
         <p id="content"> Nouveau Mot de passe : <input type="password" name="mot_de_passe" required> </p>
         <button type="submit"> Enregistrer les données </button>
