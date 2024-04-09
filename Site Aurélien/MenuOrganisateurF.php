@@ -81,11 +81,13 @@
     if (isset($_SESSION['admin_username'])) {
         // Afficher un message de bienvenue pour l'admin
         echo '<header>';
-        echo '<a href="AccueilOrganisateurF.php">';
+        echo '<a href="AccueilAdminF.php">';
         echo '<img src="logo site.png" alt="Logo du site">';
         echo '</a>';
         echo '<nav>';
-        echo '<a href="CréationCompteJoueur.php">Créer un compte joueur</a>';
+        echo '<a href="CalendrierAdminF.php">Page à définir</a>';
+        echo '<a href="ModifjeuxF.php">Page à définir</a>';
+        echo '<a href="CréationCompteAdminF.php">Créer un compte joueur</a>';
         echo '<p>' . $_SESSION['admin_username'] . '</p>';
         echo '<a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>';
         echo '</nav>';
