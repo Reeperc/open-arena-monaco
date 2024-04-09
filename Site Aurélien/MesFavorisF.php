@@ -86,7 +86,7 @@ if (isset($_SESSION['joueur_username'])) {
 //    echo 'Aucun jeu favori trouvé pour ce membre.';
 //}
 ?>
-<button id="return-button" onclick="window.location.href='AccueilMembreF.php'">Retour</button>
+<button id="return-button" onclick="window.location.href='AccueilJoueurF.php'">Retour</button>
 <?php include('FooterF.php'); ?>
 
 </body>
