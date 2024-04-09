@@ -82,9 +82,9 @@
         echo '<img src="logo esigelec.png" alt="Logo du site">';
         echo '</a>';
         echo '<nav>';
-        echo '<a href="CalendrierAdminF.php">Calendrier des parties</a>';
-        echo '<a href="ModifjeuxF.php">Edition de jeu</a>';
-        echo '<a href="CréationCompteAdminF.php">Créer un compte administrateur</a>';
+        echo '<a href="CalendrierAdminF.php">Page à définir</a>';
+        echo '<a href="ModifjeuxF.php">Page à définir</a>';
+        echo '<a href="CréationCompteAdminF.php">Créer un compte joueur</a>';
         echo '<p>' . $_SESSION['admin_username'] . '</p>';
         echo '<a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>';
         echo '</nav>';
