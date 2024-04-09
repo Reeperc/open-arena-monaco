@@ -66,6 +66,25 @@ try {
                     // Afficher un message d'erreur si les informations de connexion sont incorrectes
                     echo "Identifiant ou mot de passe incorrect.";
                 }
+            } else {
+                // Si les identifiants ne sont pas dans la table "Admin" et "Membre", vérifier dans la table "Joueur"
+                $queryJoueur = "SELECT * FROM Joueur WHERE username = ?";
+                $stmtJoueur = $connexion->prepare($queryJoueur);
+                $stmtJoueur->execute([$username]);
+                $joueur = $stmtJoueur->fetch();
+
+                // Si les identifiants sont dans la table "Joueur" et le mot de passe est correct
+                if ($joueur && password_verify($password, $joueur['password'])) {
+                    // Définir la variable de session pour le joueur
+                    $_SESSION['joueur_username'] = $username;
+                    $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
+                    // Redirection vers la page d'accueil des joueurs
+                    header("Location: AccueilJoueur.php");
+                    exit();
+                } else {
+                    // Afficher un message d'erreur si les informations de connexion sont incorrectes
+                    echo "Identifiant ou mot de passe incorrect.";
+                }
             }
         } catch (PDOException $e) {
             // En cas d'erreur, affichez l'erreur
