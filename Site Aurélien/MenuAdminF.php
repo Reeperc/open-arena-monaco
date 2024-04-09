@@ -57,7 +57,7 @@
         }
 
         nav a {
-            color: #BA9E12; /* Doré tirant vers le marron clair */
+            color: #054C8A; /* Doré tirant vers le marron clair */
             text-decoration: none;
             font-size: 18px;
             padding: 10px 20px;
