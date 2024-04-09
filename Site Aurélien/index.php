@@ -15,15 +15,15 @@ if (isset($_GET['logout_message'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Site web</title>
     <style>
-
         main {
-            background-color: white;
+            background-color: #003462; /* Bleu */
             width: 30%;
             position: absolute;
             top: 87%;
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
+            color: #BA9E12; /* Doré tirant vers le marron clair */
         }
 
         .image-container {

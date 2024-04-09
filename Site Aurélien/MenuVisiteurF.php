@@ -9,11 +9,13 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #003462; /* Bleu */
+            color: #BA9E12; /* Doré tirant vers le marron clair */
         }
 
         header {
-            background-color: #FF0000; /* Rouge */
-            color: white;
+            background-color: #BA9E12; /* Doré */
+            color: #003462; /* Bleu */
             padding: 15px;
             text-align: center;
             border-bottom-left-radius: 10px;
@@ -41,7 +43,7 @@
         }
 
         nav a {
-            color: white;
+            color: #054C8A;
             text-decoration: none;
             font-size: 18px;
             padding: 10px 20px;
@@ -50,7 +52,7 @@
         }
 
         nav a:hover {
-            background-color: #FF4500; /* Orange-rouge */
+            background-color: #2C6CC2; /* Orange-rouge */
         }
 
         .accueil-link {
