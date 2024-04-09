@@ -19,8 +19,8 @@
         }
 
         footer {
-            background-color: #FF0000; /* Rouge */
-            color: white;
+            background-color: #BA9E12; /* doré */
+            color: #054C8A;
             text-align: center;
             padding: 15px;
         }

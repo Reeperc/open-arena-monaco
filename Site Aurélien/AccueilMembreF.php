@@ -27,7 +27,7 @@ if (isset($_SESSION['welcome_message'])) {
       /* Ajoutez ici le contenu de votre fichier AccueilMembre.css */
 
       main {
-        background-color: white; /* Fond blanc */
+        background-color: #054C8A; /* Fond bleu foncé */
         width: 30%; /* Largeur de 30% de la largeur de la fenêtre */
         position: absolute; /* Position absolue pour superposer sur les images */
         top: 75%; /* Positionné à 50% de la hauteur de la fenêtre */
