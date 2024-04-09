@@ -10,7 +10,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #003462; /* Bleu */
-            color: #8B4513; /* Doré tirant vers le marron clair */
+            color: #BA9E12; /* Doré tirant vers le marron clair */
         }
 
         header {
@@ -37,7 +37,7 @@
 
         header p {
             background-color: #357ABD; /* Bleu */
-            color: #8B4513; /* Doré tirant vers le marron clair */
+            color: #BA9E12; /* Doré tirant vers le marron clair */
             padding: 10px;
             border-radius: 5px;
             font-weight: bold;
@@ -57,7 +57,7 @@
         }
 
         nav a {
-            color: #8B4513; /* Doré tirant vers le marron clair */
+            color: #BA9E12; /* Doré tirant vers le marron clair */
             text-decoration: none;
             font-size: 18px;
             padding: 10px 20px;
