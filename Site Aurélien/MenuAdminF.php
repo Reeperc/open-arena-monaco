@@ -66,7 +66,7 @@
         }
 
         nav a:hover {
-            background-color: #054C8A; /* Doré */
+            background-color: #2C6CC2; /* Doré */
         }
 
         .accueil-link {
