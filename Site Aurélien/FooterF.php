@@ -32,7 +32,7 @@
     </main>
     
     <footer>
-        Ce site vous a été créé par Aurélien Martineau et Alexandre Matias, dans le cadre d'un projet de conception d'un site web, à l'attention de l'association "Jouons Ensemble !".
+        Ce site a été créé en partenariat avec OpenArena, dans le cadre du projet S8 des étudiants de l'ESIGELEC.
     </footer>
 </body>
 </html>

@@ -61,7 +61,7 @@ if (isset($_SESSION['membre_username'])) {
 
 <?php include('MenuMembreF.php'); ?>
 
-<h1>Jeux Favoris</h1>
+<h1>Les modes de jeux dans OpenArena</h1>
     <h2>combat à mort</h2>
         <p>combat à mort : blablablbalbalba</p>
     <h2>combat par équipe</h2>
