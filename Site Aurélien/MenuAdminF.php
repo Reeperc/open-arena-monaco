@@ -14,7 +14,7 @@
         }
 
         header {
-            background-color: #FFD700; /* Doré */
+            background-color: #BA9E12; /* Doré */
             color: #16337E; /* Bleu */
             padding: 15px;
             text-align: center;
@@ -66,7 +66,7 @@
         }
 
         nav a:hover {
-            background-color: #FFD700; /* Doré */
+            background-color: #BA9E12; /* Doré */
         }
 
         .accueil-link {
