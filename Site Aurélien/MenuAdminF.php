@@ -14,7 +14,7 @@
         }
 
         header {
-            background-color: #BA9E12; /* Doré */
+            background-color: #054C8A; /* Doré */
             color: #003462; /* Bleu */
             padding: 15px;
             text-align: center;
