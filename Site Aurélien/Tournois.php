@@ -14,7 +14,7 @@ if (!isset($_SESSION['joueur_username'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historique de la Page</title>
+  <title>Calendriers des matchs</title>
   <style>
     table {
       width: 100%;
@@ -54,8 +54,8 @@ if (!isset($_SESSION['joueur_username'])) {
   </style>
 </head>
 <body>
-<?php include('MenuVisiteurF.php'); ?>
-  <h1>Historique de la Page Web</h1>
+<?php include('MenuJoueurF.php'); ?>
+  <h1>Tournois</h1>
 
   <table>
     <thead>
@@ -84,6 +84,6 @@ if (!isset($_SESSION['joueur_username'])) {
       <!-- Ajoutez d'autres lignes d'historique au besoin -->
     </tbody>
   </table>
-  <button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button>  <?php include('FooterF.php'); ?>
+  <button id="return-button" onclick="window.location.href='AccueilJoueurF.php'">Retour</button>  <?php include('FooterF.php'); ?>
 </body>
 </html>

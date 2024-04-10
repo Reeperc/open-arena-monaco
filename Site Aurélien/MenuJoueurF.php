@@ -66,7 +66,7 @@
             <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
-            <a href="HistoriqueF.php">Tournois</a>
+            <a href="Tournois.php">Tournois</a>
             <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>
     </header>
