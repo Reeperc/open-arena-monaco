@@ -61,7 +61,7 @@ if (isset($_SESSION['visiteur_username'])) {
 
 <body>
 
-    <?php include('MenuJoueurF.php'); ?>
+    <?php include('MenuVisiteurF.php'); ?>
 
     <!-- <h1>Les modes de jeux dans OpenArena</h1>
     <h2>combat à mort</h2>
@@ -130,7 +130,7 @@ if (isset($_SESSION['visiteur_username'])) {
     //    echo 'Aucun jeu favori trouvé pour ce membre.';
     //}
     ?>
-    <button id="return-button" onclick="window.location.href='AccueilJoueurF.php'">Retour</button>
+    <button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button>
     <?php include('FooterF.php'); ?>
 
 </body>
