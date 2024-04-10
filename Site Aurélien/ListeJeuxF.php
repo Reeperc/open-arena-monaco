@@ -2,7 +2,7 @@
 session_start();
 
 // Vérifier si l'utilisateur est connecté en tant que membre
-if (!isset($_SESSION['membre_username'])) {
+if (!isset($_SESSION['visiteur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
     exit();
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajouter_en_favoris']))
     $id_jeu = $_POST['id_jeu'];
 
     // Récupérer l'id du membre à partir de la base de données
-    $username = $_SESSION['membre_username'];
+    $username = $_SESSION['visiteur_username'];
     $queryMembreId = "SELECT id FROM Membre WHERE username = ?";
     $stmtMembreId = $connexion->prepare($queryMembreId);
     $stmtMembreId->execute([$username]);
@@ -171,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajouter_en_favoris']))
     </style>
 </head>
 <body>
-    <?php include('MenuMembreF.php'); ?>
+    <?php include('MenuVisiteurF.php'); ?>
 
     <h1>Liste des Jeux</h1>
 
@@ -201,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajouter_en_favoris']))
 
     $connexion = null;
     ?>
-<button id="return-button" onclick="window.location.href='AccueilMembreF.php'">Retour</button>
+<button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button>
     <?php include('FooterF.php'); ?>
 </body>
 </html>

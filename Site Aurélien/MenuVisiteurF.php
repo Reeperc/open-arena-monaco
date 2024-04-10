@@ -43,7 +43,7 @@
         }
 
         nav a {
-            color: #054C8A;
+            color: #054C8A; /* Doré tirant vers le marron clair */
             text-decoration: none;
             font-size: 18px;
             padding: 10px 20px;
@@ -52,22 +52,23 @@
         }
 
         nav a:hover {
-            background-color: #2C6CC2; /* Orange-rouge */
+            background-color: #2C6CC2; /* Doré */
         }
 
         .accueil-link {
-            margin-left: auto;
+            margin-left: auto; /* Déplace le bouton Déconnexion tout à droite */
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="index.php">
+        <a href="AccueilVisiteurF.php">
             <img src="logo site.png" alt="Logo du site">
         </a>
         <nav>
-            <a href="CréationCompteF.php" class="accueil-link">Inscription</a>
-            <a href="connexionF.php" class="accueil-link">Connexion</a>
+            <a href="ResultatsF.php">Résultats</a>
+            <a href="ModeJeu.php">Mes Favoris</a>
+            <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>
     </header>
 </body>

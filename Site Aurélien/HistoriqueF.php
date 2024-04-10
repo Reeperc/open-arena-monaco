@@ -2,7 +2,7 @@
 session_start();
 
 // Vérifier si l'utilisateur est connecté en tant que membre
-if (!isset($_SESSION['membre_username'])) {
+if (!isset($_SESSION['visiteur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
     exit();
@@ -54,7 +54,7 @@ if (!isset($_SESSION['membre_username'])) {
   </style>
 </head>
 <body>
-<?php include('MenuMembreF.php'); ?>
+<?php include('MenuVisiteurF.php'); ?>
   <h1>Historique de la Page Web</h1>
 
   <table>
@@ -84,6 +84,6 @@ if (!isset($_SESSION['membre_username'])) {
       <!-- Ajoutez d'autres lignes d'historique au besoin -->
     </tbody>
   </table>
-  <button id="return-button" onclick="window.location.href='AccueilMembreF.php'">Retour</button>  <?php include('FooterF.php'); ?>
+  <button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button>  <?php include('FooterF.php'); ?>
 </body>
 </html>

@@ -34,10 +34,10 @@ try {
         // Si les identifiants sont dans la table "Membre" et le mot de passe est correct
         if ($membre && password_verify($password, $membre['password'])) {
             // Définir la variable de session pour le membre
-            $_SESSION['membre_username'] = $username;
+            $_SESSION['visiteur_username'] = $username;
             $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
             // Redirection vers la page AccueilMembreF.php
-            header("Location: AccueilMembreF.php");
+            header("Location: AccueilVisiteurF.php");
             exit();
         }
 

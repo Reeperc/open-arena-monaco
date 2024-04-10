@@ -2,7 +2,7 @@
 session_start();
 
 // Vérifier si l'utilisateur est connecté en tant que membre
-if (!isset($_SESSION['membre_username'])) {
+if (!isset($_SESSION['visiteur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
     exit();
@@ -57,7 +57,7 @@ if (isset($_SESSION['welcome_message'])) {
     </style>
   </head>
   <body>
-  <?php include('MenuMembreF.php'); ?>
+  <?php include('MenuVisiteurF.php'); ?>
     <div class="wrapper">
       <div class="content">
       <main>

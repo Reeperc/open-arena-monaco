@@ -24,7 +24,7 @@ try {
         if ($_POST['action'] === 'bookSession') {
             if (isset($_POST['session_id'])) {
                 $session_id = $_POST['session_id'];
-                $username = $_SESSION['membre_username'];
+                $username = $_SESSION['visiteur_username'];
 
                 // Récupérer l'ID du membre à partir du username
                 $queryUserId = "SELECT id FROM Membre WHERE username = ?";
@@ -70,7 +70,7 @@ $connexion = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planning des Séances</title>
+    <title>Résultats des matchs</title>
     <style>
         table {
             width: 100%;
@@ -101,9 +101,9 @@ $connexion = null;
     </style>
 </head>
 <body>
-<?php include('MenuMembreF.php'); ?>
+<?php include('MenuVisiteurF.php'); ?>
 <!-- Affichage du tableau des sessions -->
-<h1>Planning des Séances</h1>
+<h1>Résultats des matchs</h1>
 
 <table>
     <thead>
@@ -133,7 +133,7 @@ $connexion = null;
 </table>
 
 <!-- Ajouter le bouton de retour ici -->
-<button id="return-button" onclick="window.location.href='AccueilMembreF.php'">Retour</button>
+<button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button>
 <?php include('FooterF.php'); ?>
 </body>
 </html>
