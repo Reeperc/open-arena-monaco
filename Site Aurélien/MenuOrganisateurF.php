@@ -86,7 +86,7 @@
         echo '</a>';
         echo '<nav>';
         echo '<a href="CréationCompteAdminF.php">Créer un compte joueur</a>';
-        echo '<p>' . $_SESSION['admin_username'] . '</p>';
+        echo '<p>' . $_SESSION['organisateur_username'] . '</p>';
         echo '<a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>';
         echo '</nav>';
         echo '</header>';
