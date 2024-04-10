@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Vérifier si l'utilisateur est connecté en tant que admin
-if (!isset($_SESSION['admin_username'])) {
+if (!isset($_SESSION['organisateur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
     exit();
