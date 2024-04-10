@@ -69,7 +69,7 @@ try {
             $_SESSION['joueur_username'] = $username;
             $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
             // Redirection vers la page d'accueil des joueurs
-            header("Location: AccueilJoueur.php");
+            header("Location: AccueilJoueurF.php");
             exit();
         }
 
