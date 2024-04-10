@@ -14,7 +14,7 @@ try {
 }
 
 // Assurez-vous que $_SESSION['membre_username'] est défini
-if (isset($_SESSION['joueur_username'])) {
+if (isset($_SESSION['visiteur_username'])) {
     // Utilisez une requête SQL pour obtenir l'ID du membre à partir de son username
     $stmt = $connexion->prepare("SELECT id FROM Membre WHERE username = :username");
     $stmt->bindParam(':username', $_SESSION['membre_username']);

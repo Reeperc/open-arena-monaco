@@ -67,7 +67,7 @@
         </a>
         <nav>
             <a href="ResultatsF.php">Résultats</a>
-            <a href="ModeJeu.php">Mes Favoris</a>
+            <a href="ModeJeu.php">Modes de jeu</a>
             <a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>
         </nav>
     </header>
