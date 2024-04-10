@@ -38,7 +38,7 @@ if (isset($_GET['logout_message'])) {
     </style>
 </head>
 <body>
-<?php include('MenuVisiteurF.php'); ?>
+<?php include('MenuDecoF.php'); ?>
     <div class="wrapper">
       <div class="content">
         <main>
