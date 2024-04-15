@@ -88,6 +88,7 @@
         echo '<a href="CalendrierAdminF.php">Page à définir</a>';
         echo '<a href="ModifjeuxF.php">Page à définir</a>';
         echo '<a href="CréationCompteJoueur.php">Créer un compte joueur</a>';
+        echo '<a href="Compétition.php">Arbre de compétition</a>';
         echo '<p>' . $_SESSION['admin_username'] . '</p>';
         echo '<a href="DeconnexionF.php" class="accueil-link">Déconnexion</a>';
         echo '</nav>';

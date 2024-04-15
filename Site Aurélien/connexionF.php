@@ -8,9 +8,9 @@ if (isset($_SESSION['success_message'])) {
 
 // Définir les informations de connexion à la base de données
 $serveur = "localhost";
-$utilisateur = "grp_6_10";
-$motDePasse = "oPkO06vqDtnh";
-$baseDeDonnees = "bdd_6_10";
+$utilisateur = "aurelien";
+$motDePasse = "Pa$$w0rd";
+$baseDeDonnees = "bdd_monaco";
 
 try {
     // Créer une connexion PDO
