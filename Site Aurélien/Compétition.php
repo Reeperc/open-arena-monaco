@@ -64,24 +64,58 @@ $matches = getMatches();
     <title>Arbre des matchs</title>
     <!-- Styles CSS pour l'arbre des matchs -->
     <style>
-        /* Ajoutez vos styles CSS ici */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .match {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: #fff;
+            width: 50%;
+            max-width: 600px;
+        }
+        .match p {
+            margin: 5px 0;
+        }
+        .match input[type="number"] {
+            width: 50px;
+        }
+        .match input[type="submit"] {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .match input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <h1>Arbre des matchs</h1>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <?php foreach($matches as $match): ?>
-        <div>
-            <p><?php echo $match['team1']; ?> vs <?php echo $match['team2']; ?></p>
-            <input type="hidden" name="match_id" value="<?php echo $match['id']; ?>">
-            Score <?php echo $match['team1']; ?>: <input type="number" name="team1_score" value="<?php echo $match['team1_score']; ?>">
-            Score <?php echo $match['team2']; ?>: <input type="number" name="team2_score" value="<?php echo $match['team2_score']; ?>">
+    <div class="match">
+        <p>Équipe A vs Équipe B</p>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <input type="hidden" name="match_id" value="1">
+            Score Équipe A: <input type="number" name="team1_score" value="0">
+            Score Équipe B: <input type="number" name="team2_score" value="0">
             <input type="submit" value="Valider les scores">
-        </div>
-    <?php endforeach; ?>
-    </form>
+        </form>
+    </div>
+    <!-- Ajoutez d'autres matchs similaires ici -->
 </body>
 </html>
+
 
 <?php
 // Fermer la connexion à la base de données
