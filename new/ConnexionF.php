@@ -6,14 +6,25 @@ if (isset($_SESSION['success_message'])) {
   unset($_SESSION['success_message']); // Supprimer la variable de session après l'affichage
 }
 
-// Définir les informations de connexion à la base de données
+// informations de connexion à la base de données
+
+//BDD Localhost Personel
+// $serveur = "localhost";
+// $utilisateur = "root";
+// $motDePasse = "root";
+// $baseDeDonnees = "bdd_6_10";
+
+//BDD Localhost Serveur Web
 $serveur = "localhost";
-$utilisateur = "root";
-$motDePasse = "root";
+$utilisateur = "mo";
+$motDePasse = "mdp";
 $baseDeDonnees = "bdd_6_10";
 
+//BDD moduleweb
+// $serveur = "moduleweb.esigelec.fr";
 // $utilisateur = "grp_6_10";
 // $motDePasse = "oPkO06vqDtnh";
+// $baseDeDonnees = "bdd_6_10";
 
 
 try {
