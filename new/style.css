@@ -1,0 +1,492 @@
+/* CSS styles for the site */
+.welcomeMessage { color: green; }
+
+h1 {
+    /* color: rgb(246, 246, 246); */
+    color: rgb(248, 178, 128);
+    font-size: 24px;
+    text-align: center;
+}
+
+.justtxtcolor h1 {
+    color: rgb(198, 237, 247);
+    font-size: 24px;
+    text-align: center;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hauteur minimale de la page à 100% */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #0088ff;
+    height: 100%;
+}
+
+header {
+    background-color:rgba(0, 0, 0, 0.1);
+    /* Doré */
+    color: #003462;
+    /* Bleu */
+    padding: 15px;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+}
+
+header a,a1 {
+    display: block;
+    /* Transforme l'élément en bloc pour occuper toute la largeur */
+}
+
+header img {
+    width: 140px;
+    /* Ajustez la taille du logo selon vos besoins */
+    height: auto;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+
+
+header p {
+    background-color: #073761;
+    /* Bleu */
+    color: #ffffff;
+    /* Doré tirant vers le marron clair */
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-left: 120px;
+    /* Ajout d'un espace pour le logo avant les liens */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+/* couleur du txt des boutons de la barre en haut */
+nav a {
+    color: #ffffff;
+    /* Doré tirant vers le marron clair */
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* le fond transparent derriere le bouton déconnexion par exemple */
+nav a:hover {
+    background-color: #6d0000;
+    
+}
+
+.bouton-vert:hover {
+    background-color: #03ae17;
+}
+
+.bouton-rouge-foncé:hover {
+    background-color: #ae0303;
+}
+
+.bouton-orange:hover {
+    background-color: #770d06;
+}
+
+.bouton-dore:hover {
+    background-color: #be9200;
+}
+.bouton-bleu:hover {
+    background-color: #1163c0;
+}
+.accueil-link {
+    margin-left: auto;
+    /* Déplace le bouton Déconnexion tout à droite */
+}
+
+  .image-container {
+    display: flex;
+  }
+
+  .image-container img {
+    margin: 35px;
+    /* Ajoute un espace entre les images si nécessaire */
+    width: 550px;
+    /* Définis la largeur souhaitée (par exemple, 100px) */
+    height: auto;
+    /* La hauteur est automatiquement ajustée pour maintenir les proportions */
+  }
+
+  .wrapper {
+    display: flex;
+    min-height: 100%;
+  }
+
+  .content {
+    flex: 1;
+    /* Occupe tout l'espace restant à gauche */
+    /* padding-bottom: 60px; */
+  }
+
+
+/* Vidéo en arrière-plan */
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+/* Styles pour le contenu qui passe par-dessus la vidéo */
+#content {
+    position: relative;
+    z-index: 1;
+    color: #FFFFFF; /* Exemple de couleur claire pour contraster avec la vidéo */
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+main {
+    flex: 1; /* Prend tout l'espace restant entre le menu et le pied de page */
+    z-index: 1; /* Passe au-dessus de la vidéo */
+    /* visibility: hidden; *//*Cache le contenu tout en prenant de l'espace */
+    padding: 20px;
+    color: #e09722;
+    /* color: #e8dc85; */
+    text-align: center;
+    /* background: rgba(0, 0, 0, 0.4); */
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.background-transparent {
+    background: rgba(0, 0, 0, 0.0);
+}
+
+/* Grille des boutons */
+.button-grid {
+    /* display: -moz-grid-line; */
+    /* display: grid; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Trois colonnes pour six boutons */
+    gap: 25px;
+    margin: 20px 0;
+    justify-items: center;
+    align-items: center;
+}
+
+/* Style des boutons géants */
+.button-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Enlève le soulignement des liens */
+    background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+    border-radius: 10px; /* Coins arrondis */
+    padding: 50px; /* Taille globale du bouton */
+    text-align: center;
+    width: 80%; /* Ajuste la largeur en pourcentage ou remplace par une largeur fixe */
+    max-width: 250px; /* Largeur maximale en pixels */
+    transition: background 0.3s;
+}
+
+.button-item-joueur {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Enlève le soulignement des liens */
+    background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+    border-radius: 10px; /* Coins arrondis */
+    padding: 50px; /* Taille globale du bouton */
+    text-align: center;
+    width: 80%; /* Ajuste la largeur en pourcentage ou remplace par une largeur fixe */
+    max-width: 250px; /* Largeur maximale en pixels */
+    transition: background 0.3s;
+}
+
+.button-item-joueur:hover {
+    background: rgba(31, 135, 214, 0.2); /* Change la couleur au survol */
+}
+
+.button-item-joueur p {
+    color: #FFFFFF; /* Couleur du texte */
+    margin-top: 10px;
+    font-size: 20px; /* Taille du texte plus grande */
+    margin: 0; /* Enlève les marges autour du texte */
+}
+
+.button-item:hover {
+    background: rgba(214, 31, 31, 0.2); /* Change la couleur au survol */
+}
+
+.button-item img {
+    width: 100%; /* Ajuste la taille de l'image au bouton */
+    border-radius: 8px;
+    outline: none;
+}
+
+.button-item p {
+    color: #FFFFFF; /* Couleur du texte */
+    margin-top: 10px;
+    font-size: 20px; /* Taille du texte plus grande */
+    margin: 0; /* Enlève les marges autour du texte */
+}
+
+footer {
+    background-color: rgba(174, 41, 0, 0.0);; /* doré */
+    color: #eeb38a;
+    text-align: center;
+    padding: 15px;
+    height: 60px;
+    bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+/* Style général du formulaire */
+.login-forrm {
+    max-width: 400px; /* Limite la largeur du formulaire */
+    margin: auto; /* Centre le formulaire horizontalement */
+    padding: 20px;
+    border-radius: 50px;
+    background-color: #5d2a00; /* Couleur de FOND CARRE douce */
+    box-shadow: 0 10px 10px rgb(236, 114, 0); /* Ajoute une OMBRE subtile */
+    text-align: center; /* Centre le texte */
+    /* position: left; */
+}
+
+.login-form {
+    position: absolute;
+    top: 50%; /* Centre verticalement à 50% de la hauteur du conteneur */
+    left: 50%; /* Centre horizontalement à 50% de la largeur du conteneur */
+    transform: translate(-50%, -50%); /* Ajuste la position précise du formulaire */
+    max-width: 400px;
+    margin: auto;
+    padding: 70px;
+    width: 70%;
+    border-radius: 40px;
+    background-color: #0e0803;
+    box-shadow: 0 0.5px 5px rgb(255, 240, 142);
+    text-align: center;
+}
+
+/* Styles pour les étiquettes */
+.form-label {
+    display: inline-block;
+    font-size: 16px;
+    width: 50%; /* Permet au label d'occuper tout l'espace disponible */
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff95;
+}
+
+/* Styles pour les champs de saisie */
+.form-input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #fdcf00;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    background-color: #322f2cfd; /* fond du LABEL TXT */
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(219, 124, 14, 0.552);
+    transition: border-color 0.3s;
+    color:#fbd500fd /*couleur du texte dans le input */
+}
+
+.form-input:focus {
+    border-color: #3498db; /* Change la bordure au focus */
+}
+
+/* Styles pour le bouton de connexion */
+.form-button {
+    width: 95%;
+    padding: 10px 20px;
+    background-color: #504e4b;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #2980b9; /* Change la couleur au survol */
+}
+
+/* Style général */
+.body2 {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.main2 {
+    max-width: 10000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5)
+    /* background-color: #1e0000; */
+    box-shadow: 0 4px 8px rgba(180, 36, 0, 0.97);
+    /* box-shadow: 0 4px 8px rgba(235, 157, 0, 0.97); */
+    border-radius: 40px;
+}
+
+/* h1 {
+    text-align: center;
+    color: #3498db; /* Bleu */
+/* }  */
+
+/* h2 {
+    color: #ffba5a;
+    margin-top: 20px;
+    margin-bottom: 10px;
+} */
+
+/* <----------------------------------- LISTE MAPS ------------------------------> */
+
+h3 {
+    color: #fc980b;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.game-type h2 {
+    color: #f86b41;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    /* color: rgb(246, 246, 246); */
+    color: #f9f7c5;
+    font-size: 24px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: circle; /* Changer le style de la puce selon tes préférences */
+    margin: 0;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+    color: #f2b9a5;
+    font-style: Brush Script MT;
+    /* font-family: Luminari, fantasy; */
+    /* autre styles: https://www.w3.org/Style/Examples/007/fonts.fr.html */
+}
+
+/* Style de chaque carré où sont listé les map par types de jeu*/
+.game-type-test {
+    padding: 10px;
+    border-left: 5px solid #ce6905;
+    /* background-color: #311b07; pas trop sûr*/
+    background-color: #370e01;
+    border-radius: 5px;
+}
+
+.game-type {
+    background-color:#2e0909;
+    box-shadow: 0 2px 1px rgb(181, 75, 5);
+    border-radius: 8px;
+    width: 280px;
+    padding: 20px;
+    
+}
+
+.game-type:hover {
+    transform: scale(1.05);
+    transition: transform 0.8s;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    /* background-color: #dda50c; */
+}
+
+.grid-container-test { /* à voir si je garde ou pas*/
+    display: grid;
+    grid-template-columns: repeat(3, 2fr); /* 3 colonnes */
+    grid-auto-rows: minmax(100px, auto); /* Hauteur vari able pour chaque rangée */
+    gap: 20px; /* Espacement entre les sections */
+    margin-top: 20px;
+}
+
+.form-button-retour {
+    width: 10%;
+    padding: 10px 5px;
+    background-color: #f5a844;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    
+}
+.form-button-retour:hover {
+    background-color: #bcaa01; /* Change la couleur au survol */
+}
+
+/* <----------------------------------- LISTE MODE DE JEU ------------------------------> */
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    /* background-color: #dda50c; */
+}
+
+.card {
+    background-color:#140b01;
+    box-shadow: 0 4px 1px rgb(254, 212, 0);
+    border-radius: 8px;
+    width: 280px;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fffeb2;
+}
+
+.card p {
+    color: #feb008;
+}
