@@ -135,7 +135,7 @@ include('database.php');
         <section id="semiFinals">
             <?php
             // Sélectionner les équipes gagnantes
-            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 28, 2";
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 42, 2";
             $stmt = $connexion->prepare($sql_equipes_gagnantes);
             $stmt->execute();
             $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -157,7 +157,7 @@ include('database.php');
         <section id="final">
             <?php
             // Sélectionner les équipes gagnantes
-            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 30, 1";
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 48, 1";
             $stmt = $connexion->prepare($sql_equipes_gagnantes);
             $stmt->execute();
             $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
