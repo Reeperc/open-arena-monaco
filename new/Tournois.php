@@ -111,7 +111,40 @@ include('database.php');
         <section id="quarterFinals">
             <?php
             // Sélectionner les équipes gagnantes
-            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 24, 4";
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 24, 1";
+            $stmt = $connexion->prepare($sql_equipes_gagnantes);
+            $stmt->execute();
+            $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            // Afficher les équipes gagnantes
+            foreach ($equipes_gagnantes as $equipe) {
+                echo "<div>$equipe</div>";
+            }
+            ?>
+            <?php
+            // Sélectionner les équipes gagnantes
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 26, 1";
+            $stmt = $connexion->prepare($sql_equipes_gagnantes);
+            $stmt->execute();
+            $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            // Afficher les équipes gagnantes
+            foreach ($equipes_gagnantes as $equipe) {
+                echo "<div>$equipe</div>";
+            }
+            ?>
+            <?php
+            // Sélectionner les équipes gagnantes
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 25, 1";
+            $stmt = $connexion->prepare($sql_equipes_gagnantes);
+            $stmt->execute();
+            $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            // Afficher les équipes gagnantes
+            foreach ($equipes_gagnantes as $equipe) {
+                echo "<div>$equipe</div>";
+            }
+            ?>
+            <?php
+            // Sélectionner les équipes gagnantes
+            $sql_equipes_gagnantes = "SELECT equipe_gagnante FROM matchs LIMIT 27, 1";
             $stmt = $connexion->prepare($sql_equipes_gagnantes);
             $stmt->execute();
             $equipes_gagnantes = $stmt->fetchAll(PDO::FETCH_COLUMN);
