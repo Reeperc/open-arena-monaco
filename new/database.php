@@ -2,8 +2,8 @@
 
 //BDD Localhost Personel
 // $serveur = "localhost";
-// $utilisateur = "grp_6_10";
-// $motDePasse = "oPkO06vqDtnh";
+// $utilisateur = "root";
+// $motDePasse = "root";
 // $baseDeDonnees = "bdd_6_10";
 
 //BDD Localhost Serveur Web
