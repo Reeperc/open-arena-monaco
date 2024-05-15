@@ -89,22 +89,29 @@
         <p>Arrêter le service</p>
       </a>
 
-      <a href="Competition4.php" class="button-item">
-        <img src="" alt="">
-        <p>Arbre de compétition</p>
+      <a href="StatutServiceParis.php" class="button-item-joueur">
+        <img src="image.jpg" alt="">
+        <p>Etat du serveur Paris</p>
       </a>
 
-      <a href="ListmapsAdmin.php" class="button-item">
+      <a href="StatutServiceMQ.php" class="button-item-joueur">
         <img src="" alt="">
-        <p>Liste des cartes</p>
+        <p>Etat du serveur MQ</p>
       </a>
+
+      <a href="StatutServiceRouen.php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Etat du serveur Rouen</p>
+      </a>
+
+
 
       <a href="#" class="button-item" onclick="getServiceStatus(); return false;">
         <img src="" alt="">
-        <p>Statut du service</p>
+        <p>Etat du serveur Monaco</p>
       </a>
     </section>
-    <div style="font-size: 18px" id="result"></div>
+    <div style="font-size: 22px" id="result"></div>
   </main>
   <!-- <?php include('FooterF.php'); ?> -->
 

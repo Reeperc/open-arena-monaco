@@ -35,6 +35,11 @@ if (isset($_SESSION['welcome_message9'])) {
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
+      <a href="Competition4.php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Arbre de compétition</p>
+      </a>
+
       <a href="StatutServiceParis.php" class="button-item-joueur">
         <img src="image.jpg" alt="">
         <p>Etat du serveur Paris</p>
@@ -55,9 +60,9 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur Monaco</p>
       </a>
 
-      <a href="" class="button-item">
+      <a href="ListmapsAdmin.php" class="button-item-joueur">
         <img src="" alt="">
-        <p>un boutonn</p>
+        <p>Liste des cartes</p>
       </a>
 
       <a href="" class="button-item">
