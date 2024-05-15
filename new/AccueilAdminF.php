@@ -17,6 +17,42 @@
       };
       xhr.send();
     }
+
+    function startService() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "start_service.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById("result").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+
+    function launchGame() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "launch_game.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById("result").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+
+    function stopService() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "stop_service.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById("result").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
   </script>
 </head>
 
@@ -33,12 +69,12 @@
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
-      <a href="DemarrerService.php" class="button-item">
-        <img src="image.jpg" alt="">
+      <a href="#" class="button-item" onclick="startService(); return false;">
+        <img src="imaaage.jpg" alt="">
         <p>Démarrer le service</p>
       </a>
 
-      <a href="LancerJeu.php" class="button-item">
+      <a href="#" class="button-item" onclick="launchGame(); return false;">
         <img src="" alt="">
         <p>Lancer le jeu</p>
       </a>
@@ -48,7 +84,7 @@
         <p>Créer un compte joueur</p>
       </a>
 
-      <a href="ArretJeu.php" class="button-item">
+      <a href="#" class="button-item" onclick="stopService(); return false;">
         <img src="" alt="">
         <p>Arrêter le service</p>
       </a>
@@ -68,7 +104,7 @@
         <p>Statut du service</p>
       </a>
     </section>
-    <div id="result"></div>
+    <div style="font-size: 18px" id="result"></div>
   </main>
   <!-- <?php include('FooterF.php'); ?> -->
 
