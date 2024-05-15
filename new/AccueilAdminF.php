@@ -51,7 +51,7 @@
         <p>Liste des cartes</p>
       </a>
 
-      <a href="StatutService.php" class="button-item">
+      <a href="page-statut-test.php" class="button-item">
         <img src="" alt="">
         <p>Satut du service</p>
       </a>
