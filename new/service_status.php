@@ -19,8 +19,12 @@ stream_set_blocking($stream, true);
 $output = stream_get_contents($stream);
 fclose($stream);
 
-// Affichage du résultat
-echo nl2br($output); // Affiche le résultat avec des sauts de ligne
-
 // Fermeture de la connexion SSH
 ssh2_disconnect($connection);
+
+// Traitement du résultat pour extraire le statut
+if (strpos($output, 'active (running)') !== false) {
+    echo '<div style="color: green; font-weight: bold;">Le service OpenArena est actif.</div>';
+} else {
+    echo '<div style="color: red; font-weight: bold;">Le service OpenArena n\'est pas actif.</div>';
+}
