@@ -5,7 +5,19 @@
   <link rel="stylesheet" href="style.css">
 
   <title>Site web</title>
-
+  <script>
+    function getServiceStatus() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "service_status.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById("result").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
 </head>
 
 <body>
@@ -51,13 +63,14 @@
         <p>Liste des cartes</p>
       </a>
 
-      <a href="page-statut-test.php" class="button-item">
+      <a href="#" class="button-item" onclick="getServiceStatus(); return false;">
         <img src="" alt="">
-        <p>Satut du service</p>
+        <p>Statut du service</p>
       </a>
     </section>
+    <div id="result"></div>
   </main>
-  <?php include('FooterF.php'); ?>
+  <!-- <?php include('FooterF.php'); ?> -->
 
 </body>
 
