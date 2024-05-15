@@ -50,9 +50,9 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur MQ</p>
       </a>
 
-      <a href="StatutServiceRouen.php" class="button-item-joueur">
+      <a href="ListmapsAdmin.php" class="button-item-joueur">
         <img src="" alt="">
-        <p>Etat du serveur Rouen</p>
+        <p>Liste des cartes</p>
       </a>
 
       <a href="StatutServiceMonaco.php" class="button-item-joueur">
@@ -60,19 +60,19 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur Monaco</p>
       </a>
 
-      <a href="ListmapsAdmin.php" class="button-item-joueur">
+      <a href="StatutServiceRouen.php" class="button-item-joueur">
         <img src="" alt="">
-        <p>Liste des cartes</p>
+        <p>Etat du serveur Rouen</p>
       </a>
 
-      <a href="" class="button-item">
+      <!-- <a href="" class="button-item">
         <img src="" alt="">
         <p>un bouton</p>
       </a>
 
       <a href="" class="button-item">
         <img src="" alt="">
-        <p>un bouton</p>
+        <p>un bouton</p> -->
       </a>
     </section>
   </main>

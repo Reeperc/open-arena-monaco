@@ -74,14 +74,14 @@
         <p>Démarrer le service</p>
       </a>
 
-      <a href="#" class="button-item" onclick="launchGame(); return false;">
+      <a href="StatutServiceRouen.php" class="button-item-joueur">
         <img src="" alt="">
-        <p>Lancer le jeu</p>
+        <p>Etat du serveur Rouen</p>
       </a>
 
-      <a href="CréationCompteJoueur.php" class="button-item">
+      <a href="#" class="button-item" onclick="getServiceStatus(); return false;">
         <img src="" alt="">
-        <p>Créer un compte joueur</p>
+        <p>Etat du serveur Monaco</p>
       </a>
 
       <a href="#" class="button-item" onclick="stopService(); return false;">
@@ -99,16 +99,14 @@
         <p>Etat du serveur MQ</p>
       </a>
 
-      <a href="StatutServiceRouen.php" class="button-item-joueur">
+      <a href="#" class="button-item" onclick="launchGame(); return false;">
         <img src="" alt="">
-        <p>Etat du serveur Rouen</p>
+        <p>Lancer le jeu</p>
       </a>
 
-
-
-      <a href="#" class="button-item" onclick="getServiceStatus(); return false;">
+      <a href="CréationCompteJoueur.php" class="button-item">
         <img src="" alt="">
-        <p>Etat du serveur Monaco</p>
+        <p>Créer un compte joueur</p>
       </a>
     </section>
     <div style="font-size: 22px" id="result"></div>
