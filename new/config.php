@@ -511,7 +511,7 @@ if (file_put_contents($chemin_fichier_local, $texte) !== false) {
         // Authentification SSH
         if (ssh2_auth_password($connexion, 'rt', 'rt')) {
             // Transfert du fichier via SCP
-            $resultat = ssh2_scp_send($connexion, $chemin_fichier_local, '/home/ARENA-MONACO/jean.titi/q3config.cfg');
+            $resultat = ssh2_scp_send($connexion, $chemin_fichier_local, '/home/rt/q3config.cfg');
             if ($resultat) {
                 echo "Fichier envoyé avec succès !";
             } else {
