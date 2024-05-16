@@ -188,6 +188,11 @@ if (isset($_SESSION['welcome_message'])) {
             <input type="submit" value="charger">
         </form>
         <li>hydronext2</li>
+        <li>delta</li>
+        <form action="Chargerdelta.php" method="get">
+            <input type="submit" value="charger">
+        </form>
+        <li>hydronext2</li>
     </ul>
 
     <h2>Harvester</h2>
