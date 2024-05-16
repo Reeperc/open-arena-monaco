@@ -8,13 +8,14 @@ if (!isset($_SESSION['admin_username'])) {
 }
 
 if (isset($_SESSION['welcome_message2'])) {
-  echo "<p style='color: green;'>".$_SESSION['welcome_message2']."</p>";
-  unset($_SESSION['welcome_message2']); // Supprimer la variable de session après l'affichage
+    echo "<p style='color: green;'>" . $_SESSION['welcome_message2'] . "</p>";
+    unset($_SESSION['welcome_message2']); // Supprimer la variable de session après l'affichage
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,8 @@ if (isset($_SESSION['welcome_message2'])) {
         }
 
         header {
-            background-color: #FF0000; /* Rouge */
+            background-color: #FF0000;
+            /* Rouge */
             color: white;
             padding: 15px;
             text-align: center;
@@ -50,9 +52,12 @@ if (isset($_SESSION['welcome_message2'])) {
 
         header p {
             position: absolute;
-            top: 80px; /* Ajustez la position verticale selon vos besoins */
-            right: 10px; /* Place le texte tout à droite */
-            margin: 0; /* Supprime les marges par défaut */
+            top: 80px;
+            /* Ajustez la position verticale selon vos besoins */
+            right: 10px;
+            /* Place le texte tout à droite */
+            margin: 0;
+            /* Supprime les marges par défaut */
             background-color: white;
             color: red;
             padding: 10px;
@@ -81,7 +86,8 @@ if (isset($_SESSION['welcome_message2'])) {
         }
 
         nav a:hover {
-            background-color: #FF4500; /* Orange-rouge */
+            background-color: #FF4500;
+            /* Orange-rouge */
         }
 
         .accueil-link {
@@ -127,26 +133,26 @@ if (isset($_SESSION['welcome_message2'])) {
 </head>
 
 <body>
-    <?php include('MenuAdminF.php'); ?>
+    <?php include('MenuOrganisateurF.php'); ?>
 
     <h1>Liste des Cartes</h1>
 
     <h1>Vous etes connecte en tant qu'admin, cliquer sur une carte la chargera sur le serveur</h1>
-    
+
     <h2>Match à mort (Deathmatch)</h2>
 
     <h2>Match à mort en équipe (Team Deathmatch)</h2>
 
-        <ul>
-            <li>czest1dm </li>
-            <li>chaos2 </li>
-            <li>mlca1 </li>
-            <li>oa_dm1 </li>
-        </ul>
+    <ul>
+        <li>czest1dm </li>
+        <li>chaos2 </li>
+        <li>mlca1 </li>
+        <li>oa_dm1 </li>
+    </ul>
 
     <h2>Capture du drapeau (CTF)</h2>
 
-    <ul> 
+    <ul>
         <li>am_lavactf</li>
         <li>am_lavactfxl</li>
         <li>am_underworks2</li>
@@ -155,11 +161,11 @@ if (isset($_SESSION['welcome_message2'])) {
         <li>ctf_gate1</li>
         <li>ctf_inyard</li>
         <li>delta</li>
-        <li>hydronext2</li> 
+        <li>hydronext2</li>
         <li>oa_bases3</li>
         <li>oa_bases7</li>
         <li>oa_ctf2</li>
-    </ul> 
+    </ul>
 
     <h2>Domination</h2>
 
@@ -179,8 +185,8 @@ if (isset($_SESSION['welcome_message2'])) {
         <li>ctf_inyard</li>
         <li>delta</li>
         <form action="Chargerdelta.php" method="get">
-                <input type="submit" value="charger">
-            </form>
+            <input type="submit" value="charger">
+        </form>
         <li>hydronext2</li>
     </ul>
 
@@ -198,7 +204,8 @@ if (isset($_SESSION['welcome_message2'])) {
 
     <h2>Instagib</h2>
 
-<button id="return-button" onclick="window.location.href='AccueilAdminF.php'">Retour</button>
+    <button id="return-button" onclick="window.location.href='AccueilAdminF.php'">Retour</button>
     <?php include('FooterF.php'); ?>
 </body>
+
 </html>

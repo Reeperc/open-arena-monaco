@@ -104,6 +104,11 @@
         <p>Arbre de compétition</p>
       </a>
 
+      <a href=".php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Liste des cartes</p>
+      </a>
+
       <a href="#" class="button-item" onclick="launchGame(); return false;">
         <img src="" alt="">
         <p>Lancer le jeu</p>

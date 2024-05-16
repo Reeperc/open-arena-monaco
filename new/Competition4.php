@@ -242,7 +242,7 @@ ini_set('display_errors', 0);
 
     <!-- Integration de l'arbre dans le design du site -->
 
-    <?php include('MenuAdminF.php'); ?>
+    <?php include('MenuOrganisateurF.php'); ?>
 
 
 
