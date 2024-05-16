@@ -23,8 +23,6 @@
 // ssh2_disconnect($connection);
 
 // shell_exec('cd /var/www/html');
-shell_exec('sudo su');
-shell_exec('Pa$$w0rd');
 shell_exec('cd /var/www/html/open_arena_equipe_4/new');
 shell_exec('./jeu.sh');
 // Affichage du résultat
