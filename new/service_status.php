@@ -6,14 +6,6 @@ $connection = ssh2_connect($server, 22);
 if (!$connection) {
     die('Impossible d\'établir la connexion SSH.');
 }
-<?php
-include 'configSsh.php';
-
-// Connexion SSH
-$connection = ssh2_connect($server, 22);
-if (!$connection) {
-    die('Impossible d\'établir la connexion SSH.');
-}
 
 // Authentification SSH
 if (!ssh2_auth_password($connection, $username, $password)) {
@@ -39,4 +31,3 @@ if (strpos($output, 'active (running)') !== false) {
 } else {
     echo '<div style="color: red; font-weight: bold;">Le service OpenArena n\'est pas actif.</div>';
 }
-?>
