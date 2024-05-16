@@ -133,6 +133,8 @@ if (isset($_SESSION['welcome_message'])) {
 </head>
 
 <body>
+
+<?php require_once("charger_map.php"); ?>
     <?php include('MenuOrganisateurF.php'); ?>
 
     <h1>Liste des Cartes</h1>
@@ -187,11 +189,16 @@ if (isset($_SESSION['welcome_message'])) {
         <form action="Chargerdelta.php" method="get">
             <input type="submit" value="charger">
         </form>
-        <li>hydronext2</li>
-        <li>delta</li>
-        <form action="Chargerdelta.php" method="get">
+        <li>delta2</li>
+        <form action='' method="post">
             <input type="submit" value="charger">
         </form>
+        <?php if($_SERVER['REQUEST_METHOD']=='POST') {
+            $map=$_POST["map"];
+            charger_map($map);
+        }
+
+        ?>
         <li>hydronext2</li>
     </ul>
 
