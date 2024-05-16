@@ -1,15 +1,15 @@
 <?php
 session_start();
 // Vérifier si l'utilisateur est connecté en tant que admin
-if (!isset($_SESSION['admin_username'])) {
+if (!isset($_SESSION['organisateur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
     exit();
 }
 
-if (isset($_SESSION['welcome_message2'])) {
-    echo "<p style='color: green;'>" . $_SESSION['welcome_message2'] . "</p>";
-    unset($_SESSION['welcome_message2']); // Supprimer la variable de session après l'affichage
+if (isset($_SESSION['welcome_message'])) {
+    echo "<p style='color: green;'>" . $_SESSION['welcome_message'] . "</p>";
+    unset($_SESSION['welcome_message']); // Supprimer la variable de session après l'affichage
 }
 ?>
 
