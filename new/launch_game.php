@@ -22,6 +22,7 @@
 // Fermeture de la connexion SSH
 // ssh2_disconnect($connection);
 
-shell_exec('./var/www/html/open_arena_equipe_4/new/jeu.sh');
+shell_exec('cd /var/www/html/open_arena_equipe_4/new');
+shell_exec('.jeu.sh');
 // Affichage du résultat
 echo '<div style="color: green; font-weight: bold;">Le jeu a été lancé.</div>';
