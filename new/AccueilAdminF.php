@@ -99,7 +99,7 @@
         <p>Etat du serveur MQ</p>
       </a>
 
-      <a href="Competition4.php" class="button-item-joueur">
+      <!-- <a href="Competition4.php" class="button-item-joueur">
         <img src="" alt="">
         <p>Arbre de compétition</p>
       </a>
@@ -107,7 +107,7 @@
       <a href=".php" class="button-item-joueur">
         <img src="" alt="">
         <p>Liste des cartes</p>
-      </a>
+      </a> -->
 
       <a href="#" class="button-item" onclick="launchGame(); return false;">
         <img src="" alt="">

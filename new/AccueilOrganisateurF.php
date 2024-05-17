@@ -77,7 +77,7 @@ if (isset($_SESSION['welcome_message9'])) {
     </section>
   </main>
 
-  <?php include('FooterF.php'); ?>
+  <!-- <?php include('FooterF.php'); ?> -->
   </div>
 
 </body>

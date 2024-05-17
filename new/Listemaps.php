@@ -175,7 +175,7 @@
     <h2>Instagib</h2> -->
 
     <!-- <button class="form-button-retour" id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button> -->
-    <?php include('FooterF.php'); ?>
+    <!-- <?php include('FooterF.php'); ?> -->
 </body>
 
 </html>

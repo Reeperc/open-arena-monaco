@@ -59,7 +59,7 @@ include('database.php');
     </div>
 
     <!-- <button id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button> -->
-    <?php include('FooterF.php'); ?>
+    <!-- <?php include('FooterF.php'); ?> -->
 
 </body>
 
