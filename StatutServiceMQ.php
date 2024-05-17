@@ -1,31 +1,25 @@
 <?php
-//Mettre iici les Infos du serveur jeu de chaque ville
-//MQ:
-$server = '195.221.30.5';
-$username = 'quake';
-$password = 'quake';
+function isMachineConnected($ip)
+{
+    // Exécute la commande ping pour vérifier la connectivité
+    $output = [];
+    $result = 0;
 
-// Connexion SSH
-$connection = ssh2_connect($server, 22);
-if (!$connection) {
-    die('Impossible d\'établir la connexion SSH.');
+    // Pinger l'adresse IP une seule fois (-c 1) avec un délai d'attente de 1 seconde (-W 1)
+    exec("ping -c 1 -W 1 $ip", $output, $result);
+
+    // Le résultat 0 signifie que la machine a répondu au ping
+    if ($result === 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-// Authentification SSH
-if (!ssh2_auth_password($connection, $username, $password)) {
-    die('Échec de l\'authentification SSH.');
+// Exemple d'utilisation
+$ipAddress = '195.221.20.27'; // Remplace cette IP par celle que tu veux tester
+if (isMachineConnected($ipAddress)) {
+    echo "La serveur est actif.";
+} else {
+    echo "Le serveur n'est pas actif.";
 }
-
-// Exécution de la commande à distance
-$command = 'sudo systemctl status openarena-server';
-$stream = ssh2_exec($connection, $command);
-stream_set_blocking($stream, true);
-$output = stream_get_contents($stream);
-fclose($stream);
-
-// Affichage du résultat
-echo "Résultat de la commande '$command' sur le serveur distant : <br>";
-echo nl2br($output); // Affiche le résultat avec des sauts de ligne
-
-// Fermeture de la connexion SSH
-ssh2_disconnect($connection);

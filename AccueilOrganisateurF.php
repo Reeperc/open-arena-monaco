@@ -50,7 +50,7 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur MQ</p>
       </a>
 
-      <a href="ListmapsAdmin.php" class="button-item-joueur">
+      <a href="ListMapAdmin.php" class="button-item-joueur">
         <img src="" alt="">
         <p>Liste des cartes</p>
       </a>

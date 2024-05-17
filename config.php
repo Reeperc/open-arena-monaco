@@ -526,6 +526,7 @@ if (file_put_contents($chemin_fichier_local, $texte) !== false) {
     } else {
         echo "Échec de la connexion SSH.";
     }
+    header("Location: AccueilVisiteurF.php");
 } else {
     echo "Une erreur s'est produite lors de l'enregistrement du fichier.";
 }
