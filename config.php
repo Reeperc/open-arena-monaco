@@ -500,10 +500,10 @@ bind MOUSE2 "+strafe"
 ';
 
 // Chemin du fichier où vous voulez enregistrer le texte
-$chemin_fichier_local = '/var/www/html/open_arena_equipe_4/documents_inutiles/q3config.cfg';
+$chemin_fichier_local = '/var/www/html/documents_inutiles/q3config.cfg';
 
 //mettre les permissions sur le répertoire pr être sûr BAPPPPTISTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-//shell_exec("chmod 777 /var/www/html/open_arena_equipe_4/documents_inutiles/");
+//shell_exec("chmod 777 /var/www/html/documents_inutiles/");
 
 // Écriture du texte dans le fichier local
 if (file_put_contents($chemin_fichier_local, $texte) !== false) {
