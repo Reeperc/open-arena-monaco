@@ -20,6 +20,21 @@ if (isset($_SESSION['welcome_message9'])) {
 
   <title>Menu Organisateur</title>
   <link rel="stylesheet" href="style.css">
+
+  <script>
+    function launchGame() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "launch_game.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById("result").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
+
 </head>
 
 <body>
@@ -50,7 +65,7 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur MQ</p>
       </a>
 
-      <a href="ListMapAdmin.php" class="button-item-joueur">
+      <a href="ListMapAdmin2.php" class="button-item-joueur">
         <img src="" alt="">
         <p>Liste des cartes</p>
       </a>
@@ -64,6 +79,12 @@ if (isset($_SESSION['welcome_message9'])) {
         <img src="" alt="">
         <p>Etat du serveur Rouen</p>
       </a>
+
+      <a href="#" class="button-item" onclick="launchGame(); return false;">
+        <img src="" alt="">
+        <p>Lancer le jeu</p>
+      </a>
+
 
       <!-- <a href="" class="button-item">
         <img src="" alt="">

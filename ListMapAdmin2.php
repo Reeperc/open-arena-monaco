@@ -26,7 +26,7 @@ if (isset($_SESSION['welcome_message'])) {
 
 <body class="body2">
     <link rel="stylesheet" href="style.css">
-    <?php include('MenuVisiteurF.php'); ?>
+    <?php include('MenuOrganisateurF.php'); ?>
     <video autoplay loop muted playsinline id="background-video">
         <source src="videos/video2.mp4" type="video/mp4">
     </video>
@@ -81,17 +81,17 @@ if (isset($_SESSION['welcome_message'])) {
                     <li>ctf_inyard</li>
                     <li>delta</li>
                     <form action="Chargerdelta.php" method="get">
-                    <input type="submit" value="charger">
+                        <input type="submit" value="charger">
                     </form>
                     <li>delta2</li>
                     <form action='' method="post">
-                    <input type="submit" name="map" value="delta">
+                        <input type="submit" name="map" value="delta">
                     </form>
-                    <?php if($_SERVER['REQUEST_METHOD']=='POST') {
-                        $map=$_POST["map"];
+                    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $map = $_POST["map"];
                         charger_map($map);
                     }
-        
+
                     ?>
                     <li>hydronext2</li>
                 </ul>
@@ -204,7 +204,7 @@ if (isset($_SESSION['welcome_message'])) {
     <h2>Instagib</h2> -->
 
     <!-- <button class="form-button-retour" id="return-button" onclick="window.location.href='AccueilVisiteurF.php'">Retour</button> -->
-    <?php include('FooterF.php'); ?>
+    <!-- <?php include('FooterF.php'); ?> -->
 </body>
 
 </html>

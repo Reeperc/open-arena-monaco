@@ -4,7 +4,7 @@
 <head>
   <link rel="stylesheet" href="style.css">
 
-  <title>Site web</title>
+  <title>Menu Admin</title>
   <script>
     function getServiceStatus() {
       var xhr = new XMLHttpRequest();
@@ -30,17 +30,17 @@
       xhr.send();
     }
 
-    function launchGame() {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "launch_game.php", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          document.getElementById("result").innerHTML = xhr.responseText;
-        }
-      };
-      xhr.send();
-    }
+    // function launchGame() {
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open("POST", "launch_game.php", true);
+    //   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //   xhr.onreadystatechange = function() {
+    //     if (xhr.readyState == 4 && xhr.status == 200) {
+    //       document.getElementById("result").innerHTML = xhr.responseText;
+    //     }
+    //   };
+    //   xhr.send();
+    // }
 
     function stopService() {
       var xhr = new XMLHttpRequest();
@@ -109,10 +109,10 @@
         <p>Liste des cartes</p>
       </a> -->
 
-      <a href="#" class="button-item" onclick="launchGame(); return false;">
+      <!-- <a href="#" class="button-item" onclick="launchGame(); return false;">
         <img src="" alt="">
         <p>Lancer le jeu</p>
-      </a>
+      </a> -->
 
       <a href="CréationCompteJoueur.php" class="button-item">
         <img src="" alt="">
