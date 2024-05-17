@@ -4,7 +4,7 @@ session_start();
 // Vérifier si l'utilisateur est connecté en tant que joueur
 if (!isset($_SESSION['joueur_username'])) {
   // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-  header("Location: ConnexionF.php");
+  header("Location: connexionF.php");
   exit();
 }
 
