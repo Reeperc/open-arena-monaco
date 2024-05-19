@@ -156,33 +156,7 @@
 </head>
 
 <body>
-    <?php
-    // Header include
-    echo '<header>';
-    echo '<a href="AccueilAdminF.php">';
-    echo '<img src="images/akalogo.png" alt="Logo du site">';
-    echo '</a>';
-    echo '<nav>';
-
-    $current_page = basename($_SERVER['PHP_SELF']); // Obtenir le nom de la page actuelle
-
-    $menu_items = [
-        'ConfigurationServeur.php' => 'Lancement et arrêt de la partie',
-        'GestionBots.php' => 'Gestion des bots',
-        'GestionMaps.php' => 'Gestion des maps',
-        'GestionModes.php' => 'Gestion des modes',
-    ];
-
-    foreach ($menu_items as $url => $label) {
-        $active_class = ($current_page == $url) ? 'active' : '';
-        echo '<a href="' . $url . '" class="accueil-link bouton-rouge-foncé ' . $active_class . '">' . $label . '</a>';
-    }
-
-    echo '<a href="DeconnexionF.php" class="accueil-link bouton-rouge-foncé">Déconnexion</a>';
-    echo '</nav>';
-    echo '</header>';
-    ?>
-
+<?php include('MenuAdminF.php'); ?>
     <main>
         <div class="bot-form">
             <h2>Ajouter un Bot</h2>
