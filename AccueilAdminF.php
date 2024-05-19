@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/style-antoine.css">
     <title>Menu Admin</title>
-
 </head>
 
 <body>

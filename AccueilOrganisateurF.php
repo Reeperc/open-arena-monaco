@@ -80,11 +80,15 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Etat du serveur Rouen</p>
       </a>
 
-      <a href="#" class="button-item" onclick="launchGame(); return false;">
+      <a href="#" class="button-item-joueur" onclick="launchGame(); return false;">
         <img src="" alt="">
         <p>Lancer le jeu</p>
       </a>
 
+      <a href="sendMail.php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Envoyer des mails</p>
+      </a>
 
       <!-- <a href="" class="button-item">
         <img src="" alt="">
