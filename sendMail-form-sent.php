@@ -12,7 +12,9 @@ try {
     $mail->isSMTP();
     $mail->Host = '195.221.30.17'; // Adresse IP du serveur de messagerie
     $mail->SMTPAuth = false;
+    $mail->CharSet = 'UTF-8';
     $mail->Port = 25; // ou 587 si vous utilisez TLS
+    $mail->SMTPSecure = '';
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
     // Récupérer les données du formulaire
