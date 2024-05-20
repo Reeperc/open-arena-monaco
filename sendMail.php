@@ -29,7 +29,7 @@ try {
     // 0 = off (for production use)
     // 1 = client messages
     // 2 = client and server messages
-    // 3= le niveau de debugging le plus détaillé
+    // 3= le niveau de debugging le plus détaillé .
     $mail->SMTPDebug = 3;
 
     // Expéditeur
