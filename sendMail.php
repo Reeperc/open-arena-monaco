@@ -11,7 +11,7 @@ $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
     $mail->Host = '195.221.30.17';
-    $mail->SMTPAuth = ture; // Changez à true si l'authentification est nécessaire
+    $mail->SMTPAuth = true; // Changez à true si l'authentification est nécessaire
     $mail->Username = 'rt'; // Votre nom d'utilisateur SMTP
     $mail->Password = 'rt'; // Votre mot de passe SMTP
     $mail->SMTPSecure = 'tls'; // Ou 'ssl' si vous utilisez SSL
