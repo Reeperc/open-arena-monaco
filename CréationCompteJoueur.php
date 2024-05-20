@@ -85,55 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Site web</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    main {
-      margin: 20px;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    #contact {
-      display: flex;
-      flex-direction: column;
-      max-width: 400px;
-      margin: auto;
-    }
-
-    p {
-      margin-top: 10px;
-    }
-
-    input,
-    button {
-      margin-top: 5px;
-    }
-
-    button {
-      background-color: #008CBA;
-      color: #fff;
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    #return-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="styles/style-antoine.css">
+  <link rel="stylesheet" href="styles/style-antoine-compte.css">
 </head>
 
 <body>
@@ -162,7 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </main>
   <button id="return-button" onclick="window.location.href='AccueilAdminF.php'">Retour</button>
   <p>Votre adresse mail est de la forme pseudo@arena-monaco.fr </p>
-  <?php include('FooterF.php'); ?>
 </body>
 
 </html>
