@@ -7,73 +7,46 @@ body {
     font-family: Arial, sans-serif;
     color: #0088ff;
     height: 100%;
-    background-image: url('images/hannah-oates-brick-wall-wip.jpg'); /* Assurez-vous que le chemin est correct */
+    background-image: url('../images/FondAdmin.jpg'); /* Assurez-vous que le chemin est correct */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    position: relative; /* Ajout de la position relative pour permettre le positionnement absolu des éléments enfants */
 }
 
-header {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #003462;
-    padding: 15px;
-    text-align: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: relative;
-}
-
-header a {
-    display: block;
-}
-
-header img {
-    width: 140px;
-    height: auto;
+/* Rectangle fixe non transparent */
+.rectangle-fixe {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 50%; /* Positionner le rectangle au milieu de la page verticalement */
+    left: 50%; /* Positionner le rectangle au milieu de la page horizontalement */
+    transform: translate(-50%, -50%); /* Pour centrer parfaitement le rectangle */
+    width: 70%; /* Largeur du rectangle */
+    height: 70%; /* Hauteur du rectangle */
+    background-color: #361717; /* Couleur du rectangle */
+    border-radius: 10px; /* Ajouter une bordure arrondie */
+    padding: 20px; /* Ajout de padding pour l'intérieur du rectangle */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre pour donner de la profondeur */
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    padding-left: 120px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    overflow: hidden;
-}
-
-nav a {
+/* Style des boutons */
+.button-item {
+    display: block;
+    margin-bottom: 10px;
     color: #ffffff;
     text-decoration: none;
     font-size: 18px;
     padding: 10px 20px;
+    background-color: #514f4f; /* Couleur de fond des boutons */
+    border: none; /* Retirer la bordure par défaut */
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-nav a:hover {
-    background-color: #6d0000;
+.button-item:hover {
+    background-color: #45a049;
 }
 
-.active {
-    background-color: #4CAF50; /* couleur de l'élément actif */
-}
-
-.accueil-link {
-    margin-left: auto;
-}
-
-main {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    color: #333;
-}
-
+/* Style de la section des formulaires */
 .bot-form {
     max-width: 600px;
     margin: 20px auto;
@@ -116,6 +89,7 @@ main {
     background-color: #45a049;
 }
 
+/* Style de la liste de bots */
 .bot-list {
     max-width: 600px;
     margin: 20px auto;

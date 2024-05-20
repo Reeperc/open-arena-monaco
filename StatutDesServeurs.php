@@ -2,7 +2,8 @@
 <html lang="fr">
 
 <head>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles/style-antoine.css">
+<link rel="stylesheet" href="style.css">
 
   <title>Statut des serveurs</title>
   <script>
@@ -35,14 +36,9 @@
 <body>
   <?php include('MenuAdminF.php'); ?>
 
-<video autoplay loop muted playsinline id="background-video">
-  <source src="videos/video2.mp4" type="video/mp4">
-</video>
 <main>
-  <h1></h1>
-  <p></p>
   <section class="button-grid">
-      <a href="StatutServiceRouen.php" class="button-item-joueur">
+      <a href="StatutServiceRouen.php" class="button-item">
         <img src="" alt="">
         <p>Etat du serveur Rouen</p>
       </a>
@@ -51,12 +47,12 @@
         <img src="" alt="">
         <p>Etat du serveur Monaco</p>
       </a>
-      <a href="StatutServiceParis.php" class="button-item-joueur">
-        <img src="image.jpg" alt="">
+      <a href="StatutServiceParis.php" class="button-item">
+        <img src="" alt="">
         <p>Etat du serveur Paris</p>
       </a>
 
-      <a href="StatutServiceMQ.php" class="button-item-joueur">
+      <a href="StatutServiceMQ.php" class="button-item">
         <img src="" alt="">
         <p>Etat du serveur MQ</p>
       </a>
