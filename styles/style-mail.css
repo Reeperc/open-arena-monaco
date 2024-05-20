@@ -1,0 +1,73 @@
+.form-container-mail {
+    background-color: #e8f5ff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.409);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.3s ease;
+}
+
+.form-container-mail:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.form-container-mail h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.form-container-mail label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-container-mail input,
+.form-container-mail textarea {
+    width: 94%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-container-mail input:focus,
+.form-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-container-mail button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #023e809e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container-mail button:hover {
+    background-color: #0057b3d9;}
+
+.main-mail {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e9ecef00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: auto;
+    resize: both;
+ }
