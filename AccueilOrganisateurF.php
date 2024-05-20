@@ -85,7 +85,7 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Lancer le jeu</p>
       </a>
 
-      <a href="sendMail.php" class="button-item-joueur">
+      <a href="sendMail-form.php" class="button-item-joueur">
         <img src="" alt="">
         <p>Envoyer des mails</p>
       </a>
