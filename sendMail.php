@@ -5,17 +5,19 @@ error_reporting(E_ALL);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Assurez-vous que ce chemin est correct
+require 'vendor/autoload.php'; // à verifier
 
 $mail = new PHPMailer(true);
 try {
     // Configuration de PHPMailer pour utiliser SMTP
     $mail->isSMTP();
-    $mail->Host = '195.221.30.17'; // L'adresse IP de votre serveur SMTP
-    $mail->SMTPAuth = false; // Défini à true si une authentification est nécessaire
-    $mail->Port = 25; // Utilisation du port 25, ajustez selon votre configuration serveur
-    $mail->SMTPSecure = ''; // Désactivé, utilisez 'tls' ou 'ssl' si nécessaire
-    $mail->SMTPOptions = array(
+    $mail->Host = '195.221.30.17'; // adresse IP de du serveur SMTP
+    $mail->SMTPAuth = false; // ou true s'il faut s'authentifier
+    // $mail->Username = 'username'; //  nom d'utilisateur SMTP
+    // $mail->Password = 'password'; // mot de passe SMTP
+    $mail->Port = 25; // port 25, port 587 pr tls
+    $mail->SMTPSecure = ''; // Désactivé, utiliser 'tls' ou 'ssl' si besoin
+    $mail->SMTPOptions = array( //ser t à désactiver la vérification des certificats SSL
         'ssl' => array(
             'verify_peer' => false,
             'verify_peer_name' => false,
@@ -27,7 +29,8 @@ try {
     // 0 = off (for production use)
     // 1 = client messages
     // 2 = client and server messages
-    $mail->SMTPDebug = 2;
+    // 3= le niveau de debugging le plus détaillé
+    $mail->SMTPDebug = 3;
 
     // Expéditeur
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
@@ -37,8 +40,8 @@ try {
 
     // Contenu de l'email
     $mail->isHTML(true); // Définir le format de l'email à HTML
-    $mail->Subject = 'Test Mail';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Subject = 'Test Mail depuis le site';
+    $mail->Body    = 'Ce message a été envoyé depuis le site web <b>en gras!!!!</b>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
