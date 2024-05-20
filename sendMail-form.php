@@ -41,7 +41,10 @@ if (isset($_SESSION['welcome_message9'])) {
             <h2>Envoyer un Email</h2>
             <form action="sendMail-form-sent.php" method="post">
                 <label for="to">À :</label>
-                <input type="email" id="to" name="to" required multiple>
+                <input type="text" id="to" name="to" placeholder="Séparer les mails par des virgules" required>
+                <!-- pour une seule addresse mail: -->
+                <!-- <input type="email" id="to" name="to" required multiple>  -->
+
 
                 <label for="subject">Objet :</label>
                 <input type="text" id="subject" name="subject" required>
