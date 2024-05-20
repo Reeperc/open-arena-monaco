@@ -15,7 +15,7 @@ try {
     $mail->Username = 'rt'; // Votre nom d'utilisateur SMTP
     $mail->Password = 'rt'; // Votre mot de passe SMTP
     $mail->SMTPSecure = 'tls'; // Ou 'ssl' si vous utilisez SSL
-    $mail->Port = 587; // Port pour TLS
+    $mail->Port = 25; // Port pour TLS
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
     $mail->addAddress('roger@arena-monaco.fr', 'Roger');
     $mail->Subject = 'Test Mail';
