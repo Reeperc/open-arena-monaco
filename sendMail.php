@@ -11,9 +11,9 @@ $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
     $mail->Host = '195.221.30.17';
-    $mail->SMTPAuth = false; // Changez à true si l'authentification est nécessaire
-    $mail->Username = 'username'; // Votre nom d'utilisateur SMTP
-    $mail->Password = 'password'; // Votre mot de passe SMTP
+    $mail->SMTPAuth = ture; // Changez à true si l'authentification est nécessaire
+    $mail->Username = 'rt'; // Votre nom d'utilisateur SMTP
+    $mail->Password = 'rt'; // Votre mot de passe SMTP
     $mail->SMTPSecure = 'tls'; // Ou 'ssl' si vous utilisez SSL
     $mail->Port = 587; // Port pour TLS
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
