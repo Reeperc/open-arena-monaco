@@ -3,89 +3,60 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des Bots et Configuration du Serveur Monaco</title>
+    <title>Menu Admin</title>
     <link rel="stylesheet" href="styles/style-antoine-config.css">
-    <script>
-        function toggleBotList() {
-            var botList = document.getElementById("botList");
-            if (botList.classList.contains("open")) {
-                botList.classList.remove("open");
-            } else {
-                botList.classList.add("open");
-            }
+    <link rel="stylesheet" href="styles/style-antoine.css">
+    <style>
+        /* Ajout du style pour aligner et ajuster la taille des boutons */
+        .bot-form button {
+            margin-left: 10px; /* Espacement entre les boutons */
+            flex: 1; /* Ajustement automatique de la taille */
         }
-
-        function startService() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "start_service.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("result").innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-
-        function stopService() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "stop_service.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("result").innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-
-        function addBot() {
-            var botName = document.getElementById("bot-name").value;
-            var botLevel = document.getElementById("bot-level").value;
-            var botList = document.getElementById("added-bots");
-            var existingBots = document.querySelectorAll("#added-bots li");
-
-            // Vérifiez si le bot est déjà dans la liste
-            for (var i = 0; i < existingBots.length; i++) {
-                if (existingBots[i].textContent.includes(botName)) {
-                    alert("Ce bot est déjà ajouté.");
-                    return;
-                }
-            }
-
-            // Ajouter le bot à la liste
-            var listItem = document.createElement("li");
-            listItem.textContent = botName + " - Niveau " + botLevel;
-            botList.appendChild(listItem);
-        }
-
-        function startWarmup() {
-            // Code pour démarrer le warmup
-        }
-
-        function startGame() {
-            // Code pour démarrer la partie
-        }
-    </script>
+    </style>
 </head>
 
 <body>
     <?php include('MenuAdminF.php'); ?>
-    <div class="rectangle-fixe">
-        <main>
-            <h1>Lancement/Arrêt du service</h1>
-            <section class="button-grid">
-                <a href="#" class="button-item" onclick="startService(); return false;">
-                    Démarrer le service
-                </a>
-                <a href="#" class="button-item" onclick="stopService(); return false;">
-                    Arrêter le service
-                </a>
-            </section>
-            <div style="font-size: 22px" id="result"></div>
+    <main>
+    <h2>Sélection de la Map et du Mode de Jeu</h2>
+            <div style="display: flex; align-items: center;">
+                <div style="margin-right: 20px;">
+                    <label for="map-select">Sélectionnez une Map :</label>
+                    <select id="map-select" name="map">
+                        <option value="map1">Map 1</option>
+                        <option value="map2">Map 2</option>
+                        <option value="map3">Map 3</option>
+                        <!-- Ajoutez d'autres options ici -->
+                    </select>
+                </div>
+                <div>
+                    <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
+                    <select id="mode-select" name="mode">
+                        <option value="mode1">Mode 1</option>
+                        <option value="mode2">Mode 2</option>
+                        <option value="mode3">Mode 3</option>
+                        <!-- Ajoutez d'autres options ici -->
+                    </select>
+                </div>
+                <div style="margin-left: 20px;">
+                    <label for="warmup-counter">Warmup (secondes):</label>
+                    <input type="number" id="warmup-counter" name="warmup" min="0" value="0">
+                </div>
+            </div>
+        </section>
 
-            <div class="bot-form">
-                <h2>Ajouter un Bot</h2>
+        <section>
+            <h2>Contrôle du Serveur</h2>
+            <div style="display: flex; justify-content: space-between;">
+                <button onclick="startService()">Démarrer le service</button>
+                <button onclick="stopService()">Arrêter le service</button>
+            </div>
+        </section>
+    </main>
+    <main>
+        <section>
+            <h2>Ajouter ou Supprimer un Bot</h2>
+            <div class="bot-form" style="display: flex; align-items: center;">
                 <form onsubmit="addBot(); return false;">
                     <label for="bot-name">Nom du Bot:</label>
                     <select id="bot-name" name="bot_name" required>
@@ -127,27 +98,33 @@
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="10" required>
 
-                    <input type="submit" value="Ajouter">
+                    <button class="button" onclick="addBot()">Ajouter</button>
+                    <button class="delete-button" onclick="deleteBot()">Supprimer</button>
                 </form>
+                
             </div>
+        </section>
 
-            <div class="bot-list">
-                <h2>Bots Ajoutés</h2>
-                <ul id="added-bots">
-                    <!-- Les bots ajoutés apparaîtront ici -->
-                </ul>
-            </div>
+        <section>
+            <button style="width: 100%;" onclick="launchGame()">Lancer la partie</button>
+        </section>
 
-            <div class="warmup-block">
-                <h2>Warmup</h2>
-                <button onclick="startWarmup()">Warmup</button>
-                <input type="number" id="warmup-counter" value="0" min="0">
-                <span>secondes</span>
-            </div>
-            
-            <button id="start-game-btn" onclick="startGame()">Lancer la partie</button>
-        </main>
-    </div>
+     
+    </main>
+
+    <script>
+        function addBot() {
+            // Code pour ajouter un bot à la liste
+        }
+
+        function deleteBot() {
+            // Code pour supprimer un bot de la liste
+        }
+
+        function launchGame() {
+            // Code pour lancer la partie
+        }
+    </script>
 </body>
 
 </html>
