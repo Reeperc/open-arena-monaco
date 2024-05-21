@@ -2,7 +2,7 @@
 include 'configSsh.php';
 
 // Construction de la commande sshpass
-$command = "sshpass -p '$password' ssh -o StrictHostKeyChecking=no $username@$server 'quit'";
+$command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'quit'";
 
 // Exécution de la commande avec shell_exec
 $output = shell_exec($command);
