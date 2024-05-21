@@ -1,18 +1,6 @@
 <?php
 
 //BDD Localhost Personel
-<<<<<<< HEAD
-// $serveur = "localhost";
-// $utilisateur = "root";
-// $motDePasse = "root";
-// $baseDeDonnees = "bdd_6_10";
-
-//BDD Localhost Serveur Web
-$serveur = "localhost";
-$utilisateur = "mo";
-$motDePasse = "mdp";
-$baseDeDonnees = "bdd_6_10";
-=======
 //$serveur = "localhost";
 //$utilisateur = "root";
 //$motDePasse = "root";
@@ -22,8 +10,7 @@ $baseDeDonnees = "bdd_6_10";
  $serveur = "localhost";
  $utilisateur = "mo";
  $motDePasse = "mdp";
- $baseDeDonnees = "bdd_6_10";
->>>>>>> 8cb27a9be0a75160a8e4aba177d4c39e0262643e
+ $baseDeDonnees = "bdd_6_10";*
 
 //BDD moduleweb
 // $serveur = "moduleweb.esigelec.fr";
