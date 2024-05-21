@@ -7,7 +7,7 @@ if (isset($_SESSION['success_message'])) {
 }
 
 // informations de connexion à la base de données
-
+//ajout
 //BDD Localhost Personel
 // $serveur = "localhost";
 // $utilisateur = "root";
