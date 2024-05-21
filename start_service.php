@@ -2,7 +2,7 @@
 include 'configSsh.php';
 
 // Construction de la commande sshpass
-$command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'openarena-server +set dedicated 2 +set net_port 27960 +set g_gametype 1 +map delta +set sv_hostname \"Tournois Monaco\"'";
+$command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'openarena-server +set dedicated 2 +set net_port 27961 +set g_gametype 1 +map delta +set sv_hostname \"Tournois Monaco\"'";
 
 // Exécution de la commande avec shell_exec
 $output = shell_exec($command);
