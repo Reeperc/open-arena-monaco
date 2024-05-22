@@ -25,9 +25,9 @@
             <div>
                 <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
                 <select id="mode-select" name="mode">
-                    <option value="1">0</option>
-                    <option value="2">Mode 2</option>
-                    <option value="3">Mode 3</option>
+                    <option value="0">0</option>
+                    <option value="1">Mode 2</option>
+                    <option value="2">Mode 3</option>
                     <!-- Ajoutez d'autres options ici -->
                 </select>
             </div>
@@ -39,14 +39,16 @@
 
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
-            <button onclick="startService()">Démarrer le service</button>
-            <button onclick="stopService()">Arrêter le service</button>
+            <button type="button" onclick="startServiceAjax()">Démarrer le service</button>
+            <button type="button" onclick="stopService()">Arrêter le service</button>
         </div>
 
-        <form id="serverForm" action="start_service.php" method="post">
+        <form id="serverForm" action="start_service.php" method="post" style="display:none;">
             <input type="hidden" id="selected-map" name="selected-map">
             <input type="hidden" id="selected-mode" name="selected-mode">
         </form>
+
+        <div id="message" style="margin-top: 20px;"></div>
     </main>
 
     <main>
@@ -118,12 +120,30 @@
             // Code pour lancer la partie
         }
 
-        function startService() {
+        function startServiceAjax() {
             // Récupère les valeurs sélectionnées pour la map et le mode
-            document.getElementById('selected-map').value = document.getElementById('map-select').value;
-            document.getElementById('selected-mode').value = document.getElementById('mode-select').value;
-            // Soumet le formulaire
-            document.getElementById('serverForm').submit();
+            const map = document.getElementById('map-select').value;
+            const mode = document.getElementById('mode-select').value;
+
+            // Crée un objet FormData
+            const formData = new FormData();
+            formData.append('selected-map', map);
+            formData.append('selected-mode', mode);
+
+            // Effectue une requête AJAX
+            fetch('start_service.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Affiche le message de retour dans la div message
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                // Affiche l'erreur dans la div message
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
 
         function stopService() {

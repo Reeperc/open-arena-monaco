@@ -7,11 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $output = shell_exec($command);
 
-    // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou afficher un message
+    // Message de confirmation
     echo "Le serveur a été démarré avec la map $map et le mode $mode.";
+    
 } else {
-    // Redirige vers la page principale si l'accès n'est pas via POST
-    echo "Le serveur n'a pas démarré avec la map $map et le mode $mode.";
+    // Message d'erreur si la requête n'est pas POST
+    echo "Le serveur n'a pas démarré.";
     exit;
 }
 ?>
