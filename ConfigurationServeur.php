@@ -101,7 +101,8 @@
                     <button class="button" onclick="addBot()">Ajouter</button>
                     <button class="delete-button" onclick="deleteBot()">Supprimer</button>
                 </form>
-                
+                </main>
+                <main>
             </div>
         </section>
 
