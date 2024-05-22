@@ -97,7 +97,7 @@
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" required>
 
                     <button class="button" type="submit">Ajouter</button>
-                    <div id="botMessage"></div>
+                    <div id="message2" style="margin-top: 20px;"></div>
                 </form>
             </div>
         </section>
@@ -160,10 +160,10 @@
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById('message').innerHTML = data;
+                document.getElementById('message2').innerHTML = data;
             })
             .catch(error => {
-                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                document.getElementById('message2').innerHTML = 'Erreur : ' + error;
             });
         }
     </script>
