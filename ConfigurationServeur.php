@@ -48,8 +48,7 @@
             <input type="hidden" id="selected-mode" name="selected-mode">
         </form>
 
-        <form id="serverForm" action="stop_service.php" method="post" style="display:none;">
-        </form>
+        <div id="message" style="margin-top: 20px;"></div>
     </main>
 
     <main>
@@ -98,8 +97,7 @@
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" required>
 
                     <button class="button" type="submit">Ajouter</button>
-                    <form id="serverForm" action="stop_service.php" method="post" style="display:none;">
-                    </form>
+                    <div id="botMessage"></div>
                 </form>
             </div>
         </section>
@@ -119,16 +117,16 @@
             formData.append('bot_level', botLevel);
 
             fetch('add_bot.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message').innerHTML = data;
-                })
-                .catch(error => {
-                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
-                });
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
 
         function launchGame() {
@@ -144,32 +142,31 @@
             formData.append('selected-mode', mode);
 
             fetch('start_service.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message').innerHTML = data;
-                })
-                .catch(error => {
-                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
-                });
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
 
         function stopServiceAjax() {
             fetch('stop_service.php', {
-                    method: 'POST'
-                })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('message').innerHTML = data;
-                })
-                .catch(error => {
-                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
-                });
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
     </script>
 </body>
 
 </html>
-?>
