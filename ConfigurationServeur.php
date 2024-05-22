@@ -55,7 +55,7 @@
         <section>
             <h2>Ajouter ou Supprimer un Bot</h2>
             <div class="bot-form" style="display: flex; align-items: center;">
-                <form onsubmit="addBot(); return false;">
+                <form id="addBotForm" onsubmit="addBot(); return false;">
                     <label for="bot-name">Nom du Bot:</label>
                     <select id="bot-name" name="bot_name" required>
                         <option value="Angelyss">Angelyss</option>
@@ -96,8 +96,7 @@
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="10" required>
 
-                    <button class="button" onclick="addBot()">Ajouter</button>
-                    <button class="delete-button" onclick="deleteBot()">Supprimer</button>
+                    <button class="button" type="submit">Ajouter</button>
                 </form>
             </div>
         </section>
@@ -109,11 +108,24 @@
 
     <script>
         function addBot() {
-            // Code pour ajouter un bot à la liste
-        }
+            const botName = document.getElementById('bot-name').value;
+            const botLevel = document.getElementById('bot-level').value;
 
-        function deleteBot() {
-            // Code pour supprimer un bot de la liste
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+            formData.append('bot_level', botLevel);
+
+            fetch('add_bot.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
 
         function launchGame() {
@@ -121,43 +133,35 @@
         }
 
         function startServiceAjax() {
-            // Récupère les valeurs sélectionnées pour la map et le mode
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
 
-            // Crée un objet FormData
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
 
-            // Effectue une requête AJAX
             fetch('start_service.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.text())
             .then(data => {
-                // Affiche le message de retour dans la div message
                 document.getElementById('message').innerHTML = data;
             })
             .catch(error => {
-                // Affiche l'erreur dans la div message
                 document.getElementById('message').innerHTML = 'Erreur : ' + error;
             });
         }
 
         function stopServiceAjax() {
-            // Effectue une requête AJAX pour arrêter le service
             fetch('stop_service.php', {
                 method: 'POST'
             })
             .then(response => response.text())
             .then(data => {
-                // Affiche le message de retour dans la div message
                 document.getElementById('message').innerHTML = data;
             })
             .catch(error => {
-                // Affiche l'erreur dans la div message
                 document.getElementById('message').innerHTML = 'Erreur : ' + error;
             });
         }
