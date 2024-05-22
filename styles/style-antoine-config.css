@@ -1,22 +1,19 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
     color: #0088ff;
     height: 100%;
-    background-image: url('../images/FondAdmin.jpg'); /* Assurez-vous que le chemin est correct */
+    background-image: url('../images/FondAdmin.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    position: relative; /* Ajout de la position relative pour permettre le positionnement absolu des éléments enfants */
+    position: relative;
 }
 
-main {
+.config main {
     max-width: 800px;
+    width: 100%;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
@@ -24,31 +21,31 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-section {
+.config section {
     margin-bottom: 20px;
 }
 
-h2 {
+.config h2 {
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;
 }
 
-label {
+.config label {
     font-size: 18px;
     color: #333;
 }
 
-select {
+.config select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 200px;
 }
 
-button,
-input[type="submit"] {
-    padding: 12px 20px; /* Ajustement de la taille pour correspondre */
+.config button,
+.config input[type="submit"] {
+    padding: 12px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -56,24 +53,24 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s;
-    margin-right: 10px; /* Espacement entre les boutons */
+    margin-right: 10px;
 }
 
-button:hover,
-input[type="submit"]:hover {
+.config button:hover,
+.config input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.delete-button {
+.config .delete-button {
     background-color: #ff4d4d;
     color: #fff;
 }
 
-.delete-button:hover {
+.config .delete-button:hover {
     background-color: #ff3333;
 }
 
-.rectangle-fixe {
+.config .rectangle-fixe {
     width: 70%;
     margin: 0 auto;
     padding: 20px;
@@ -82,20 +79,20 @@ input[type="submit"]:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.bot-form {
+.config .bot-form {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.bot-form label {
+.config .bot-form label {
     display: block;
     margin-bottom: 10px;
     color: #666;
 }
 
-.bot-form input[type="text"],
-.bot-form input[type="number"] {
+.config .bot-form input[type="text"],
+.config .bot-form input[type="number"] {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
@@ -103,22 +100,28 @@ input[type="submit"]:hover {
     border-radius: 5px;
 }
 
-.bot-form input[type="submit"] {
+.config .bot-form input[type="submit"] {
     cursor: pointer;
 }
 
-.bot-form input[type="submit"]:hover {
+.config .bot-form input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.bot-message,
-.bot-remove-message {
+.config .bot-message,
+.config .bot-remove-message {
     font-weight: bold;
     margin-left: 10px;
 }
 
 .bot-image {
-    width: 100px;
-    height: 100px;
-    margin-left: 20px;
+    width: 120px; /* Augmentation de la taille */
+    height: 120px; /* Augmentation de la taille */
+    margin-left: auto; /* Centrage horizontal */
+    margin-right: auto; /* Centrage horizontal */
+    display: block; /* Pour centrer */
+}
+
+#bot-level {
+    width: 60px; /* Réduction de la largeur */
 }

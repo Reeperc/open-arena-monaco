@@ -90,6 +90,11 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Envoyer des mails</p>
       </a>
 
+      <a href="ConfigurationServeur.php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Lancement du tournois</p>
+      </a>
+
       <!-- <a href="" class="button-item">
         <img src="" alt="">
         <p>un bouton</p>

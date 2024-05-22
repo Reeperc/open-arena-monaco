@@ -81,7 +81,6 @@
 
     $menu_items = [
         'AccueilAdminF.php' => 'Accueil',
-        'ConfigurationServeur.php' => 'Configuration serveur',
         'StatutDesServeurs.php' => 'Statut des serveurs',
         'CréationCompteJoueur.php' => 'Créer un compte joueur',
     ];

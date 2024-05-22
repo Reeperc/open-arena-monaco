@@ -1,15 +1,31 @@
+<?php
+session_start();
+// Vérifier si l'utilisateur est connecté en tant que admin
+if (!isset($_SESSION['organisateur_username'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: ConnexionF.php");
+    exit();
+}
+
+if (isset($_SESSION['welcome_message9'])) {
+    echo "<p style='color: green;'>" . $_SESSION['welcome_message9'] . "</p>";
+    unset($_SESSION['welcome_message9']); // Supprimer la variable de session après l'affichage
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title>Menu Admin</title>
+    <title>Lancement partie</title>
     <link rel="stylesheet" href="styles/style-antoine-config.css">
-    <link rel="stylesheet" href="styles/style-antoine.css">
+    <link rel="stylesheet" href="style.css">
+    <?php include('MenuOrganisateurF.php'); ?>
 </head>
 
-<body>
-    <?php include('MenuAdminF.php'); ?>
+
+<body class="config">
     <main>
         <h2>Sélection de la Map et du Mode de Jeu</h2>
         <div style="display: flex; align-items: center;">
@@ -80,12 +96,15 @@
 
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
+                    <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
 
-                    <button class="button" type="button" onclick="addBot()">Ajouter</button>
-                    <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
-                    <div id="bot-message" class="bot-message"></div>
-                    <div id="bot-remove-message" class="bot-remove-message"></div>
+                        <button class="button" type="button" onclick="addBot()">Ajouter</button>
+                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                        <div id="bot-message" class="bot-message"></div>
+                        <div id="bot-remove-message" class="bot-remove-message"></div>
                 </form>
+            </div>
+            <div style="margin-left: 25%;">
                 <img id="bot-image" class="bot-image" src="" alt="Image du Bot">
             </div>
         </section>
@@ -139,16 +158,30 @@
         }
 
         function launchGame() {
-            // Code pour lancer la partie
+           
+            fetch('lance_partie.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
         }
 
         function startServiceAjax() {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
+            const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
+
 
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
+            formData.append('selected-warmup', warmup);
 
             fetch('start_service.php', {
                     method: 'POST',
