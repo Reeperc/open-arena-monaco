@@ -97,6 +97,7 @@
                     <input type="number" id="bot-level" name="bot_level" min="1" max="10" required>
 
                     <button class="button" type="submit">Ajouter</button>
+                    <div id="botMessage"></div>
                 </form>
             </div>
         </section>
