@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strpos($portOutput, 'succeeded') !== false) {
         echo '<div style="color: red; font-weight: bold;">Échec de l\'arrêt du service.</div>';
     } else {
-        echo '<div style="color: green; font-weight: bold;">Le service a été arrêté.</div>';
+        echo '<div style="color: green; font-weight: bold;">La partie a été arrêté.</div>';
     }
 } else {
     echo '<div style="color: red; font-weight: bold;">Requête invalide.</div>';
