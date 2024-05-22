@@ -43,7 +43,7 @@
             <button onclick="stopService()">Arrêter le service</button>
         </div>
 
-        <form id="serverForm" action="start_server.php" method="post">
+        <form id="serverForm" action="start_service.php" method="post">
             <input type="hidden" id="selected-map" name="selected-map">
             <input type="hidden" id="selected-mode" name="selected-mode">
         </form>
