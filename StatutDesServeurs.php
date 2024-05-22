@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-<link rel="stylesheet" href="styles/style-antoine.css">
+<link rel="stylesheet" href="styles/style-antoine-statut.css">
 <link rel="stylesheet" href="style.css">
 
   <title>Statut des serveurs</title>
