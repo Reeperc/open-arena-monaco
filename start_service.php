@@ -1,16 +1,17 @@
 <?php
-include 'configSsh.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $map = escapeshellarg($_POST['selected-map']);
+    $mode = escapeshellarg($_POST['selected-mode']);
+    
+    $command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'screen -dmS openarena-server openarena-server +set dedicated 2 +set net_port 27961 +set g_gametype $mode +map $map +set sv_hostname \"Tournois Monaco\"'";
+    
+    $output = shell_exec($command);
 
-// Construction de la commande sshpass pour démarrer OpenArena dans une session screen
-$command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'screen -dmS openarena-server openarena-server +set dedicated 2 +set net_port 27961 +set g_gametype 1 +map delta +set sv_hostname \"Tournois Monaco\"'";
-
-// Exécution de la commande avec shell_exec
-$output = shell_exec($command);
-
-// Vérification du résultat de la commande
-if ($output !== null) {
-    echo '<div style="color: green; font-weight: bold;">Le service a été démarré.</div>';
+    // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou afficher un message
+    echo "Le serveur a été démarré avec la map $map et le mode $mode.";
 } else {
-    echo '<div style="color: red; font-weight: bold;">Échec du démarrage du service.</div>';
+    // Redirige vers la page principale si l'accès n'est pas via POST
+    echo "Le serveur n'a pas démarré avec la map $map et le mode $mode.";
+    exit;
 }
 ?>

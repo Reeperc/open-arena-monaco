@@ -6,53 +6,49 @@
     <title>Menu Admin</title>
     <link rel="stylesheet" href="styles/style-antoine-config.css">
     <link rel="stylesheet" href="styles/style-antoine.css">
-    <style>
-        /* Ajout du style pour aligner et ajuster la taille des boutons */
-        .bot-form button {
-            margin-left: 10px; /* Espacement entre les boutons */
-            flex: 1; /* Ajustement automatique de la taille */
-        }
-    </style>
 </head>
 
 <body>
     <?php include('MenuAdminF.php'); ?>
     <main>
-    <h2>Sélection de la Map et du Mode de Jeu</h2>
-            <div style="display: flex; align-items: center;">
-                <div style="margin-right: 20px;">
-                    <label for="map-select">Sélectionnez une Map :</label>
-                    <select id="map-select" name="map">
-                        <option value="map1">Map 1</option>
-                        <option value="map2">Map 2</option>
-                        <option value="map3">Map 3</option>
-                        <!-- Ajoutez d'autres options ici -->
-                    </select>
-                </div>
-                <div>
-                    <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
-                    <select id="mode-select" name="mode">
-                        <option value="mode1">Mode 1</option>
-                        <option value="mode2">Mode 2</option>
-                        <option value="mode3">Mode 3</option>
-                        <!-- Ajoutez d'autres options ici -->
-                    </select>
-                </div>
-                <div style="margin-left: 20px;">
-                    <label for="warmup-counter">Warmup (secondes):</label>
-                    <input type="number" id="warmup-counter" name="warmup" min="0" value="0">
-                </div>
+        <h2>Sélection de la Map et du Mode de Jeu</h2>
+        <div style="display: flex; align-items: center;">
+            <div style="margin-right: 20px;">
+                <label for="map-select">Sélectionnez une Map :</label>
+                <select id="map-select" name="map">
+                    <option value="delta">delta</option>
+                    <option value="map2">Map 2</option>
+                    <option value="map3">Map 3</option>
+                    <!-- Ajoutez d'autres options ici -->
+                </select>
             </div>
-        </section>
+            <div>
+                <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
+                <select id="mode-select" name="mode">
+                    <option value="1">0</option>
+                    <option value="2">Mode 2</option>
+                    <option value="3">Mode 3</option>
+                    <!-- Ajoutez d'autres options ici -->
+                </select>
+            </div>
+            <div style="margin-left: 20px;">
+                <label for="warmup-counter">Warmup (secondes):</label>
+                <input type="number" id="warmup-counter" name="warmup" min="0" value="0">
+            </div>
+        </div>
 
-        <section>
-            <h2>Contrôle du Serveur</h2>
-            <div style="display: flex; justify-content: space-between;">
-                <button onclick="startService()">Démarrer le service</button>
-                <button onclick="stopService()">Arrêter le service</button>
-            </div>
-        </section>
+        <h2>Contrôle du Serveur</h2>
+        <div style="display: flex; justify-content: space-between;">
+            <button onclick="startService()">Démarrer le service</button>
+            <button onclick="stopService()">Arrêter le service</button>
+        </div>
+
+        <form id="serverForm" action="start_server.php" method="post">
+            <input type="hidden" id="selected-map" name="selected-map">
+            <input type="hidden" id="selected-mode" name="selected-mode">
+        </form>
     </main>
+
     <main>
         <section>
             <h2>Ajouter ou Supprimer un Bot</h2>
@@ -101,15 +97,12 @@
                     <button class="button" onclick="addBot()">Ajouter</button>
                     <button class="delete-button" onclick="deleteBot()">Supprimer</button>
                 </form>
-                
             </div>
         </section>
 
         <section>
             <button style="width: 100%;" onclick="launchGame()">Lancer la partie</button>
         </section>
-
-     
     </main>
 
     <script>
@@ -123,6 +116,18 @@
 
         function launchGame() {
             // Code pour lancer la partie
+        }
+
+        function startService() {
+            // Récupère les valeurs sélectionnées pour la map et le mode
+            document.getElementById('selected-map').value = document.getElementById('map-select').value;
+            document.getElementById('selected-mode').value = document.getElementById('mode-select').value;
+            // Soumet le formulaire
+            document.getElementById('serverForm').submit();
+        }
+
+        function stopService() {
+            // Code pour arrêter le service
         }
     </script>
 </body>

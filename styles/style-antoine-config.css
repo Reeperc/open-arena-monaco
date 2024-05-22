@@ -109,3 +109,8 @@ input[type="submit"]:hover {
 .bot-form input[type="submit"]:hover {
     background-color: #0056b3;
 }
+ /* Ajout du style pour aligner et ajuster la taille des boutons */
+ .bot-form button {
+    margin-left: 10px; /* Espacement entre les boutons */
+    flex: 1; /* Ajustement automatique de la taille */
+}
