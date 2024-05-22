@@ -25,9 +25,9 @@
             <div>
                 <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
                 <select id="mode-select" name="mode">
-                    <option value="0">0</option>
-                    <option value="1">Mode 2</option>
-                    <option value="2">Mode 3</option>
+                    <option value="1">0</option>
+                    <option value="2">Mode 2</option>
+                    <option value="3">Mode 3</option>
                     <!-- Ajoutez d'autres options ici -->
                 </select>
             </div>
@@ -39,8 +39,8 @@
 
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
-            <button type="button" onclick="startServiceAjax()">Démarrer le service</button>
-            <button type="button" onclick="stopService()">Arrêter le service</button>
+            <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
+            <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
 
         <form id="serverForm" action="start_service.php" method="post" style="display:none;">
@@ -146,8 +146,20 @@
             });
         }
 
-        function stopService() {
-            // Code pour arrêter le service
+        function stopServiceAjax() {
+            // Effectue une requête AJAX pour arrêter le service
+            fetch('stop_service.php', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Affiche le message de retour dans la div message
+                document.getElementById('message').innerHTML = data;
+            })
+            .catch(error => {
+                // Affiche l'erreur dans la div message
+                document.getElementById('message').innerHTML = 'Erreur : ' + error;
+            });
         }
     </script>
 </body>
