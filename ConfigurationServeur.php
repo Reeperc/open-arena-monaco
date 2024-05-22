@@ -25,9 +25,9 @@
             <div>
                 <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
                 <select id="mode-select" name="mode">
-                    <option value="1">0</option>
+                    <option value="0">Mode 0</option>
+                    <option value="1">Mode 1</option>
                     <option value="2">Mode 2</option>
-                    <option value="3">Mode 3</option>
                     <!-- Ajoutez d'autres options ici -->
                 </select>
             </div>
@@ -48,7 +48,7 @@
             <input type="hidden" id="selected-mode" name="selected-mode">
         </form>
 
-        <div id="message" style="margin-top: 20px;"></div>
+        <div id="message" action="stop_service.php" method="post" style="display:none;"></div>
     </main>
 
     <main>
@@ -94,10 +94,10 @@
                     </select>
 
                     <label for="bot-level">Niveau du Bot:</label>
-                    <input type="number" id="bot-level" name="bot_level" min="1" max="10" required>
+                    <input type="number" id="bot-level" name="bot_level" min="1" max="5" required>
 
                     <button class="button" type="submit">Ajouter</button>
-                    <div id="botMessage"></div>
+                    <div id="message" action="start_service.php" method="post" style="display:none;"></div>
                 </form>
             </div>
         </section>
