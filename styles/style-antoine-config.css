@@ -6,7 +6,6 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     color: #0088ff;
     height: 100%;
     background-image: url('../images/FondAdmin.jpg'); /* Assurez-vous que le chemin est correct */
@@ -48,7 +47,6 @@ select {
 }
 
 button,
-.delete-button,
 input[type="submit"] {
     padding: 12px 20px; /* Ajustement de la taille pour correspondre */
     background-color: #007bff;
@@ -58,20 +56,21 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s;
-}
-
-.delete-button {
-    background-color: #ff4d4d;
-    margin-left: 10px;
-}
-
-.delete-button:hover {
-    background-color: #ff3333;
+    margin-right: 10px; /* Espacement entre les boutons */
 }
 
 button:hover,
 input[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: #ff3333;
 }
 
 .rectangle-fixe {
@@ -84,6 +83,8 @@ input[type="submit"]:hover {
 }
 
 .bot-form {
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -109,8 +110,15 @@ input[type="submit"]:hover {
 .bot-form input[type="submit"]:hover {
     background-color: #0056b3;
 }
- /* Ajout du style pour aligner et ajuster la taille des boutons */
- .bot-form button {
-    margin-left: 10px; /* Espacement entre les boutons */
-    flex: 1; /* Ajustement automatique de la taille */
+
+.bot-message,
+.bot-remove-message {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.bot-image {
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
 }

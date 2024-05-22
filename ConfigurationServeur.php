@@ -57,48 +57,36 @@
             <div class="bot-form" style="display: flex; align-items: center;">
                 <form id="addBotForm" onsubmit="addBot(); return false;">
                     <label for="bot-name">Nom du Bot:</label>
-                    <select id="bot-name" name="bot_name" required>
+                    <select id="bot-name" name="bot_name" onchange="showBotImage()" required>
                         <option value="Angelyss">Angelyss</option>
-                        <option value="Andriy">Andriy</option>
                         <option value="Arachna">Arachna</option>
                         <option value="Assassin">Assassin</option>
                         <option value="Ayumi">Ayumi</option>
                         <option value="Beret">Beret</option>
-                        <option value="Broadklin">Broadklin</option>
-                        <option value="Cyber-Garg">Cyber-Garg</option>
-                        <option value="Dark">Dark</option>
                         <option value="Gargoyle">Gargoyle</option>
-                        <option value="Ghost">Ghost</option>
-                        <option value="Grism">Grism</option>
-                        <option value="Grunt">Grunt</option>
-                        <option value="Headcrash">Headcrash</option>
-                        <option value="Jenna">Jenna</option>
                         <option value="Kyonshi">Kyonshi</option>
                         <option value="Liz">Liz</option>
                         <option value="Major">Major</option>
                         <option value="Merman">Merman</option>
-                        <option value="Metalbot">Metalbot</option>
-                        <option value="Morgan">Morgan</option>
-                        <option value="Murielle">Murielle</option>
                         <option value="Neko">Neko</option>
-                        <option value="Nekoyss">Nekoyss</option>
                         <option value="Penguin">Penguin</option>
-                        <option value="Rai">Rai</option>
                         <option value="S_Marine">S_Marine</option>
                         <option value="Sarge">Sarge</option>
                         <option value="Sergei">Sergei</option>
                         <option value="Skelebot">Skelebot</option>
                         <option value="Sorceress">Sorceress</option>
-                        <option value="Tanisha">Tanisha</option>
                         <option value="Tony">Tony</option>
                     </select>
 
                     <label for="bot-level">Niveau du Bot:</label>
-                    <input type="number" id="bot-level" name="bot_level" min="1" max="5" required>
+                    <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
 
-                    <button class="button" type="submit">Ajouter</button>
-                    <div id="bot-message" style="margin-top: 20px;"></div>
+                    <button class="button" type="button" onclick="addBot()">Ajouter</button>
+                    <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                    <div id="bot-message" class="bot-message"></div>
+                    <div id="bot-remove-message" class="bot-remove-message"></div>
                 </form>
+                <img id="bot-image" class="bot-image" src="" alt="Image du Bot">
             </div>
         </section>
 
@@ -117,16 +105,37 @@
             formData.append('bot_level', botLevel);
 
             fetch('add_bot.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('bot-message').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('bot-message').innerHTML = 'Erreur : ' + error;
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-message').innerHTML = data;
+                    document.getElementById('bot-remove-message').innerHTML = ''; // Clear remove message
+                })
+                .catch(error => {
+                    document.getElementById('bot-message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function removeBot() {
+            const botName = document.getElementById('bot-name').value;
+
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+
+            fetch('remove_bot.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-remove-message').innerHTML = data;
+                    document.getElementById('bot-message').innerHTML = ''; // Clear add message
+                })
+                .catch(error => {
+                    document.getElementById('bot-remove-message').innerHTML = 'Erreur : ' + error;
+                });
         }
 
         function launchGame() {
@@ -142,30 +151,64 @@
             formData.append('selected-mode', mode);
 
             fetch('start_service.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('message').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('message').innerHTML = 'Erreur : ' + error;
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
         }
 
         function stopServiceAjax() {
             fetch('stop_service.php', {
-                method: 'POST'
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('message').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('message').innerHTML = 'Erreur : ' + error;
-            });
+                    method: 'POST'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
         }
+
+        function showBotImage() {
+            const botName = document.getElementById('bot-name').value;
+            const botImage = document.getElementById('bot-image');
+
+            // Mapping bot names to images
+            const botImages = {
+                Angelyss: '../images/bots/Angelyss.png',
+                Arachna: '../images/bots/Arachna.png',
+                Assassin: '../images/bots/Assassin.png',
+                Ayumi: '../images/bots/Ayumi.png',
+                Beret: '../images/bots/Beret.png',
+                Gargoyle: '../images/bots/Gargoyle.png',
+                Kyonshi: '../images/bots/Kyonshi.png',
+                Liz: '../images/bots/Liz.png',
+                Major: '../images/bots/Major.png',
+                Merman: '../images/bots/Merman.png',
+                Neko: '../images/bots/Neko.png',
+                Penguin: '../images/bots/Penguin.png',
+                Sarge: '../images/bots/Sarge.png',
+                Sergei: '../images/bots/Sergei.png',
+                Skelebot: '../images/bots/Skelebot.png',
+                S_Marine: '../images/bots/Smarine.png',
+                Sorceress: '../images/bots/Sorceress.png',
+                Tony: '../images/bots/Tony.png',
+                // Ajoutez les autres bots ici
+            };
+
+            botImage.src = botImages[botName] || '';
+            botImage.alt = botName ? `Image du bot ${botName}` : 'Image du Bot';
+        }
+
+        // Initial call to display the image for the selected bot
+        document.addEventListener('DOMContentLoaded', showBotImage);
     </script>
 </body>
 
