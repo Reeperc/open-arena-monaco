@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mer 15 Mai 2024 à 12:17
+-- Généré le :  Jeu 23 Mai 2024 à 12:34
 -- Version du serveur :  10.1.26-MariaDB-0+deb9u1
 -- Version de PHP :  7.0.30-0+deb9u1
 
@@ -139,6 +139,24 @@ INSERT INTO `Joueur` (`id`, `Nom`, `Prénom`, `Email`, `username`, `password`) V
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `MatchID`
+--
+
+CREATE TABLE `MatchID` (
+  `id` int(11) NOT NULL,
+  `match` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `MatchID`
+--
+
+INSERT INTO `MatchID` (`id`, `match`) VALUES
+(1, 'match1');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `matchs`
 --
 
@@ -149,63 +167,112 @@ CREATE TABLE `matchs` (
   `score_equipe1` int(11) DEFAULT NULL,
   `score_equipe2` int(11) DEFAULT NULL,
   `equipe_gagnante` varchar(30) DEFAULT NULL,
-  `poule` char(1) DEFAULT NULL
+  `poule` char(2) DEFAULT NULL,
+  `annee` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `matchs`
 --
 
-INSERT INTO `matchs` (`id`, `equipe1`, `equipe2`, `score_equipe1`, `score_equipe2`, `equipe_gagnante`, `poule`) VALUES
-(953, 'A_1', 'A_2', 1, 2, 'A_2', 'A'),
-(954, 'A_1', 'A_3', 1, 2, 'A_3', 'A'),
-(955, 'A_1', 'A_4', 2, 1, 'A_1', 'A'),
-(956, 'A_2', 'A_3', 2, 4, 'A_3', 'A'),
-(957, 'A_2', 'A_4', 2, 3, 'A_4', 'A'),
-(958, 'A_3', 'A_4', 4, 1, 'A_3', 'A'),
-(959, 'B_1', 'B_2', 1, 0, 'B_1', 'B'),
-(960, 'B_1', 'B_3', 0, 1, 'B_3', 'B'),
-(961, 'B_1', 'B_4', 0, 1, 'B_4', 'B'),
-(962, 'B_2', 'B_3', 4, 1, 'B_2', 'B'),
-(963, 'B_2', 'B_4', 2, 1, 'B_2', 'B'),
-(964, 'B_3', 'B_4', 2, 1, 'B_3', 'B'),
-(965, 'C_1', 'C_2', 1, 3, 'C_2', 'C'),
-(966, 'C_1', 'C_3', 2, 1, 'C_1', 'C'),
-(967, 'C_1', 'C_4', 2, 0, 'C_1', 'C'),
-(968, 'C_2', 'C_3', 4, 1, 'C_2', 'C'),
-(969, 'C_2', 'C_4', NULL, NULL, 'C_4', 'C'),
-(970, 'C_3', 'C_4', 5, 1, 'C_3', 'C'),
-(971, 'D_1', 'D_2', NULL, NULL, 'D_2', 'D'),
-(972, 'D_1', 'D_3', 2, 1, 'D_1', 'D'),
-(973, 'D_1', 'D_4', NULL, NULL, 'D_4', 'D'),
-(974, 'D_2', 'D_3', 3, 1, 'D_2', 'D'),
-(975, 'D_2', 'D_4', 3, 1, 'D_2', 'D'),
-(976, 'D_3', 'D_4', 2, 1, 'D_3', 'D'),
-(977, 'A_3', 'B_2', 2, 1, 'A_3', 'E'),
-(978, 'A_2', 'B_3', 3, 1, 'A_2', 'E'),
-(979, 'C_2', 'D_4', 3, 1, 'C_2', 'E'),
-(980, 'D_2', 'C_1', 2, 1, 'D_2', 'E'),
-(981, '', '', NULL, NULL, NULL, NULL),
-(982, '', '', NULL, NULL, NULL, NULL),
-(983, '', '', NULL, NULL, NULL, NULL),
-(984, '', '', NULL, NULL, NULL, NULL),
-(985, '', '', NULL, NULL, NULL, NULL),
-(986, '', '', NULL, NULL, NULL, NULL),
-(987, '', '', NULL, NULL, NULL, NULL),
-(988, '', '', NULL, NULL, NULL, NULL),
-(989, '', '', NULL, NULL, NULL, NULL),
-(990, '', '', NULL, NULL, NULL, NULL),
-(991, '', '', NULL, NULL, NULL, NULL),
-(992, '', '', NULL, NULL, NULL, NULL),
-(993, '', '', NULL, NULL, NULL, NULL),
-(994, '', '', NULL, NULL, NULL, NULL),
-(995, 'A_3', 'C_2', 2, 1, 'A_3', 'F'),
-(996, 'A_2', 'D_2', 2, 1, 'A_2', 'F'),
-(997, '', '', NULL, NULL, NULL, NULL),
-(998, '', '', NULL, NULL, NULL, NULL),
-(999, '', '', NULL, NULL, NULL, NULL),
-(1000, '', '', NULL, NULL, NULL, NULL),
-(1001, 'A_3', 'A_2', 6, 1, 'A_3', 'G');
+INSERT INTO `matchs` (`id`, `equipe1`, `equipe2`, `score_equipe1`, `score_equipe2`, `equipe_gagnante`, `poule`, `annee`) VALUES
+(953, 'A_1', 'A_2', 3, 1, 'A_1', 'A', 2019),
+(954, 'A_1', 'A_3', 2, 1, 'A_1', 'A', 2019),
+(955, 'A_1', 'A_4', 2, 1, 'A_1', 'A', 2019),
+(956, 'A_2', 'A_3', 2, 4, 'A_3', 'A', 2019),
+(957, 'A_2', 'A_4', 2, 3, 'A_4', 'A', 2019),
+(958, 'A_3', 'A_4', 4, 1, 'A_3', 'A', 2019),
+(959, 'B_1', 'B_2', 1, 0, 'B_1', 'B', 2019),
+(960, 'B_1', 'B_3', 0, 1, 'B_3', 'B', 2019),
+(961, 'B_1', 'B_4', 0, 1, 'B_4', 'B', 2019),
+(962, 'B_2', 'B_3', 4, 1, 'B_2', 'B', 2019),
+(963, 'B_2', 'B_4', 2, 1, 'B_2', 'B', 2019),
+(964, 'B_3', 'B_4', 2, 1, 'B_3', 'B', 2019),
+(965, 'C_1', 'C_2', 1, 3, 'C_2', 'C', 2019),
+(966, 'C_1', 'C_3', 2, 1, 'C_1', 'C', 2019),
+(967, 'C_1', 'C_4', 2, 0, 'C_1', 'C', 2019),
+(968, 'C_2', 'C_3', 4, 1, 'C_2', 'C', 2019),
+(969, 'C_2', 'C_4', NULL, NULL, 'C_4', 'C', 2019),
+(970, 'C_3', 'C_4', 5, 1, 'C_3', 'C', 2019),
+(971, 'D_1', 'D_2', NULL, NULL, 'D_2', 'D', 2019),
+(972, 'D_1', 'D_3', 2, 1, 'D_1', 'D', 2019),
+(973, 'D_1', 'D_4', NULL, NULL, 'D_4', 'D', 2019),
+(974, 'D_2', 'D_3', 2, 1, 'D_2', 'D', 2019),
+(975, 'D_2', 'D_4', 2, 1, 'D_2', 'D', 2019),
+(976, 'D_3', 'D_4', 3, 1, 'D_3', 'D', 2019),
+(977, 'A_1', 'B_2', 3, 1, 'A_1', 'E4', 2019),
+(978, 'A_3', 'B_3', 2, 1, 'A_3', 'E3', 2019),
+(979, 'C_2', 'D_4', 2, 1, 'C_2', 'E2', 2019),
+(980, 'D_2', 'C_1', 2, 1, 'D_2', 'E1', 2019),
+(981, '', '', NULL, NULL, NULL, NULL, NULL),
+(982, '', '', NULL, NULL, NULL, NULL, NULL),
+(983, '', '', NULL, NULL, NULL, NULL, NULL),
+(984, '', '', NULL, NULL, NULL, NULL, NULL),
+(985, '', '', NULL, NULL, NULL, NULL, NULL),
+(986, '', '', NULL, NULL, NULL, NULL, NULL),
+(987, '', '', NULL, NULL, NULL, NULL, NULL),
+(988, '', '', NULL, NULL, NULL, NULL, NULL),
+(989, '', '', NULL, NULL, NULL, NULL, NULL),
+(990, '', '', NULL, NULL, NULL, NULL, NULL),
+(991, '', '', NULL, NULL, NULL, NULL, NULL),
+(992, '', '', NULL, NULL, NULL, NULL, NULL),
+(993, '', '', NULL, NULL, NULL, NULL, NULL),
+(994, '', '', NULL, NULL, NULL, NULL, NULL),
+(995, 'A_1', 'C_2', 2, 1, 'A_1', 'F', 2019),
+(996, 'A_3', 'D_2', 2, 1, 'A_3', 'F', 2019),
+(997, '', '', NULL, NULL, NULL, NULL, NULL),
+(998, '', '', NULL, NULL, NULL, NULL, NULL),
+(999, '', '', NULL, NULL, NULL, NULL, NULL),
+(1000, '', '', NULL, NULL, NULL, NULL, NULL),
+(1001, 'A_1', 'A_3', 1, 7, 'A_3', 'G', 2019),
+(1002, 'A_1', 'A_2', 2, 1, 'A_1', 'A', 2020),
+(1003, 'A_1', 'A_3', NULL, NULL, NULL, 'A', 2020),
+(1004, 'A_1', 'A_4', NULL, NULL, NULL, 'A', 2020),
+(1005, 'A_2', 'A_3', NULL, NULL, NULL, 'A', 2020),
+(1006, 'A_2', 'A_4', NULL, NULL, NULL, 'A', 2020),
+(1007, 'A_3', 'A_4', NULL, NULL, NULL, 'A', 2020),
+(1008, 'B_1', 'B_2', NULL, NULL, NULL, 'B', 2020),
+(1009, 'B_1', 'B_3', NULL, NULL, NULL, 'B', 2020),
+(1010, 'B_1', 'B_4', NULL, NULL, NULL, 'B', 2020),
+(1011, 'B_2', 'B_3', NULL, NULL, NULL, 'B', 2020),
+(1012, 'B_2', 'B_4', NULL, NULL, NULL, 'B', 2020),
+(1013, 'B_3', 'B_4', NULL, NULL, NULL, 'B', 2020),
+(1014, 'C_1', 'C_2', NULL, NULL, NULL, 'C', 2020),
+(1015, 'C_1', 'C_3', NULL, NULL, NULL, 'C', 2020),
+(1016, 'C_1', 'C_4', NULL, NULL, NULL, 'C', 2020),
+(1017, 'C_2', 'C_3', NULL, NULL, NULL, 'C', 2020),
+(1018, 'C_2', 'C_4', NULL, NULL, NULL, 'C', 2020),
+(1019, 'C_3', 'C_4', NULL, NULL, NULL, 'C', 2020),
+(1020, 'D_1', 'D_2', NULL, NULL, NULL, 'D', 2020),
+(1021, 'D_1', 'D_3', NULL, NULL, NULL, 'D', 2020),
+(1022, 'D_1', 'D_4', NULL, NULL, NULL, 'D', 2020),
+(1023, 'D_2', 'D_3', NULL, NULL, NULL, 'D', 2020),
+(1024, 'D_2', 'D_4', NULL, NULL, NULL, 'D', 2020),
+(1025, 'D_3', 'D_4', NULL, NULL, NULL, 'D', 2020),
+(1026, 'A_1', 'A_2', NULL, NULL, NULL, 'A', 2021),
+(1027, 'A_1', 'A_3', NULL, NULL, NULL, 'A', 2021),
+(1028, 'A_1', 'A_4', NULL, NULL, NULL, 'A', 2021),
+(1029, 'A_2', 'A_3', NULL, NULL, NULL, 'A', 2021),
+(1030, 'A_2', 'A_4', NULL, NULL, NULL, 'A', 2021),
+(1031, 'A_3', 'A_4', NULL, NULL, NULL, 'A', 2021),
+(1032, 'B_1', 'B_2', NULL, NULL, NULL, 'B', 2021),
+(1033, 'B_1', 'B_3', NULL, NULL, NULL, 'B', 2021),
+(1034, 'B_1', 'B_4', NULL, NULL, NULL, 'B', 2021),
+(1035, 'B_2', 'B_3', NULL, NULL, NULL, 'B', 2021),
+(1036, 'B_2', 'B_4', NULL, NULL, NULL, 'B', 2021),
+(1037, 'B_3', 'B_4', NULL, NULL, NULL, 'B', 2021),
+(1038, 'C_1', 'C_2', NULL, NULL, NULL, 'C', 2021),
+(1039, 'C_1', 'C_3', NULL, NULL, NULL, 'C', 2021),
+(1040, 'C_1', 'C_4', NULL, NULL, NULL, 'C', 2021),
+(1041, 'C_2', 'C_3', NULL, NULL, NULL, 'C', 2021),
+(1042, 'C_2', 'C_4', NULL, NULL, NULL, 'C', 2021),
+(1043, 'C_3', 'C_4', NULL, NULL, NULL, 'C', 2021),
+(1044, 'D_1', 'D_2', NULL, NULL, NULL, 'D', 2021),
+(1045, 'D_1', 'D_3', NULL, NULL, NULL, 'D', 2021),
+(1046, 'D_1', 'D_4', NULL, NULL, NULL, 'D', 2021),
+(1047, 'D_2', 'D_3', NULL, NULL, NULL, 'D', 2021),
+(1048, 'D_2', 'D_4', NULL, NULL, NULL, 'D', 2021),
+(1049, 'D_3', 'D_4', NULL, NULL, NULL, 'D', 2021);
 
 -- --------------------------------------------------------
 
@@ -323,6 +390,12 @@ ALTER TABLE `Joueur`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Index pour la table `MatchID`
+--
+ALTER TABLE `MatchID`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `matchs`
 --
 ALTER TABLE `matchs`
@@ -386,10 +459,15 @@ ALTER TABLE `Jeu`
 ALTER TABLE `Joueur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
+-- AUTO_INCREMENT pour la table `MatchID`
+--
+ALTER TABLE `MatchID`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `matchs`
 --
 ALTER TABLE `matchs`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1050;
 --
 -- AUTO_INCREMENT pour la table `Membre`
 --
