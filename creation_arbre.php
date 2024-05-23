@@ -45,6 +45,12 @@
                         }
                     }
                 }
+                for ($i=0, $i<4;$i++) {
+                    $poule = "E" . $i;
+                    $sql_insert_match_quart = "INSERT INTO matchs (poule, annee) VALUES ('$poule', '$annee)";
+                    $connexion->exec($sql_insert_match_quart);
+                }
+                
             }
         } catch (PDOException $e) {
             echo "Erreur lors de l'insertion dans la DB'" . $e->getMessage();
