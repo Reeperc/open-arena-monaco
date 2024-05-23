@@ -1,33 +1,65 @@
 <?php
-include 'configSsh.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $serverIP = '195.221.30.65'; // IP du serveur de jeu
+    $port = 27961; // Port à vérifier
+    $website = 'http://195.221.30.65'; // URL du site web associé au serveur
 
-// Connexion SSH
-$connection = ssh2_connect($server, 22);
-if (!$connection) {
-    die('Impossible d\'établir la connexion SSH.');
+    // Fonction pour vérifier l'état du port avec netcat
+    function isPortOpen($serverIP, $port) {
+        $connection = @fsockopen($serverIP, $port, $errno, $errstr, 2);
+        if ($connection) {
+            fclose($connection);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Fonction pour vérifier si le serveur répond au ping
+    function isServerUp($serverIP) {
+        $pingresult = shell_exec("ping -c 1 " . $serverIP);
+        if (strpos($pingresult, '1 received')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Fonction pour vérifier si le site web répond au ping
+    function isWebsiteUp($website) {
+        $pingresult = shell_exec("ping -c 1 " . parse_url($website, PHP_URL_HOST));
+        if (strpos($pingresult, '1 received')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Vérifications
+    $serverUp = isServerUp($serverIP);
+    $portOpen = isPortOpen($serverIP, $port);
+    $websiteUp = isWebsiteUp($website);
+
+    // Générer le message de statut
+    $statusMessage = "Statut du serveur:<br>";
+
+    if ($serverUp) {
+        $statusMessage .= "Le serveur de jeu est UP.<br>";
+        if ($portOpen) {
+            $statusMessage .= "Le port $port est ouvert. Une partie est en cours.<br>";
+        } else {
+            $statusMessage .= "Le port $port est fermé. Aucune partie en cours.<br>";
+        }
+
+        if ($websiteUp) {
+            $statusMessage .= "Le site web est UP. <a href=\"$website\" target=\"_blank\">Visitez le site web</a>.<br>";
+        } else {
+            $statusMessage .= "Le site web est DOWN.<br>";
+        }
+    } else {
+        $statusMessage .= "Le serveur de jeu est DOWN.<br>";
+    }
+
+    echo $statusMessage;
 }
-
-// Authentification SSH
-if (!ssh2_auth_password($connection, $username, $password)) {
-    die('Échec de l\'authentification SSH.');
-}
-
-// Exécution de la commande à distance
-$command = 'sudo systemctl status openarena-server';
-$stream = ssh2_exec($connection, $command);
-stream_set_blocking($stream, true);
-$output = stream_get_contents($stream);
-fclose($stream);
-
-// Fermeture de la connexion SSH
-ssh2_disconnect($connection);
-
-// Affichagge du contenu brut du terminal pour voir si ça corresp bien
-echo '<pre>' . nl2br(htmlentities($output)) . '</pre>';
-
-// Traitement du résultat pour extraire le statut
-if (strpos($output, 'active (running)') == true) {
-    echo '<div style="color: green; font-weight: bold;">Le service OpenArena est actif.</div>';
-} else {
-    echo '<div style="color: red; font-weight: bold;">Le service OpenArena n\'est pas actif.</div>';
-}
+?>
