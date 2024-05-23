@@ -50,7 +50,7 @@ if (isset($_SESSION['welcome_message9'])) {
             </div>
             <div style="margin-left: 20px;">
                 <label for="warmup-counter">Warmup (secondes):</label>
-                <input type="number" id="warmup-counter" name="warmup" min="0" value="0">
+                <input type="number" id="warmup-counter" name="warmup" min="0" max="5000" value="0">
             </div>
         </div>
 
