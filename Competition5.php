@@ -698,7 +698,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_955"];
                                                                 $score2 = $_POST["score_2_955"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "A_1", $equipe2 = "A_4", $poule = "A", $match_ids = 955);
+                                                            script_competition2($score1, $score2, $equipe1 = "A_1", $equipe2 = "A_4", $poule = "A", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -725,7 +725,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_956"];
                                                                 $score2 = $_POST["score_2_956"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "A_2", $equipe2 = "A_3", $poule = "A", $match_ids = 956);
+                                                            script_competition2($score1, $score2, $equipe1 = "A_2", $equipe2 = "A_3", $poule = "A", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -752,7 +752,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_957"];
                                                                 $score2 = $_POST["score_2_957"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "A_2", $equipe2 = "A_4", $poule = "A", $match_ids = 957);
+                                                            script_competition2($score1, $score2, $equipe1 = "A_2", $equipe2 = "A_4", $poule = "A", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -779,7 +779,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_958"];
                                                                 $score2 = $_POST["score_2_958"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "A_3", $equipe2 = "A_4", $poule = "A", $match_ids = 958);
+                                                            script_competition2($score1, $score2, $equipe1 = "A_3", $equipe2 = "A_4", $poule = "A", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -833,7 +833,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_959"];
                                                                 $score2 = $_POST["score_2_959"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_2", $poule = "B", $match_ids = 959);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_2", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -860,7 +860,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_960"];
                                                                 $score2 = $_POST["score_2_960"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_3", $poule = "B", $match_ids = 960);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_3", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -887,7 +887,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_961"];
                                                                 $score2 = $_POST["score_2_961"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_4", $poule = "B", $match_ids = 961);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_1", $equipe2 = "B_4", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -914,7 +914,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_962"];
                                                                 $score2 = $_POST["score_2_962"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_2", $equipe2 = "B_3", $poule = "B", $match_ids = 962);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_2", $equipe2 = "B_3", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -941,7 +941,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_963"];
                                                                 $score2 = $_POST["score_2_963"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_2", $equipe2 = "B_4", $poule = "B", $match_ids = 963);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_2", $equipe2 = "B_4", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -968,7 +968,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_964"];
                                                                 $score2 = $_POST["score_2_964"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "B_3", $equipe2 = "B_4", $poule = "B", $match_ids = 964);
+                                                            script_competition2($score1, $score2, $equipe1 = "B_3", $equipe2 = "B_4", $poule = "B", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1019,7 +1019,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_965"];
                                                                 $score2 = $_POST["score_2_965"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_2", $poule = "C", $match_ids = 965);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_2", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1046,7 +1046,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_966"];
                                                                 $score2 = $_POST["score_2_966"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_3", $poule = "C", $match_ids = 966);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_3", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1073,7 +1073,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_967"];
                                                                 $score2 = $_POST["score_2_967"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_4", $poule = "C", $match_ids = 967);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_1", $equipe2 = "C_4", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1100,7 +1100,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_968"];
                                                                 $score2 = $_POST["score_2_968"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_2", $equipe2 = "C_3", $poule = "C", $match_ids = 968);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_2", $equipe2 = "C_3", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1127,7 +1127,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_969"];
                                                                 $score2 = $_POST["score_2_969"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_2", $equipe2 = "C_4", $poule = "C", $match_ids = 969);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_2", $equipe2 = "C_4", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1154,7 +1154,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_970"];
                                                                 $score2 = $_POST["score_2_970"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "C_3", $equipe2 = "C_4", $poule = "C", $match_ids = 970);
+                                                            script_competition2($score1, $score2, $equipe1 = "C_3", $equipe2 = "C_4", $poule = "C", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1205,7 +1205,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_971"];
                                                                 $score2 = $_POST["score_2_971"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_2", $poule = "D", $match_ids = 971);
+                                                            script_competition2($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_2", $poule = "D", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1232,7 +1232,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_972"];
                                                                 $score2 = $_POST["score_2_972"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_3", $poule = "D", $match_ids = 972);
+                                                            script_competition2($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_3", $poule = "D", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1259,7 +1259,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_973"];
                                                                 $score2 = $_POST["score_2_973"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_4", $poule = "D", $match_ids = 973);
+                                                            script_competition2($score1, $score2, $equipe1 = "D_1", $equipe2 = "D_4", $poule = "D", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1286,7 +1286,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_974"];
                                                                 $score2 = $_POST["score_2_974"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "D_2", $equipe2 = "D_3", $poule = "D", $match_ids = 974);
+                                                            script_competition2($score1, $score2, $equipe1 = "D_2", $equipe2 = "D_3", $poule = "D", $annee);
                                                         }
                                                         ?>
                                                     </div>
@@ -1313,7 +1313,7 @@ ini_set('display_errors', 0);
                                                                 $score1 = $_POST["score_1_975"];
                                                                 $score2 = $_POST["score_2_975"];
                                                             }
-                                                            script_competition($score1, $score2, $equipe1 = "D_2", $equipe2 = "D_4", $poule = "D", $match_ids = 975);
+                                                            script_competition2($score1, $score2, $equipe1 = "D_2", $equipe2 = "D_4", $poule = "D", $annee);
                                                         }
                                                         ?>
                                                     </div>
