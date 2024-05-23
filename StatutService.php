@@ -1,27 +1,52 @@
-<?php
-include 'configSsh.php';
+<!doctype html>
+<html lang="fr">
 
-// Connexion SSH
-$connection = ssh2_connect($server, 22);
-if (!$connection) {
-    die('Impossible d\'établir la connexion SSH.');
-}
+<head>
+    <link rel="stylesheet" href="styles/style-antoine-statut.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Statut des serveurs</title>
+    <script>
+        function getServiceStatus() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "service_status.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</head>
 
-// Authentification SSH
-if (!ssh2_auth_password($connection, $username, $password)) {
-    die('Échec de l\'authentification SSH.');
-}
+<body>
+    <?php include('MenuAdminF.php'); ?>
 
-// Exécution de la commande à distance
-$command = 'sudo systemctl status openarena-server';
-$stream = ssh2_exec($connection, $command);
-stream_set_blocking($stream, true);
-$output = stream_get_contents($stream);
-fclose($stream);
+    <main>
+        <section class="button-grid">
+            <a href="StatutServiceRouen.php" class="button-item">
+                <img src="" alt="">
+                <p>Etat du serveur Rouen</p>
+            </a>
 
-// Affichage du résultat
-echo "Résultat de la commande '$command' sur le serveur distant : <br>";
-echo nl2br($output); // Affiche le résultat avec des sauts de ligne
+            <a href="#" class="button-item" onclick="getServiceStatus(); return false;">
+                <img src="" alt="">
+                <p>Etat du serveur Monaco</p>
+            </a>
+            <a href="StatutServiceParis.php" class="button-item">
+                <img src="" alt="">
+                <p>Etat du serveur Paris</p>
+            </a>
 
-// Fermeture de la connexion SSH
-ssh2_disconnect($connection);
+            <a href="StatutServiceMQ.php" class="button-item">
+                <img src="" alt="">
+                <p>Etat du serveur MQ</p>
+            </a>
+        </section>
+    </main>
+
+    <div id="result"></div>
+</body>
+
+</html>

@@ -1,33 +1,76 @@
 <?php
-include 'configSsh.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $serverIP = $_POST['server_ip'];
+    $port = $_POST['port'];
+    $website = $_POST['website'];
 
-// Connexion SSH
-$connection = ssh2_connect($server, 22);
-if (!$connection) {
-    die('Impossible d\'établir la connexion SSH.');
+    // Fonction pour vérifier l'état du port avec fsockopen
+    function isPortOpen($serverIP, $port) {
+        $connection = @fsockopen($serverIP, $port, $errno, $errstr, 2);
+        if ($connection) {
+            fclose($connection);
+            return true;
+        } else {
+            error_log("Erreur fsockopen: $errstr ($errno)");
+            return false;
+        }
+    }
+
+    // Fonction pour vérifier si le serveur répond au ping
+    function isServerUp($serverIP) {
+        $pingresult = shell_exec("ping -c 1 " . escapeshellarg($serverIP));
+        error_log("Ping result: $pingresult");
+        if (strpos($pingresult, '1 received') !== false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Fonction pour vérifier si le site web répond au ping
+    function isWebsiteUp($website) {
+        $hostname = parse_url($website, PHP_URL_HOST);
+        if ($hostname === null) {
+            error_log("Invalid URL: $website");
+            return false;
+        }
+        $pingresult = shell_exec("ping -c 1 " . escapeshellarg($hostname));
+        error_log("Website ping result: $pingresult");
+        if (strpos($pingresult, '1 received') !== false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Vérifications
+    $serverUp = isServerUp($serverIP);
+    $portOpen = isPortOpen($serverIP, $port);
+    $websiteUp = isWebsiteUp($website);
+
+    // Générer le message de statut
+    $statusMessage = "<div style='text-align: center; margin: 20px; font-family: Arial, sans-serif;'>";
+    $statusMessage .= "<h3>Statut du serveur:</h3>";
+
+    if ($serverUp) {
+        $statusMessage .= "<p style='color: green;'>Le serveur de jeu est UP.</p>";
+        if ($portOpen) {
+            $statusMessage .= "<p style='color: green;'>Le port $port est ouvert. Une partie est en cours.</p>";
+        } else {
+            $statusMessage .= "<p style='color: red;'>Le port $port est fermé. Aucune partie en cours.</p>";
+        }
+
+        if ($websiteUp) {
+            $statusMessage .= "<p style='color: green;'>Le site web est UP. <a href=\"$website\" target=\"_blank\">Visitez le site web</a>.</p>";
+        } else {
+            $statusMessage .= "<p style='color: red;'>Le site web est DOWN.</p>";
+        }
+    } else {
+        $statusMessage .= "<p style='color: red;'>Le serveur de jeu est DOWN.</p>";
+    }
+
+    $statusMessage .= "</div>";
+
+    echo $statusMessage;
 }
-
-// Authentification SSH
-if (!ssh2_auth_password($connection, $username, $password)) {
-    die('Échec de l\'authentification SSH.');
-}
-
-// Exécution de la commande à distance
-$command = 'sudo systemctl status openarena-server';
-$stream = ssh2_exec($connection, $command);
-stream_set_blocking($stream, true);
-$output = stream_get_contents($stream);
-fclose($stream);
-
-// Fermeture de la connexion SSH
-ssh2_disconnect($connection);
-
-// Affichagge du contenu brut du terminal pour voir si ça corresp bien
-echo '<pre>' . nl2br(htmlentities($output)) . '</pre>';
-
-// Traitement du résultat pour extraire le statut
-if (strpos($output, 'active (running)') == true) {
-    echo '<div style="color: green; font-weight: bold;">Le service OpenArena est actif.</div>';
-} else {
-    echo '<div style="color: red; font-weight: bold;">Le service OpenArena n\'est pas actif.</div>';
-}
+?>
