@@ -47,7 +47,7 @@
                 }
                 for ($i=0; $i<4;$i++) {
                     $poule = "E" . $i;
-                    $sql_insert_match_quart = "INSERT INTO matchs (poule, annee) VALUES ('$poule', '$annee)";
+                    $sql_insert_match_quart = "INSERT INTO matchs (poule, annee) VALUES ('$poule', '$annee')";
                     $connexion->exec($sql_insert_match_quart);
                 }
                 
