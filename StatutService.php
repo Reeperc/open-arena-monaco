@@ -40,7 +40,7 @@
                 <p>Etat du serveur Rouen</p>
             </a>
 
-            <a href="#" class="button-item" onclick="getServiceStatus('195.221.30.65', 27961, 'http:195.221.30.65'); return false;">
+            <a href="#" class="button-item" onclick="getServiceStatus('195.221.30.65', 27961, 'http://195.221.30.65'); return false;">
                 <img src="" alt="">
                 <p>Etat du serveur Monaco</p>
             </a>

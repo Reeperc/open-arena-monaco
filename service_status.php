@@ -4,13 +4,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $port = $_POST['port'];
     $website = $_POST['website'];
 
-    // Fonction pour vérifier l'état du port avec netcat
+    // Fonction pour vérifier l'état du port avec fsockopen
     function isPortOpen($serverIP, $port) {
         $connection = @fsockopen($serverIP, $port, $errno, $errstr, 2);
         if ($connection) {
             fclose($connection);
             return true;
         } else {
+            error_log("Erreur fsockopen: $errstr ($errno)");
             return false;
         }
     }
@@ -18,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Fonction pour vérifier si le serveur répond au ping
     function isServerUp($serverIP) {
         $pingresult = shell_exec("ping -c 1 " . escapeshellarg($serverIP));
-        if (strpos($pingresult, '1 received')) {
+        error_log("Ping result: $pingresult");
+        if (strpos($pingresult, '1 received') !== false) {
             return true;
         } else {
             return false;
@@ -27,8 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Fonction pour vérifier si le site web répond au ping
     function isWebsiteUp($website) {
-        $pingresult = shell_exec("ping -c 1 " . escapeshellarg(parse_url($website, PHP_URL_HOST)));
-        if (strpos($pingresult, '1 received')) {
+        $hostname = parse_url($website, PHP_URL_HOST);
+        if ($hostname === null) {
+            error_log("Invalid URL: $website");
+            return false;
+        }
+        $pingresult = shell_exec("ping -c 1 " . escapeshellarg($hostname));
+        error_log("Website ping result: $pingresult");
+        if (strpos($pingresult, '1 received') !== false) {
             return true;
         } else {
             return false;
