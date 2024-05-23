@@ -46,7 +46,7 @@ try {
     // Contenu de l'email
     $mail->isHTML(true); // Définir le format de l'email à HTML
     $mail->Subject = 'Allez vous échauffez!';
-    $mail->Body    = 'La<b> MONACO ARENA </b> est ouverte et la partie va bien. Veuillez vous installer et vous echauffer avec les autres joueurs';
+    $mail->Body    = 'La<b> Monaco Arena </b> est ouverte et la partie va bientot debuter. Vous pouvez vous echauffer avec les autres joueurs';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
