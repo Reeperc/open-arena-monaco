@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $serverIP = '195.221.50.17'; // IP du serveur de jeu
+    $serverIP = '195.221.30.65'; // IP du serveur de jeu
     $port = 27960; // Port à vérifier
-    $website = 'http:195.221.50.25'; // URL du site web associé au serveur
+    $website = 'http://example.com'; // URL du site web associé au serveur
 
     // Fonction pour vérifier l'état du port avec netcat
     function isPortOpen($serverIP, $port) {
