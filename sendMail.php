@@ -38,15 +38,15 @@ try {
     $mail->SMTPDebug = 3;
 
     // Expéditeur
-    $mail->setFrom('organisateur@arena-monaco.fr', 'Monaco Arena');
+    $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
     // Destinataire
     $mail->addAddress('roger@arena-monaco.fr', 'Roger'); // Modifier par l'adresse de votre destinataire
 
     // Contenu de l'email
     $mail->isHTML(true); // Définir le format de l'email à HTML
-    $mail->Subject = 'Test Mail depuis le site2';
-    $mail->Body    = 'Ce message a été envoyé depuis le site web <b>en gras!!!!</b> et avec un 😊 EMOJI!';
+    $mail->Subject = 'Allez vous échauffez!';
+    $mail->Body    = 'La<b> MONACO ARENA </b> est ouverte et la partie va bien. Veuillez vous installer et vous echauffer avec les autres joueurs';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
