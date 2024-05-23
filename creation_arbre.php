@@ -50,6 +50,12 @@
                     $sql_insert_match_quart = "INSERT INTO matchs (poule, annee) VALUES ('$poule', '$annee')";
                     $connexion->exec($sql_insert_match_quart);
                 }
+                for ($i=0;$i<2;$i++) {
+                    $sql_insert_match_demi = "INSERT INTO matchs (poule, annee) VALUES ('F', '$annee')";
+                    $connexion->exec($sql_insert_match_demi);
+                }
+                $sql_insert_match_finale = "INSERT INTO matchs (poule, annee) VALUES ('G', '$annee')";
+                $connexion->exec($sql_insert_match_finale);
                 
             }
         } catch (PDOException $e) {
