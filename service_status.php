@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $serverIP = '195.221.30.65'; // IP du serveur de jeu
+    $serverIP = '195.221.30.16'; // IP du serveur de jeu
     $port = 27961; // Port à vérifier
     $website = 'http://195.221.30.65'; // URL du site web associé au serveur
 
