@@ -35,7 +35,7 @@
 
     <main>
         <section class="button-grid">
-            <a href="#" class="button-item" onclick="getServiceStatus('192.168.1.1', 27960, 'http://192.168.1.1'); return false;">
+            <a href="#" class="button-item" onclick="getServiceStatus('192.221.50.27', 27960, 'http://192.221.50.17'); return false;">
                 <img src="" alt="">
                 <p>Etat du serveur Rouen</p>
             </a>
@@ -43,11 +43,11 @@
                 <img src="" alt="">
                 <p>Etat du serveur Monaco</p>
             </a>
-            <a href="#" class="button-item" onclick="getServiceStatus('192.168.1.3', 27962, 'http://192.168.1.3'); return false;">
+            <a href="#" class="button-item" onclick="getServiceStatus('192.168.40.129', 27960, 'http://192.221.40.131'); return false;">
                 <img src="" alt="">
                 <p>Etat du serveur Paris</p>
             </a>
-            <a href="#" class="button-item" onclick="getServiceStatus('192.168.1.4', 27963, 'http://192.168.1.4'); return false;">
+            <a href="#" class="button-item" onclick="getServiceStatus('192.168.20.27', 27965, 'http://192.221.20.46'); return false;">
                 <img src="" alt="">
                 <p>Etat du serveur MQ</p>
             </a>
