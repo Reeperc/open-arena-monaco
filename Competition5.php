@@ -41,7 +41,7 @@ ini_set('display_errors', 0);
         }
 
 
-        /*----------------genealogy-tree----------*/
+        /*----------------genealogy-treeee----------*/
         .genealogy-body {
             white-space: nowrap;
             overflow-y: hidden;
@@ -222,18 +222,25 @@ ini_set('display_errors', 0);
 
     ?>
 
-    <?php //require_once('script_selection_vainqueurs_poule.php'); ?>
+    <?php //require_once('script_selection_vainqueurs_poule.php'); 
+    ?>
     <?php require_once('script_selection_vainqueur_poule2.php'); ?>
-    <?php //require_once('script_selection_second_poule.php'); ?>
+    <?php //require_once('script_selection_second_poule.php'); 
+    ?>
     <?php require_once('script_selection_second_poule2.php'); ?>
-    <?php //require_once('script_competition.php'); ?>
-    <?php require_once('script_competition2.php'); ?>    
+    <?php //require_once('script_competition.php'); 
+    ?>
+    <?php require_once('script_competition2.php'); ?>
 
     <!-- Scripts pour les demis-finales -->
-    <?php //require_once('script_premier_quarts.php'); ?>
-    <?php //require_once('script_second_quarts.php'); ?>
-    <?php //require_once('script_troisieme_quarts.php'); ?>
-    <?php //require_once('script_quatrieme_quarts.php'); ?>
+    <?php //require_once('script_premier_quarts.php'); 
+    ?>
+    <?php //require_once('script_second_quarts.php'); 
+    ?>
+    <?php //require_once('script_troisieme_quarts.php'); 
+    ?>
+    <?php //require_once('script_quatrieme_quarts.php'); 
+    ?>
 
     <!-- Scripts pour la finale -->
     <?php require_once('script_premier_demi2.php'); ?>
@@ -251,33 +258,33 @@ ini_set('display_errors', 0);
     <!-- <?php include('MenuOrganisateurF.php'); ?> -->
 
 
-<h2>Veuillez selectionner l'annee du tournois</h2>
-<form method='get' action=''>
-    <p> <input type='number' name='annee' style="width: 50px;"><br></p>
-    <button type="submit" style="width: 100px;"> Valider annee</button>
-</form>
-<?php 
-//if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//    $annee= $_POST['selection_annee'];
-//    echo $annee;
-//}
-?>
-<?php echo $annee; ?>
-<?php echo $_GET['annee']; ?>
-<?php $annee= $_GET['annee'];?>
-<?php echo $annee; ?>
+    <h2>Veuillez selectionner l'annee du tournois</h2>
+    <form method='get' action=''>
+        <p> <input type='number' name='annee' style="width: 50px;"><br></p>
+        <button type="submit" style="width: 100px;"> Valider annee</button>
+    </form>
+    <?php
+    //if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //    $annee= $_POST['selection_annee'];
+    //    echo $annee;
+    //}
+    ?>
+    <?php echo $annee; ?>
+    <?php echo $_GET['annee']; ?>
+    <?php $annee = $_GET['annee']; ?>
+    <?php echo $annee; ?>
 
-<form method='post' action=''>
-    <button type="submit" style="width: 100px;"> Creer nouvel arbre</button>
-    <input type="hidden" name="separator" value="nouvel_arbre" />
-</form>
-<?php if ($_POST['separator']== 'nouvel_arbre') {
-        if ($_SERVER["REQUEST_METHOD"]== "POST") {
+    <form method='post' action=''>
+        <button type="submit" style="width: 100px;"> Creer nouvel arbre</button>
+        <input type="hidden" name="separator" value="nouvel_arbre" />
+    </form>
+    <?php if ($_POST['separator'] == 'nouvel_arbre') {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "test creation nouvel arbre";
             creation_arbre($annee);
         }
-}
-?>
+    }
+    ?>
 
 
     <div class="body genealogy-body genealogy-scroll">
@@ -300,7 +307,7 @@ ini_set('display_errors', 0);
                             <div class="member-view-box">
                                 <div class="member-image">
                                     <div class="member-details">
-                                        <h3>Vainqueur <?php echo $annee?> </h3>
+                                        <h3>Vainqueur <?php echo $annee ?> </h3>
                                     </div>
                                 </div>
                             </div>
@@ -360,13 +367,14 @@ ini_set('display_errors', 0);
                                     <div class="member-image">
                                         <img src="images/akalogo.png" alt="Member">
                                         <div class="member-details">
-                                            <?php script_vainqueur_quart2($poule ="E4", $annee); //977
+                                            <?php script_vainqueur_quart2($poule = "E4", $annee); //977
                                             print(" VS ");
-                                            script_vainqueur_quart2($poule = "E2" , $annee);//979 ?>
+                                            script_vainqueur_quart2($poule = "E2", $annee); //979 
+                                            ?>
                                         </div>
                                         <form method='post' action=''>
-                                            <p><?php script_vainqueur_quart2($poule ="E4", $annee); ?> : <input type='number' name='score_1_995' style="width: 50px;"><br></p>
-                                            <p><?php script_vainqueur_quart2($poule = "E2" , $annee); ?> : <input type='number' name='score_2_995' style="width: 50px;"><br></p>
+                                            <p><?php script_vainqueur_quart2($poule = "E4", $annee); ?> : <input type='number' name='score_1_995' style="width: 50px;"><br></p>
+                                            <p><?php script_vainqueur_quart2($poule = "E2", $annee); ?> : <input type='number' name='score_2_995' style="width: 50px;"><br></p>
                                             <input type="hidden" name="separator" value="995" />
                                             <button type="submit" style="width: 100px;"> Valider score</button>
                                         </form>
@@ -378,8 +386,8 @@ ini_set('display_errors', 0);
                                                 // Récupérer les données du formulaire
                                                 $score1 = $_POST["score_1_995"];
                                                 $score2 = $_POST["score_2_995"];
-                                                $equipe1 = script_vainqueur_quart2($poule ="E4", $annee);
-                                                $equipe2 = script_vainqueur_quart2($poule = "E2" , $annee);
+                                                $equipe1 = script_vainqueur_quart2($poule = "E4", $annee);
+                                                $equipe2 = script_vainqueur_quart2($poule = "E2", $annee);
                                             }
                                             script_competition($score1, $score2, $equipe1, $equipe2, $poule = "F", $match_ids = 995);
                                         }
@@ -395,13 +403,14 @@ ini_set('display_errors', 0);
                                     <div class="member-image">
                                         <img src="images/akalogo.png" alt="Member">
                                         <div class="member-details">
-                                            <?php script_vainqueur_quart2($poule= "E3", $annee);//978
+                                            <?php script_vainqueur_quart2($poule = "E3", $annee); //978
                                             print(" VS ");
-                                            script_vainqueur_quart2($poule="E1", $annee);//980 ?>
+                                            script_vainqueur_quart2($poule = "E1", $annee); //980 
+                                            ?>
                                         </div>
                                         <form method='post' action=''>
-                                            <p><?php script_vainqueur_quart2($poule= "E3", $annee); ?> : <input type='number' name='score_1_996' style="width: 50px;"><br></p>
-                                            <p><?php script_vainqueur_quart2($poule="E1", $annee); ?> : <input type='number' name='score_2_996' style="width: 50px;"><br></p>
+                                            <p><?php script_vainqueur_quart2($poule = "E3", $annee); ?> : <input type='number' name='score_1_996' style="width: 50px;"><br></p>
+                                            <p><?php script_vainqueur_quart2($poule = "E1", $annee); ?> : <input type='number' name='score_2_996' style="width: 50px;"><br></p>
                                             <input type="hidden" name="separator" value="996" />
                                             <button type="submit" style="width: 100px;"> Valider score</button>
                                         </form>
@@ -413,8 +422,8 @@ ini_set('display_errors', 0);
                                                 // Récupérer les données du formulaire
                                                 $score1 = $_POST["score_1_996"];
                                                 $score2 = $_POST["score_2_996"];
-                                                $equipe1 = script_vainqueur_quart2($poule= "E3", $annee);
-                                                $equipe2 = script_vainqueur_quart2($poule="E1", $annee);
+                                                $equipe1 = script_vainqueur_quart2($poule = "E3", $annee);
+                                                $equipe2 = script_vainqueur_quart2($poule = "E1", $annee);
                                             }
                                             script_competition($score1, $score2, $equipe1, $equipe2, $poule = "F", $match_ids = 996);
                                         }
@@ -1339,7 +1348,7 @@ ini_set('display_errors', 0);
                                                                 // Récupérer les données du formulaire
                                                                 $score1 = $_POST["score_1_976"];
                                                                 $score2 = $_POST["score_2_976"];
-                                                                $annee=$_POST["selection_annee"];
+                                                                $annee = $_POST["selection_annee"];
                                                             }
                                                             //$annee=2019;
                                                             echo $annee;
