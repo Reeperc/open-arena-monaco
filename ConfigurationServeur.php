@@ -161,7 +161,6 @@ if (isset($_SESSION['welcome_message9'])) {
            
             fetch('lance_partie.php', {
                     method: 'POST',
-                    body: formData
                 })
                 .then(response => response.text())
                 .then(data => {
