@@ -10,6 +10,9 @@
 
 <body>
     <?php include('MenuAdminF.php'); ?>
+    <form action="enregistrer_config.php" method="post">
+        <button type="submit">enregistrer les configurations</button>
+    </form>
     
 </body>
 
