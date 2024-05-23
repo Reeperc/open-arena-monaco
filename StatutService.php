@@ -77,7 +77,7 @@
 
             <a href="#" class="button-item" onclick="getServiceStatusMontcuq(); return false;">
                 <img src="" alt="">
-                <p>Etat du serveur Montcuq</p>
+                <p>Etat du serveur MQ</p>
             </a>
         </section>
     </main>
