@@ -30,26 +30,27 @@ if (isset($_SESSION['welcome_message9'])) {
         <h2>Sélection de la Map et du Mode de Jeu</h2>
         <div style="display: flex; align-items: center;">
             <div style="margin-right: 20px;">
-                <label for="map-select">Sélectionnez une Map :</label>
-                <select id="map-select" name="map">
-                    <option value="delta">delta</option>
-                    <option value="map2">Map 2</option>
-                    <option value="map3">Map 3</option>
-                    <!-- Ajoutez d'autres options ici -->
+                <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
+                <select id="mode-select" name="mode" onchange="updateMapOptions()">
+                    <option value="">-- Mode de jeu --</option>
+                    <option value="0">Match à mort (Deathmatch)</option>
+                    <option value="1">Capture du drapeau (CTF)</option>
+                    <option value="2">Domination</option>
+                    <option value="3">One-Flag CTF</option>
+                    <option value="4">Harvester</option>
+                    <option value="5">Rocket Arena</option>
+                    <option value="6">Instagib</option>
                 </select>
             </div>
-            <div>
-                <label for="mode-select">Sélectionnez un Mode de Jeu :</label>
-                <select id="mode-select" name="mode">
-                    <option value="0">Mode 0</option>
-                    <option value="1">Mode 1</option>
-                    <option value="2">Mode 2</option>
-                    <!-- Ajoutez d'autres options ici -->
+            <div id="map-container" style="display: none;">
+                <label for="map-select">Sélectionnez une Map :</label>
+                <select id="map-select" name="map">
+                    <!-- Options de la carte mises à jour dynamiquement -->
                 </select>
             </div>
             <div style="margin-left: 20px;">
                 <label for="warmup-counter">Warmup (secondes):</label>
-                <input type="number" id="warmup-counter" name="warmup" min="0" value="0">
+                <input type="number" id="warmup-counter" name="warmup" min="0" max="5000" value="0">
             </div>
         </div>
 
@@ -96,32 +97,80 @@ if (isset($_SESSION['welcome_message9'])) {
 
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
+                    
+                    <label for="bot-team">Équipe du Bot:</label>
+                    <select id="bot-team" name="bot_team" required>
+                        <option value="red">Rouge</option>
+                        <option value="blue">Bleu</option>
+                    </select>
+
                     <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
 
-                        <button class="button" type="button" onclick="addBot()">Ajouter</button>
-                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
-                        <div id="bot-message" class="bot-message"></div>
-                        <div id="bot-remove-message" class="bot-remove-message"></div>
+                        
                 </form>
             </div>
             <div style="margin-left: 25%;">
                 <img id="bot-image" class="bot-image" src="" alt="Image du Bot">
+                <p></p>
+                <p></p>
+                <p></p>
+                <button class="button" type="button" onclick="addBot()">Ajouter</button>
+                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                        <div id="bot-message" class="bot-message"></div>
+                        <div id="bot-remove-message" class="bot-remove-message"></div>
             </div>
         </section>
 
         <section>
             <button style="width: 100%;" onclick="launchGame()">Lancer la partie</button>
+            <div id="message-launchGame" class="message"></div>
         </section>
     </main>
 
     <script>
+        const maps = {
+            0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
+            1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
+            2: ['aggressor', 'am_lavaarena', 'ctf_gate1', 'ctf_inyard', 'mlca1'],
+            3: ['am_lavactf', 'am_lavactfxl', 'ctf_inyard', 'delta', 'hydronext2'],
+            4: ['am_lavactf', 'am_lavactf2', 'delta', 'hydronext2', 'oa_bases3', 'oa_Thor'],
+            5: ['aggressor', 'am_lavaarena', 'mlca1'],
+            6: ['aggressor', 'oa_dm1']
+        };
+
+        function updateMapOptions() {
+            const modeSelect = document.getElementById('mode-select');
+            const mapSelect = document.getElementById('map-select');
+            const mapContainer = document.getElementById('map-container');
+
+            const selectedMode = modeSelect.value;
+
+            // Clear previous options
+            mapSelect.innerHTML = '';
+
+            if (selectedMode !== '') {
+                // Add new options
+                maps[selectedMode].forEach(map => {
+                    const option = document.createElement('option');
+                    option.value = map;
+                    option.text = map;
+                    mapSelect.appendChild(option);
+                });
+                mapContainer.style.display = 'block';
+            } else {
+                mapContainer.style.display = 'none';
+            }
+        }
+
         function addBot() {
             const botName = document.getElementById('bot-name').value;
             const botLevel = document.getElementById('bot-level').value;
+            const botTeam = document.getElementById('bot-team').value; // Récupérer la valeur de l'équipe du bot
 
             const formData = new FormData();
             formData.append('bot_name', botName);
             formData.append('bot_level', botLevel);
+            formData.append('bot_team', botTeam); // Ajouter l'équipe du bot aux données du formulaire
 
             fetch('add_bot.php', {
                     method: 'POST',
@@ -158,16 +207,15 @@ if (isset($_SESSION['welcome_message9'])) {
         }
 
         function launchGame() {
-           
             fetch('lance_partie.php', {
                     method: 'POST',
                 })
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('message').innerHTML = data;
+                    document.getElementById('message-launchGame').innerHTML = data;
                 })
                 .catch(error => {
-                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                    document.getElementById('message-launchGame').innerHTML = 'Erreur : ' + error;
                 });
         }
 
@@ -175,7 +223,6 @@ if (isset($_SESSION['welcome_message9'])) {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
             const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
-
 
             const formData = new FormData();
             formData.append('selected-map', map);

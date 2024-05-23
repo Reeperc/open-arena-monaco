@@ -50,7 +50,7 @@ if (isset($_SESSION['welcome_message9'])) {
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
-      <a href="Competition4.php" class="button-item-joueur">
+      <a href="Competition5.php" class="button-item-joueur">
         <img src="" alt="">
         <p>Arbre de compétition</p>
       </a>
