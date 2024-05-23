@@ -4,8 +4,7 @@
         if ($connexion) {
             // Authentification SSH
             if (ssh2_auth_password($connexion, 'oxidized', 'azertyuiop')) {
-                // Transfert du fichier via SCP
-                $resultat = ssh2_exec($connexion, 'oxidized');
+                $resultat = ssh2_exec($connexion, '/usr/local/bin/oxidized');
                 if ($resultat) {
                     echo "Fichier envoyé avec succès !";
                 } else {
