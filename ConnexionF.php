@@ -1,151 +1,104 @@
 <?php
 session_start();
 
-if (isset($_SESSION['success_message'])) {
-  echo "<p style='color: green;'>" . $_SESSION['success_message'] . "</p>";
-  unset($_SESSION['success_message']); // Supprimer la variable de session après l'affichage
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Récupérer les données du formulaire
+  $email = $_POST['email'];
+  $password = $_POST['password']; // Récupérer le mot de passe saisi par l'utilisateur
 
-// informations de connexion à la base de données
-//ajout
-//BDD Localhost Personel
-// $serveur = "localhost";
-// $utilisateur = "root";
-// $motDePasse = "root";
-// $baseDeDonnees = "bdd_6_10";
+  // Configuration pour l'accès à l'Active Directory
+  $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
+  $ldap_bind_dn = 'cn=utilisateur,cn=Users,dc=arena-monaco,dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
+  $ldap_bind_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
+  $ldap_base_dn = 'dc=arena-monaco,dc=fr'; // Base DN d
+  $ldap_base_dn_admin = 'cn=Users,dc=arena-monaco,dc=fr'; // Base DN des administrateurs
+  $ldap_base_dn_organisateur = 'ou=organisateurs,dc=arena-monaco,dc=fr'; // Base DN des organisateurs
 
-//BDD Localhost Serveur Web
-// $serveur = "localhost";
-// $utilisateur = "mo";
-// $motDePasse = "mdp";
-// $baseDeDonnees = "bdd_6_10";
+  // Connexion à l'Active Directory
+  $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
+  ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+  ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
-//BDD moduleweb
-// $serveur = "moduleweb.esigelec.fr";
-// $utilisateur = "grp_6_10";
-// $motDePasse = "oPkO06vqDtnh";
-// $baseDeDonnees = "bdd_6_10";
-include("database.php");
+  if ($ldap_conn) {
+    // Authentification avec l'utilisateur LDAP
+    $ldap_bind = ldap_bind($ldap_conn, $ldap_bind_dn, $ldap_bind_password);
 
-try {
-  // Créer une connexion PDO
-  $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePasse);
+    if ($ldap_bind) {
+      // Requête de recherche LDAP pour les administrateurs
+      $search_filter_admin = "(mail=$email)";
+      $attributes_admin = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+      $search_result_admin = ldap_search($ldap_conn, $ldap_base_dn_admin, $search_filter_admin, $attributes_admin);
 
-  // Définir le mode d'erreur sur PDO
-  $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // Requête de recherche LDAP pour les organisateurs
+      $search_filter_organisateur = "(mail=$email)";
+      $attributes_organisateur = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+      $search_result_organisateur = ldap_search($ldap_conn, $ldap_base_dn_organisateur, $search_filter_organisateur, $attributes_organisateur);
 
-  // Vérifier si des données ont été soumises via le formulaire
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du formulaire de manière sécurisée
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+      // Requête de recherche LDAP avec le filtre d'adresse e-mail
+      $search_filter = "(mail=$email)";
+      $attributes = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+      $search_result = ldap_search($ldap_conn, $ldap_base_dn, $search_filter, $attributes);
 
-    // Vérifier d'abord dans la table "Membre"
-    $queryMembre = "SELECT * FROM Membre WHERE username = ?";
-    $stmtMembre = $connexion->prepare($queryMembre);
-    $stmtMembre->execute([$username]);
-    $membre = $stmtMembre->fetch();
+      if ($search_result_admin !== false && $search_result_organisateur !== false && $search_result != false) {
+        // Récupération des entrées LDAP pour les administrateurs
+        $entries_admin = ldap_get_entries($ldap_conn, $search_result_admin);
 
-    // Si les identifiants sont dans la table "Membre" et le mot de passe est correct
-    if ($membre && password_verify($password, $membre['password'])) {
-      // Définir la variable de session pour le membre
-      $_SESSION['visiteur_username'] = $username;
-      $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
-      // Redirection vers la page AccueilMembreF.php
-      header("Location: AccueilVisiteurF.php");
-      exit();
+        // Récupération des entrées LDAP pour les organisateurs
+        $entries_organisateur = ldap_get_entries($ldap_conn, $search_result_organisateur);
+
+        //utilisateurs
+        $entries = ldap_get_entries($ldap_conn, $search_result);
+
+        // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
+        if ($entries_admin['count'] == 1) {
+          $user_dn = $entries_admin[0]['dn'];
+        } elseif ($entries_organisateur['count'] == 1) {
+          $user_dn = $entries_organisateur[0]['dn'];
+        } elseif ($entries['count'] == 1) {
+          $user_dn = $entries[0]['dn'];
+        } else {
+          $user_dn = null;
+        }
+
+        if ($user_dn) {
+          // Tenter de lier avec le DN et le mot de passe de l'utilisateur
+          if (@ldap_bind($ldap_conn, $user_dn, $password)) {
+            // Authentification réussie
+            if ($entries_admin['count'] == 1) {
+              // L'utilisateur est un administrateur
+              $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
+              $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
+              header("Location: AccueilAdminF.php");
+              exit();
+            } elseif ($entries_organisateur['count'] == 1) {
+              // L'utilisateur est un organisateur
+              $_SESSION['organisateur_username'] = $entries_organisateur[0]['cn'][0];
+              $_SESSION['welcome_message'] = "Connexion réussie en tant qu'organisateur";
+              header("Location: AccueilOrganisateurF.php");
+              exit();
+            } elseif ($entries['count'] == 1) {
+              // L'utilisateur est un joueur
+              $_SESSION['joueur_username'] = $entries[0]['cn'][0];
+              $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
+              header("Location: AccueilJoueurF.php");
+              exit();
+            }
+          } else {
+            echo "<p style='color: red;'>Mot de passe incorrect.</p>";
+          }
+        } else {
+          echo "<p style='color: red;'>Aucun utilisateur trouvé avec cette adresse e-mail.</p>";
+        }
+      } else {
+        echo "<p style='color: red;'>Erreur de recherche LDAP.</p>";
+      }
+    } else {
+      echo "<p style='color: red;'>Échec de l'authentification LDAP.</p>";
     }
 
-    // Vérifier dans la table "Admin"
-    $queryAdmin = "SELECT * FROM Admin WHERE username = ?";
-    $stmtAdmin = $connexion->prepare($queryAdmin);
-    $stmtAdmin->execute([$username]);
-    $admin = $stmtAdmin->fetch();
-
-    // Si les identifiants sont dans la table "Admin" et le mot de passe est correct
-    if ($admin && password_verify($password, $admin['password'])) {
-      // Définir la variable de session pour l'admin
-      $_SESSION['admin_username'] = $username;
-      $_SESSION['welcome_message2'] = "Bienvenue, $username ! Connexion réussie.";
-      // Redirection vers la page AccueilAdminF.php
-      header("Location: AccueilAdminF.php");
-      exit();
-    }
-
-    // Vérifier dans la table "Joueur"
-    $queryJoueur = "SELECT * FROM Joueur WHERE username = ?";
-    $stmtJoueur = $connexion->prepare($queryJoueur);
-    $stmtJoueur->execute([$username]);
-    $joueur = $stmtJoueur->fetch();
-
-    // Si les identifiants sont dans la table "Joueur" et le mot de passe est correct
-    if ($joueur && password_verify($password, $joueur['password'])) {
-      // Définir la variable de session pour le joueur
-      $_SESSION['joueur_username'] = $username;
-      $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
-      // Redirection vers la page d'accueil des joueurs
-      header("Location: AccueilJoueurF.php");
-      exit();
-    }
-
-    // Vérifier dans la table "Organisateur"
-    $queryOrganisateur = "SELECT * FROM Organisateur WHERE username = ?";
-    $stmtOrganisateur = $connexion->prepare($queryOrganisateur);
-    $stmtOrganisateur->execute([$username]);
-    $organisateur = $stmtOrganisateur->fetch();
-
-    // Si les identifiants sont dans la table "Organisateur" et le mot de passe est correct
-    if ($organisateur && password_verify($password, $organisateur['password'])) {
-      // Définir la variable de session pour l'organisateur
-      $_SESSION['organisateur_username'] = $username;
-      $_SESSION['welcome_message'] = "Bienvenue, $username ! Connexion réussie.";
-      // Redirection vers la page d'accueil des organisateurs
-      header("Location: AccueilOrganisateurF.php");
-      exit();
-    }
-
-    // Afficher un message d'erreur si les informations de connexion sont incorrectes
-    echo "Identifiant ou mot de passe incorrect.";
+    // Fermeture de la connexion LDAP
+    ldap_close($ldap_conn);
+  } else {
+    echo "<p style='color: red;'>Échec de la connexion au serveur LDAP.</p>";
   }
-} catch (PDOException $e) {
-  // En cas d'erreur, affichez l'erreur
-  die("La connexion à la base de données a échoué : " . $e->getMessage());
 }
-
-// Fermer la connexion à la base de données à la fin du script (si nécessaire)
-$connexion = null;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
-
-<!doctype html>
-<html lang="fr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Site web</title>
-</head>
-
-<body>
-  <link rel="stylesheet" href="style.css">
-  <?php include('MenuVisiteurF.php'); ?>
-  <video autoplay loop muted playsinline id="background-video">
-    <source src="videos/video5.mp4" type="video/mp4">
-  </video>
-  <main class='background-transparent'>
-    <form method="post" class="login-form">
-      <label for="username" class="form-label">Nom d'utilisateur :</label><br>
-      <input type="text" id="username" name="username" required class="form-input"><br><br>
-
-      <label for="password" class="form-label">Mot de passe :</label><br>
-      <input type="password" id="password" name="password" required class="form-input"><br><br>
-
-      <button type="submit" class="form-button">Connexion</button>
-    </form>
-  </main>
-</body>
-
-</html>
