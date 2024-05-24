@@ -32,19 +32,19 @@ if (isset($_SESSION['success_message'])) {
       <button type="submit" class="form-button">Connexion</button>
     </form>
   </main> -->
-  <mainclass='background-transparent'>
+  <main class='background-transparent'>
     <h2>Connexion</h2>
     <?php if (isset($error_message)) { ?>
       <p class="error-message"><?php echo $error_message; ?></p>
     <?php } ?>
-    <form method="post" action="connexionphp.php">
+    <form method="post" class="login-form" action="connexionphp.php">
       <label class="form-label" for="email">identifiant :</label>
       <input class="form-input" type="text" id="email" name="email" required>
       <label class="form-label for=" password">Mot de passe :</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Se connecter</button>
+      <input type="password" class="form-input" id="password" name="password" required>
+      <button class="form-button" type="submit">Se connecter</button>
     </form>
-    </main>
+  </main>
 </body>
 
 </html>
