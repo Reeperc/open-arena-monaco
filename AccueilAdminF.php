@@ -10,10 +10,19 @@
 
 <body>
     <?php include('MenuAdminF.php'); ?>
-    <form action="enregistrer_config.php" method="post">
-        <button type="submit">enregistrer les configurations</button>
-    </form>
-    
+    <link rel="stylesheet" href="style.css">
+    <main>
+        <section class="button-grid">
+            <a href="enregistrer_config.php" class="button-item-joueur">
+                <img src="" alt="">
+                <p>Enregistrer les configurations</p>
+            </a>
+        </section>
+
+        <!-- <form action="enregistrer_config.php" method="post">
+            <button type="submit">enregistrer les configurations</button>
+        </form> -->
+    </main>
 </body>
 
 </html>
