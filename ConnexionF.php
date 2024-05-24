@@ -12,7 +12,7 @@ if (isset($_SESSION['success_message'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Site web</title>
+  <title>Connexion</title>
 </head>
 
 <body>
@@ -32,19 +32,19 @@ if (isset($_SESSION['success_message'])) {
       <button type="submit" class="form-button">Connexion</button>
     </form>
   </main> -->
-  <main>
+  <mainclass='background-transparent'>
     <h2>Connexion</h2>
     <?php if (isset($error_message)) { ?>
       <p class="error-message"><?php echo $error_message; ?></p>
     <?php } ?>
     <form method="post" action="connexionphp.php">
-      <label for="email">ident :</label>
-      <input type="text" id="email" name="email" required>
-      <label for="password">Mot de passe :</label>
+      <label class="form-label" for="email">identifiant :</label>
+      <input class="form-input" type="text" id="email" name="email" required>
+      <label class="form-label for=" password">Mot de passe :</label>
       <input type="password" id="password" name="password" required>
       <button type="submit">Se connecter</button>
     </form>
-  </main>
+    </main>
 </body>
 
 </html>
