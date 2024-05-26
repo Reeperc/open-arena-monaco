@@ -31,6 +31,7 @@ Les opérations de connexion étant directement liées à l'Active Directory d'u
 ## Instructions pour le Déploiement
 ### Pré-requis
 - Serveur DNS configuré
+- Raspberry pi
 - Serveur de jeu
 - Serveur web
 - Active Directory
