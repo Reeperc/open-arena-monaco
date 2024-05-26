@@ -1,11 +1,41 @@
-# Ce site a été conçu dans le cadre d'un projet de fin d'année par un groupe de 6 étudiants.
-Contexte: Championnat de Quake Français (Simulation) entre les villes : Rouen, MQ, Paris et Monaco.
-Notre équipe représente les arènes de Monaco. Nous avons configuré dans un réseau local différents serveurs (DNS, jeu, web, active directory) pour que des joueurs puissent s'affronter.
-Les deux meilleurs champions de chaque ville affronteront ensuite les finalistes des autres villes.
+# Projet de Fin d'Année - Championnat de Quake Français
 
-La page de connexion permet d'accéder à trois sessions: 
-* Administrateur : peut voir l'état du serveur de jeu local et des autres villes, récuperer et consulter des backups des serveurs/ configuration des routeurs et switch.
-* Organisateur : peut organiser des tournois, consulter leur hisorique, lancer des parties avec des modes spécifiques, fermer le serveur de jeu, ajouter ou retirer des bots.
-* Joueur : peut voir les modes de jeu triés par type de carte (map du jeu), configurer ses touches pour jouer, consulter les règles du jeu, l'avancement du tournoi.
+## Contexte du Projet
+Ce site a été conçu dans le cadre d'un projet de fin d'année par un groupe de 6 étudiants.
 
+### Description
+Le projet simule un Championnat de Quake Français entre les villes suivantes : Rouen, MQ, Paris et Monaco. Notre équipe représente les arènes de Monaco. Nous avons configuré un réseau local comprenant différents serveurs (DNS, jeu, web, Active Directory) pour permettre aux joueurs de s'affronter. Les deux meilleurs champions de chaque ville affronteront ensuite les finalistes des autres villes.
+
+### Fonctionnalités du Site
+La page de connexion permet d'accéder à trois types de sessions :
+
+#### Administrateur
+- Voir l'état du serveur de jeu local et des autres villes.
+- Récupérer et consulter des backups des serveurs/configurations des routeurs et switchs.
+
+#### Organisateur
+- Organiser des tournois et consulter leur historique.
+- Lancer des parties avec des modes spécifiques.
+- Fermer le serveur de jeu.
+- Ajouter ou retirer des bots.
+
+#### Joueur
+- Voir les modes de jeu triés par type de carte (map du jeu).
+- Configurer les touches pour jouer.
+- Consulter les règles du jeu.
+- Suivre l'avancement du tournoi.
+
+### Accessibilité
 Les opérations de connexion étant directement liées à l'Active Directory d'un serveur local, le site ne sera accessible qu'en mode visiteur en dehors du réseau local de jeu.
+
+## Instructions pour le Déploiement
+### Pré-requis
+- Serveur DNS configuré
+- Serveur de jeu
+- Serveur web
+- Active Directory
+
+### Installation
+1. **Cloner le Répertoire**
+   ```bash
+   git clone https://github.com/Reeperc/html
