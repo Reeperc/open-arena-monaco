@@ -31,11 +31,11 @@ $_SESSION['reset_token_expire'] = time() + (30 * 60); // 30 minutes d'expiration
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = '195.221.30.17';
-    $mail->SMTPAuth = false;
-    $mail->Port = 25;
-    $mail->CharSet = 'UTF-8';
-    $mail->SMTPSecure = '';
+    $mail->Host = '195.221.30.17'; // Votre serveur SMTP
+    $mail->SMTPAuth = false; // Si l'authentification SMTP est nécessaire
+    $mail->Port = 25; // Port SMTP
+    $mail->CharSet = 'UTF-8'; // Encodage du message
+    $mail->SMTPSecure = ''; // Protocole de sécurité SMTP
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
