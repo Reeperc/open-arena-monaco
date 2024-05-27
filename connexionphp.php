@@ -4,6 +4,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données du formulaire
     $email = $_POST['email'];
+    $password = $_POST['password']; // Récupérer le mot de passe saisi par l'utilisateur
 
     // Configuration pour l'accès à l'Active Directory
     $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
@@ -25,17 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($ldap_bind) {
             // Requête de recherche LDAP pour les administrateurs
             $search_filter_admin = "(mail=$email)";
-            $attributes_admin = array("cn"); // Attribut à récupérer (CN)
+            $attributes_admin = array("cn", "dn"); // Attributs à récupérer (CN et DN)
             $search_result_admin = ldap_search($ldap_conn, $ldap_base_dn_admin, $search_filter_admin, $attributes_admin);
 
             // Requête de recherche LDAP pour les organisateurs
             $search_filter_organisateur = "(mail=$email)";
-            $attributes_organisateur = array("cn"); // Attribut à récupérer (CN)
+            $attributes_organisateur = array("cn", "dn"); // Attributs à récupérer (CN et DN)
             $search_result_organisateur = ldap_search($ldap_conn, $ldap_base_dn_organisateur, $search_filter_organisateur, $attributes_organisateur);
 
             // Requête de recherche LDAP avec le filtre d'adresse e-mail
             $search_filter = "(mail=$email)";
-            $attributes = array("cn", "directoryName"); // Attribut à récupérer (CN)
+            $attributes = array("cn"); // Attribut à récupérer (CN)
             $search_result = ldap_search($ldap_conn, $ldap_base_dn, $search_filter, $attributes);
 
             if ($search_result_admin !== false && $search_result_organisateur !== false && $search_result != false) {
@@ -66,11 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Récupérer le CN de l'utilisateur trouvé
                     $cn = $entries[0]['cn'][0];
-                    $directoryName= $entries[0]['$directoryName'][0];
 
                     // Authentification réussie, enregistrer le nom d'utilisateur dans une variable de session
                     $_SESSION['joueur_username'] = $cn;
-                    $_SESSION['joueur_directory'] = $directoryName;
                     $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
 
                     // Rediriger vers la page d'accueil après la connexion réussie
@@ -78,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit(); // Assurez-vous de terminer l'exécution du script après la redirection
 
                 } else {
-                    // il n'y a  rien
                     echo "<p style='color: red;'>Aucun utilisateur trouvé avec cette adresse e-mail.</p>";
                 }
             } else {
