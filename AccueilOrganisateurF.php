@@ -95,6 +95,13 @@ if (isset($_SESSION['welcome_message9'])) {
         <p>Lancement du tournois</p>
       </a>
 
+      <a href="assigner_joueur.php" class="button-item-joueur">
+        <img src="" alt="">
+        <p>Assigner un joueur à un raspberry
+          
+        </p>
+      </a>
+
       <!-- <a href="" class="button-item">
         <img src="" alt="">
         <p>un bouton</p>

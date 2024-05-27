@@ -8,6 +8,7 @@
                 $resultat = ssh2_exec($connexion, 'oxidized');
                 if ($resultat) {
                     echo "configuration enregistrer";
+                    
                 } else {
                     echo "Une erreur s'est produite lors de l'envoi du fichier.";
                 }
