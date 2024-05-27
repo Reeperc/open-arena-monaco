@@ -82,7 +82,7 @@
     $menu_items = [
         'AccueilOrganisateurF.php' => 'Accueil',
         'Competition5.php' => 'Arbre de compétition',
-        'ListMapAdmin2.php.php' => 'Liste des cartes',
+        'ListMapAdmin2.php' => 'Liste des cartes',
         'StatutDesServeursBis.php' => 'Statut des serveurs',
         'sendMail-form.php' => 'Envoyer des mails',
         'ConfigurationServeur.php' => 'Lancement du tournois',
