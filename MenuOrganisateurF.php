@@ -82,8 +82,8 @@
     $menu_items = [
         'AccueilOrganisateurF.php' => 'Accueil',
         'Competition5.php' => 'Arbre de compétition',
-        'ListMapAdmin2.php.php' => 'Liste des cartes',
-        'StatutDesServeurs.php' => 'Statut des serveurs',
+        'ListMapAdmin2.php' => 'Liste des cartes',
+        'StatutDesServeursBis.php' => 'Statut des serveurs',
         'sendMail-form.php' => 'Envoyer des mails',
         'ConfigurationServeur.php' => 'Lancement du tournois',
         'assigner_joueur.php' => 'Assigner un joueur à un raspberry',
