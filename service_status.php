@@ -2,7 +2,6 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serverIP = $_POST['server_ip'];
     $port = $_POST['port'];
-    $website = $_POST['website'];
 
     // Fonction pour vérifier l'état du port avec fsockopen
     function isPortOpen($serverIP, $port) {
