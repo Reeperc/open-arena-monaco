@@ -66,7 +66,7 @@
     </main>
 
     <script>
-        updateStatuses(); // Initial call to set statuses on page load
+        updateStatuses(); // Initial call to set statuses on page loaddd
     </script>
 </body>
 
