@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Requête de recherche LDAP avec le filtre d'adresse e-mail
             $search_filter = "(mail=$email)";
-            $attributes = array("cn", "sAMAccountName"); // Attribut à récupérer (CN)
+            $attributes = array("cn", "givenName"); // Attribut à récupérer (CN)
             $search_result = ldap_search($ldap_conn, $ldap_base_dn, $search_filter, $attributes);
 
             if ($search_result_admin !== false && $search_result_organisateur !== false && $search_result != false) {
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Récupérer le CN de l'utilisateur trouvé
                     $cn = $entries[0]['cn'][0];
-                    $directoryName= $entries[0]['sAMAccountName'][0];
+                    $directoryName= $entries[0]['givenName'][0];
 
                     // Authentification réussie, enregistrer le nom d'utilisateur dans une variable de session
                     $_SESSION['joueur_username'] = $cn;

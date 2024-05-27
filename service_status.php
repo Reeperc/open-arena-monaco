@@ -1,20 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serverIP = $_POST['server_ip'];
-    $port = $_POST['port'];
     $website = $_POST['website'];
-
-    // Fonction pour vérifier l'état du port avec fsockopen
-    function isPortOpen($serverIP, $port) {
-        $connection = @fsockopen($serverIP, $port, $errno, $errstr, 2);
-        if ($connection) {
-            fclose($connection);
-            return true;
-        } else {
-            error_log("Erreur fsockopen: $errstr ($errno)");
-            return false;
-        }
-    }
 
     // Fonction pour vérifier si le serveur répond au ping
     function isServerUp($serverIP) {
@@ -45,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifications
     $serverUp = isServerUp($serverIP);
-    $portOpen = isPortOpen($serverIP, $port);
     $websiteUp = isWebsiteUp($website);
 
     // Générer le message de statut
@@ -54,19 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($serverUp) {
         $statusMessage .= "<p style='color: green;'>Le serveur de jeu est UP.</p>";
-        if ($portOpen) {
-            $statusMessage .= "<p style='color: green;'>Le port $port est ouvert. Une partie est en cours.</p>";
-        } else {
-            $statusMessage .= "<p style='color: red;'>Le port $port est fermé. Aucune partie en cours.</p>";
-        }
-
-        if ($websiteUp) {
-            $statusMessage .= "<p style='color: green;'>Le site web est UP. <a href=\"$website\" target=\"_blank\">Visitez le site web</a>.</p>";
-        } else {
-            $statusMessage .= "<p style='color: red;'>Le site web est DOWN.</p>";
-        }
     } else {
         $statusMessage .= "<p style='color: red;'>Le serveur de jeu est DOWN.</p>";
+    }
+
+    if ($websiteUp) {
+        $statusMessage .= "<p style='color: green;'>Le site web est UP</p>";
+    } else {
+        $statusMessage .= "<p style='color: red;'>Le site web est DOWN.</p>";
     }
 
     $statusMessage .= "</div>";
