@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <?php include('MenuAdminF.php'); ?>
+    <?php include('MenuOrganisateurF.php'); ?>
 
     <main>
         <section class="server-grid">

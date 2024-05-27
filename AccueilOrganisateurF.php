@@ -45,73 +45,7 @@ if (isset($_SESSION['welcome_message9'])) {
     <source src="videos/video6.mp4" type="video/mp4">
   </video>
   <main>
-    <h1></h1>
-    <p></p>
 
-    <!-- Section des six boutons géants -->
-    <section class="button-grid">
-      <a href="Competition5.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Arbre de compétition</p>
-      </a>
-
-      <a href="StatutServiceParis.php" class="button-item-joueur">
-        <img src="image.jpg" alt="">
-        <p>Etat du serveur Paris</p>
-      </a>
-
-      <a href="StatutServiceMQ.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Etat du serveur MQ</p>
-      </a>
-
-      <a href="ListMapAdmin2.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Liste des cartes</p>
-      </a>
-
-      <a href="StatutServiceMonaco.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Etat du serveur Monaco</p>
-      </a>
-
-      <a href="StatutServiceRouen.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Etat du serveur Rouen</p>
-      </a>
-
-      <a href="#" class="button-item-joueur" onclick="launchGame(); return false;">
-        <img src="" alt="">
-        <p>Lancer le jeu</p>
-      </a>
-
-      <a href="sendMail-form.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Envoyer des mails</p>
-      </a>
-
-      <a href="ConfigurationServeur.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Lancement du tournois</p>
-      </a>
-
-      <a href="assigner_joueur.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>Assigner un joueur à un raspberry
-          
-        </p>
-      </a>
-
-      <!-- <a href="" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p>
-      </a>
-
-      <a href="" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p> -->
-      </a>
-    </section>
   </main>
 
   <!-- <?php include('FooterF.php'); ?> -->
