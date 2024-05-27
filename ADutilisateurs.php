@@ -16,18 +16,24 @@ if ($ldap_conn) {
 
     if ($ldap_bind) {
         // Requête pour récupérer tous les utilisateurs avec un sAMAccountName
-        $filter = "(sAMAccountName=*)";
+        $filter = "(objectClass=user)";
         $attributes = array("sAMAccountName");
         $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
         $entries = ldap_get_entries($ldap_conn, $search);
 
-        // Génération des options pour la liste déroulante
-        echo "<select>";
+        // Récupérer les noms d'utilisateurs
+        $users = [];
         for ($i = 0; $i < $entries['count']; $i++) {
-            $sAMAccountName = $entries[$i]['samaccountname'][0];
-            echo "<option value='$sAMAccountName'>$sAMAccountName</option>";
+            $users[] = $entries[$i]['samaccountname'][0];
         }
-        echo "</select>";
+
+        // Fermeture de la connexion LDAP
+        ldap_close($ldap_conn);
+
+        // Renvoyer les noms d'utilisateurs sous forme de JSON
+        header('Content-Type: application/json');
+        echo json_encode($users);
+        exit;
     } else {
         echo "Échec de l'authentification LDAP.";
     }

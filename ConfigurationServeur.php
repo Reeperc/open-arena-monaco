@@ -119,8 +119,8 @@
             fetch('ADutilisateurs.php')
                 .then(response => response.json())
                 .then(data => {
-                    const userList1 = document.getElementById('userList1');
-                    const userList2 = document.getElementById('userList2');
+                    const userList1 = document.getElementById('listeNoms1');
+                    const userList2 = document.getElementById('listeNoms2');
 
                     // Vider les listes déroulantes
                     userList1.innerHTML = '';
@@ -141,6 +141,9 @@
                     console.error('Erreur lors de la récupération des utilisateurs depuis le serveur AD :', error);
                 });
         }
+
+        // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
+        document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
 
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
