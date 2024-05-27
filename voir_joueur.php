@@ -5,7 +5,7 @@ $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez
 $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
 $ldap_base_dn = 'DC=arena-monaco, DC=fr'; // Remplacez par votre base DN
 
-// Connexion à l'Active Directory
+// Connexion à l'Active Directoryyy
 $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
 ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);

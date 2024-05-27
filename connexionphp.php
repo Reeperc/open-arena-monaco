@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Authentification réussie, enregistrer le nom d'utilisateur dans une variable de session
                     $_SESSION['joueur_username'] = $cn;
-                    $_SESSION['joueur_directory'] = $directoryName;
+                    $_SESSION['joueur_directory'] = $entries[0]['givenName'][0];
                     $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
 
                     // Rediriger vers la page d'accueil après la connexion réussie
