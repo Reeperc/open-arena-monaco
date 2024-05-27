@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Récupérer le CN de l'utilisateur trouvé
                     $cn = $entries[0]['cn'][0];
-                    $directoryName= $entries[0]['givenName'][0];
+                    //$directoryName= $entries[0]['givenName'][0];
 
                     // Authentification réussie, enregistrer le nom d'utilisateur dans une variable de session
                     $_SESSION['joueur_username'] = $cn;
