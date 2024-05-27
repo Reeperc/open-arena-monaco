@@ -43,7 +43,11 @@ if (isset($_SESSION['success_message'])) {
       <label class="form-label for=" password">Mot de passe :</label>
       <input type="password" class="form-input" id="password" name="password" required>
       <button class="form-button" type="submit">Se connecter</button>
+
+      <a href="forgot-password.php">Mot de passe oublié ?</a>
+
     </form>
+
   </main>
 </body>
 
