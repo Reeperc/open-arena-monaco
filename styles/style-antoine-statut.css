@@ -13,7 +13,7 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    position: relative; /* Ajout de la position relative pour permettre le positionnement absolu des éléments enfants */
+    position: relative;
 }
 
 main {
@@ -22,14 +22,16 @@ main {
     align-items: center; /* Centrer horizontalement */
     justify-content: center; /* Centrer verticalement */
     flex-grow: 1;
+    width: 100%;
     padding: 20px;
 }
 
 .server-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Augmenté de 250px à 300px */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusté à 300px */
     gap: 30px; /* Augmenté de 20px à 30px */
     padding: 30px; /* Augmenté de 20px à 30px */
+    justify-content: center; /* Centrer les éléments dans la grille */
 }
 
 .server-info {
@@ -58,9 +60,4 @@ main {
 
 #result {
     text-align: center;
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-}
+    margin-top: 
