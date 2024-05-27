@@ -12,12 +12,19 @@ $email = $_POST["email"];
 
 // Vérifie si l'email se termine par @arena-monaco.fr
 if (!endsWith($email, '@arena-monaco.fr')) {
-    echo "L'adresse email doit se terminer par @arena-monaco.fr";
-    exit();
+    die("L'adresse email doit se terminer par @arena-monaco.fr");
 }
 
 // Génération du token de réinitialisation
 $token = bin2hex(openssl_random_pseudo_bytes(16));
+
+// Démarrage de la session
+session_start();
+
+// Stockage du token dans la session
+$_SESSION['reset_token'] = $token;
+$_SESSION['reset_email'] = $email; // Sauvegarde de l'email pour la réinitialisation
+$_SESSION['reset_token_expire'] = time() + (30 * 60); // 30 minutes d'expiration
 
 // Configuration pour l'accès à l'Active Directory
 $ldap_server = "ldaps://dc.arena-monaco.fr";
@@ -51,11 +58,11 @@ if ($ldap_conn) {
                 $mail = new PHPMailer(true);
                 try {
                     $mail->isSMTP();
-                    $mail->Host = '195.221.30.17';
-                    $mail->SMTPAuth = false;
-                    $mail->Port = 25;
+                    $mail->Host = '195.221.30.17'; // Assurez-vous que le serveur SMTP est correctement configuré
+                    $mail->SMTPAuth = false; // Si l'authentification SMTP est requise, mettre à true et fournir les détails appropriés
+                    $mail->Port = 25; // Port SMTP
                     $mail->CharSet = 'UTF-8';
-                    $mail->SMTPSecure = '';
+                    $mail->SMTPSecure = ''; // Type de sécurité SMTP (ssl/tls)
                     $mail->SMTPOptions = array(
                         'ssl' => array(
                             'verify_peer' => false,
