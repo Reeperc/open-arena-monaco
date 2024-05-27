@@ -31,19 +31,10 @@ $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
     $mail->Host = '195.221.30.17'; // Assurez-vous que le serveur SMTP est correctement configuré
-    $mail->SMTPAuth = false; // Si l'authentification SMTP est requise, mettre à true et fournir les détails appropriés
     $mail->Port = 25; // Port SMTP
     $mail->CharSet = 'UTF-8';
-    $mail->SMTPSecure = ''; // Type de sécurité SMTP (ssl/tls)
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-
-    // Configuration de l'email
+    $mail->SMTPSecure = ''; // Type de sécurité SMTP (ssl/tls), laissez vide pour le port 25
+    $mail->SMTPAuth = false; // Pas d'authentification SMTP requise selon votre configuration
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
     $mail->addAddress($email);
     $mail->isHTML(true);
