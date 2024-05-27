@@ -1,3 +1,5 @@
+/* style.css */
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,6 +16,46 @@ body {
     position: relative; /* Ajout de la position relative pour permettre le positionnement absolu des éléments enfants */
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer horizontalement */
+    justify-content: center; /* Centrer verticalement */
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.server-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté de 250px à 300px */
+    gap: 30px; /* Augmenté de 20px à 30px */
+    padding: 30px; /* Augmenté de 20px à 30px */
+}
+
+.server-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px; /* Augmenté de 15px à 20px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.server-icon {
+    width: 100px; /* Augmenté de 50px à 100px */
+    height: 100px; /* Augmenté de 50px à 100px */
+}
+
+.server-name {
+    font-size: 20px; /* Augmenté de 18px à 20px */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.server-details {
+    margin-top: 10px; /* Augmenté de 5px à 10px */
+    font-size: 16px; /* Augmenté de 14px à 16px */
+}
+
 #result {
     text-align: center;
     margin-top: 20px;
@@ -21,37 +63,4 @@ body {
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     border-radius: 5px;
-}
-
-/* style-antoine-statut.css */
-
-.server-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.server-info {
-    background-color: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.server-icon {
-    width: 50px;
-    height: 50px;
-}
-
-.server-name {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.server-details {
-    margin-top: 5px;
-    font-size: 14px;
 }
