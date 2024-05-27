@@ -27,42 +27,6 @@
 
         setInterval(updateStatuses, 5000); // Mettre à jour toutes les 5 secondes
     </script>
-    <style>
-        #result {
-            text-align: center;
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-
-        .server-info {
-            text-align: center;
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-
-        .server-icon {
-            width: 50px;
-            height: 50px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .server-name {
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-
-        .server-details {
-            margin-top: 5px;
-            font-size: 0.9em;
-        }
-    </style>
 </head>
 
 <body>
@@ -74,28 +38,28 @@
                 <img src="icons/server-rouen.png" alt="Icone Serveur Rouen" class="server-icon">
                 <div class="server-name">Serveur Rouen</div>
                 <div class="server-details">IP: 192.221.50.27</div>
-                <div class="server-details">URL: <a href="http://192.221.50.17">http://192.221.50.17</a></div>
+                <div class="server-details">URL: <a href="http://192.221.50.17" target="_blank">http://192.221.50.17</a></div>
                 <div id="status-rouen" class="server-details">Vérification en cours...</div>
             </div>
             <div class="server-info" id="server-monaco">
                 <img src="icons/server-monaco.png" alt="Icone Serveur Monaco" class="server-icon">
                 <div class="server-name">Serveur Monaco</div>
                 <div class="server-details">IP: 195.221.30.65</div>
-                <div class="server-details">URL: <a href="http://195.221.30.16">http://195.221.30.16</a></div>
+                <div class="server-details">URL: <a href="http://195.221.30.16" target="_blank">http://195.221.30.16</a></div>
                 <div id="status-monaco" class="server-details">Vérification en cours...</div>
             </div>
             <div class="server-info" id="server-paris">
                 <img src="icons/server-paris.png" alt="Icone Serveur Paris" class="server-icon">
                 <div class="server-name">Serveur Paris</div>
                 <div class="server-details">IP: 192.168.40.129</div>
-                <div class="server-details">URL: <a href="http://192.221.40.131">http://192.221.40.131</a></div>
+                <div class="server-details">URL: <a href="http://192.221.40.131" target="_blank">http://192.221.40.131</a></div>
                 <div id="status-paris" class="server-details">Vérification en cours...</div>
             </div>
             <div class="server-info" id="server-mq">
                 <img src="icons/server-mq.png" alt="Icone Serveur MQ" class="server-icon">
                 <div class="server-name">Serveur MQ</div>
                 <div class="server-details">IP: 192.168.20.27</div>
-                <div class="server-details">URL: <a href="http://192.221.20.46">http://192.221.20.46</a></div>
+                <div class="server-details">URL: <a href="http://192.221.20.46" target="_blank">http://192.221.20.46</a></div>
                 <div id="status-mq" class="server-details">Vérification en cours...</div>
             </div>
         </section>
