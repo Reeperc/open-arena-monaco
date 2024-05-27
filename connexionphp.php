@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Récupération des entrées LDAP pour les organisateurs
                 $entries_organisateur = ldap_get_entries($ldap_conn, $search_result_organisateur);
-                
+
                 //utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
 
@@ -103,4 +103,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color: red;'>Échec de la connexion au serveur LDAP.</p>";
     }
 }
-?>
