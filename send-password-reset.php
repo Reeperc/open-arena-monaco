@@ -12,8 +12,7 @@ $email = $_POST["email"];
 
 // Vérifie si l'email se termine par @arena-monaco.fr
 if (!endsWith($email, '@arena-monaco.fr')) {
-    echo "L'adresse email doit se terminer par @arena-monaco.fr";
-    exit();
+    die("L'adresse email doit se terminer par @arena-monaco.fr");
 }
 
 // Génération du token de réinitialisation
@@ -31,11 +30,11 @@ $_SESSION['reset_token_expire'] = time() + (30 * 60); // 30 minutes d'expiration
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = '195.221.30.17'; // Votre serveur SMTP
-    $mail->SMTPAuth = false; // Si l'authentification SMTP est nécessaire
+    $mail->Host = '195.221.30.17'; // Assurez-vous que le serveur SMTP est correctement configuré
+    $mail->SMTPAuth = false; // Si l'authentification SMTP est requise, mettre à true et fournir les détails appropriés
     $mail->Port = 25; // Port SMTP
-    $mail->CharSet = 'UTF-8'; // Encodage du message
-    $mail->SMTPSecure = ''; // Protocole de sécurité SMTP
+    $mail->CharSet = 'UTF-8';
+    $mail->SMTPSecure = ''; // Type de sécurité SMTP (ssl/tls)
     $mail->SMTPOptions = array(
         'ssl' => array(
             'verify_peer' => false,
@@ -52,7 +51,7 @@ try {
     $mail->Body = "
         <p>Bonjour,</p>
         <p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p>
-        <p><a href='http://votre-site.com/reset-password.php'>Réinitialiser votre mot de passe</a></p>
+        <p><a href='http://votre-site.com/reset-password.php?token=$token'>Réinitialiser votre mot de passe</a></p>
         <p>Ce lien expirera dans 30 minutes.</p>
         <p>Cordialement,<br>Monaco Arena</p>
     ";
