@@ -20,10 +20,10 @@ if (!endsWith($email, '@arena-monaco.fr')) {
 $token = bin2hex(openssl_random_pseudo_bytes(16));
 
 // Configuration pour l'accès à l'Active Directory
-$ldap_server = "ldaps://dc.arena-monaco.fr";
-$ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr';
-$ldap_password = 'VotreMotDePasseLDAP';
-$ldap_base_dn = 'dc=arena-monaco,dc=fr';
+$ldap_server = "ldaps://dc.arena-monaco.fr"; // Assurez-vous que ldaps:// est correctement configuré
+$ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr'; // Nom complet de l'utilisateur administrateur LDAP
+$ldap_password = 'VotreMotDePasseLDAP'; // Mot de passe de l'utilisateur administrateur LDAP
+$ldap_base_dn = 'dc=arena-monaco,dc=fr'; // Base DN de votre Active Directory
 
 // Connexion à l'Active Directory
 $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
@@ -31,7 +31,7 @@ ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
 if ($ldap_conn) {
-    // Authentification
+    // Authentification LDAP
     $ldap_bind = ldap_bind($ldap_conn, $ldap_user, $ldap_password);
 
     if ($ldap_bind) {
