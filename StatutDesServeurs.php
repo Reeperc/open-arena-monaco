@@ -27,6 +27,47 @@
 
         setInterval(updateStatuses, 5000); // Mettre à jour toutes les 5 secondes
     </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .server-info {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .server-icon {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .server-name {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .server-details {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 
 <body>
