@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($websiteUp) {
-        $statusMessage .= "<p style='color: green;'>Le site web est UP. <a href=\"$website\" target=\"_blank\">Visitez le site web</a>.</p>";
+        $statusMessage .= "<p style='color: green;'>Le site web est UP</p>";
     } else {
         $statusMessage .= "<p style='color: red;'>Le site web est DOWN.</p>";
     }
