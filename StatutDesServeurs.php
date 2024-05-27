@@ -32,8 +32,8 @@
 <body>
     <?php include('MenuAdminF.php'); ?>
 
-    <main>
-        <section class="server-grid">
+    <main class="server-grid">
+        <section>
             <div class="server-info" id="server-rouen">
                 <img src="images/villes/rouen.jpg" alt="Icone Serveur Rouen" class="server-icon">
                 <div class="server-name">Serveur Rouen</div>
