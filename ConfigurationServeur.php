@@ -145,8 +145,6 @@
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
 
-        // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
-        document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
 
         const maps = {
             0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
