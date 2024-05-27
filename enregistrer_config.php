@@ -5,9 +5,10 @@
         if ($connexion) {
             // Authentification SSH
             if (ssh2_auth_password($connexion, 'oxidized', 'azertyuiop')) {
-                $resultat = ssh2_exec($connexion, "/usr/local/bin/oxidized");
+                $resultat = ssh2_exec($connexion, 'oxidized');
                 if ($resultat) {
                     echo "configuration enregistrer";
+                    
                 } else {
                     echo "Une erreur s'est produite lors de l'envoi du fichier.";
                 }
