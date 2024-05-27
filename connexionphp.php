@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Requête de recherche LDAP avec le filtre d'adresse e-mail
             $search_filter = "(mail=$email)";
-            $attributes = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+            $attributes = array("cn", "dn", "givenName"); // Attributs à récupérer (CN et DN)
             $search_result = ldap_search($ldap_conn, $ldap_base_dn, $search_filter, $attributes);
 
             if ($search_result_admin !== false && $search_result_organisateur !== false && $search_result != false) {
@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         } elseif ($entries['count'] == 1) {
                             // L'utilisateur est un joueur
                             $_SESSION['joueur_username'] = $entries[0]['cn'][0];
+                            $_SESSION['joueur_directory'] = $entries[1]['givenName'][0];
                             $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
                             header("Location: AccueilJoueurF.php");
                             exit();
