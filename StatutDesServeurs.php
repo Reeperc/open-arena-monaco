@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Statut des serveurs</title>
     <script>
-        function getServiceStatus(serverIP, website, elementId) {
+        function getServiceStatus(serverIP, port, elementId) {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "service_status.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -15,14 +15,14 @@
                     document.getElementById(elementId).innerHTML = xhr.responseText;
                 }
             };
-            xhr.send("server_ip=" + encodeURIComponent(serverIP) + "&port=" + encodeURIComponent(port) + "&website=" + encodeURIComponent(website));
+            xhr.send("server_ip=" + encodeURIComponent(serverIP) + "&port=" + encodeURIComponent(port));
         }
 
         function updateStatuses() {
-            getServiceStatus('192.221.50.27', 'http://192.221.50.17', 'status-rouen');
-            getServiceStatus('195.221.30.65','http://195.221.30.16', 'status-monaco');
-            getServiceStatus('192.168.40.129', 'http://192.221.40.131', 'status-paris');
-            getServiceStatus('192.168.20.27',  'http://192.221.20.46', 'status-mq');
+            getServiceStatus('192.221.50.27', 27960, 'status-rouen');
+            getServiceStatus('195.221.30.65', 27961, 'status-monaco');
+            getServiceStatus('192.168.40.129', 27960, 'status-paris');
+            getServiceStatus('192.168.20.27', 27965, 'status-mq');
         }
 
         setInterval(updateStatuses, 5000); // Mettre à jour toutes les 5 secondes
