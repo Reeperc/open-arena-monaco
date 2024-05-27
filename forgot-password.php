@@ -9,7 +9,7 @@
     <h1>Réinitialisation de mot de passe</h1>
 
     <form method="post" action="send-password-reset.php">
-        <label for="email">Adresse email</label>
+        <label for="email">Adresse email (doit se terminer par @arena-monaco.fr)</label>
         <input type="email" id="email" name="email" required>
 
         <button type="submit">Envoyer</button>
