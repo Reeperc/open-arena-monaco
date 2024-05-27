@@ -19,10 +19,10 @@
         }
 
         function updateStatuses() {
-            getServiceStatus('195.221.50.25', '195.221.50.17', 'status-rouen');
-            getServiceStatus('195.221.30.65', '195.221.30.16', 'status-monaco');
-            getServiceStatus('195.168.40.129', '195.221.40.131', 'status-paris');
-            getServiceStatus('195.168.20.27', '195.221.20.46', 'status-mq');
+            getServiceStatus('195.221.50.25', 'http://195.221.50.17', 'status-rouen');
+            getServiceStatus('195.221.30.65', 'http://195.221.30.16', 'status-monaco');
+            getServiceStatus('195.168.40.129', 'http://195.221.40.131', 'status-paris');
+            getServiceStatus('195.168.20.27', 'http://195.221.20.46', 'status-mq');
         }
 
         setInterval(updateStatuses, 5000); // Mettre à jour toutes les 5 secondes
