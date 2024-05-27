@@ -61,7 +61,7 @@
             background-color: #6d0000;
         }
 
-        .active {
+        .actives {
             background-color: #4CAF50; /* couleur de l'élément actif */
         }
 
@@ -94,8 +94,8 @@
     if (in_array($current_page, $allowed_pages)) {
         echo '<nav>';
         foreach ($menu_items as $url => $label) {
-            $active_class = ($current_page == $url) ? 'active' : '';
-            echo '<a href="' . $url . '" class="accueil-link bouton-rouge-foncé ' . $active_class . '">' . $label . '</a>';
+            $actives_class = ($current_page == $url) ? 'actives' : '';
+            echo '<a href="' . $url . '" class="accueil-link bouton-rouge-foncé ' . $actives_class . '">' . $label . '</a>';
         }
         echo '<a href="DeconnexionF.php" class="accueil-link bouton-rouge-foncé">Déconnexion</a>';
         echo '</nav>';

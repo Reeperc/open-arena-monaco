@@ -41,6 +41,8 @@
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
+            <select id="listeNoms1"></select>
+            <select id="listeNoms2"></select>
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
 
@@ -112,6 +114,37 @@
     </main>
 
     <script>
+        // Fonction pour récupérer les utilisateurs depuis le serveur AD et les mettre à jour dans les listes déroulantes
+        function fetchUsersFromAD() {
+            fetch('ADutilisateurs.php')
+                .then(response => response.json())
+                .then(data => {
+                    const userList1 = document.getElementById('userList1');
+                    const userList2 = document.getElementById('userList2');
+
+                    // Vider les listes déroulantes
+                    userList1.innerHTML = '';
+                    userList2.innerHTML = '';
+
+                    // Remplir les listes déroulantes avec les utilisateurs récupérés
+                    data.forEach(user => {
+                        const option1 = document.createElement('option');
+                        option1.text = user;
+                        userList1.appendChild(option1);
+
+                        const option2 = document.createElement('option');
+                        option2.text = user;
+                        userList2.appendChild(option2);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des utilisateurs depuis le serveur AD :', error);
+                });
+        }
+
+        // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
+        document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
+
         const maps = {
             0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
             1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
