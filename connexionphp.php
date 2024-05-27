@@ -49,35 +49,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 //utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
 
-
-
+                // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
                 if ($entries_admin['count'] == 1) {
-                    // L'utilisateur est un administrateur
-                    $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
-                    $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
-                    header("Location: AccueilAdminF.php");
-                    exit();
+                    $user_dn = $entries_admin[0]['dn'];
                 } elseif ($entries_organisateur['count'] == 1) {
-                    // L'utilisateur est un organisateur
-                    $_SESSION['organisateur_username'] = $entries_organisateur[0]['cn'][0];
-                    $_SESSION['welcome_message'] = "Connexion réussie en tant qu'organisateur";
-                    header("Location: AccueilOrganisateurF.php");
-                    exit();
+                    $user_dn = $entries_organisateur[0]['dn'];
                 } elseif ($entries['count'] == 1) {
+                    $user_dn = $entries[0]['dn'];
+                } else {
+                    $user_dn = null;
+                }
 
-                    // Récupérer le CN de l'utilisateur trouvé
-                    $cn = $entries[0]['cn'][0];
-                    $directoryName= $entries[0]['givenName'][0];
-
-                    // Authentification réussie, enregistrer le nom d'utilisateur dans une variable de session
-                    $_SESSION['joueur_username'] = $cn;
-                    $_SESSION['joueur_directory'] = $directoryName;
-                    $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
-
-                    // Rediriger vers la page d'accueil après la connexion réussie
-                    header("Location: AccueilJoueurF.php");
-                    exit(); // Assurez-vous de terminer l'exécution du script après la redirection
-
+                if ($user_dn) {
+                    // Tenter de lier avec le DN et le mot de passe de l'utilisateur
+                    if (@ldap_bind($ldap_conn, $user_dn, $password)) {
+                        // Authentification réussie
+                        if ($entries_admin['count'] == 1) {
+                            // L'utilisateur est un administrateur
+                            $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
+                            $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
+                            header("Location: AccueilAdminF.php");
+                            exit();
+                        } elseif ($entries_organisateur['count'] == 1) {
+                            // L'utilisateur est un organisateur
+                            $_SESSION['organisateur_username'] = $entries_organisateur[0]['cn'][0];
+                            $_SESSION['welcome_message'] = "Connexion réussie en tant qu'organisateur";
+                            header("Location: AccueilOrganisateurF.php");
+                            exit();
+                        } elseif ($entries['count'] == 1) {
+                            // L'utilisateur est un joueur
+                            $_SESSION['joueur_username'] = $entries[0]['cn'][0];
+                            $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
+                            header("Location: AccueilJoueurF.php");
+                            exit();
+                        }
+                    } else {
+                        echo "<p style='color: red;'>Mot de passe incorrect.</p>";
+                    }
                 } else {
                     echo "<p style='color: red;'>Aucun utilisateur trouvé avec cette adresse e-mail.</p>";
                 }
