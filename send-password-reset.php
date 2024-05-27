@@ -22,7 +22,7 @@ $token = bin2hex(openssl_random_pseudo_bytes(16));
 // Configuration pour l'accès à l'Active Directory
 $ldap_server = "ldaps://dc.arena-monaco.fr";
 $ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr';
-$ldap_password = 'VotreMotDePasseLDAP'; // Assurez-vous que le mot de passe est correct
+$ldap_password = '1234567890A@'; // Assurez-vous que le mot de passe est correct
 $ldap_base_dn = 'dc=arena-monaco,dc=fr';
 
 // Connexion à l'Active Directory
