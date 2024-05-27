@@ -1,110 +1,105 @@
 <?php
-// Afficher toutes les erreurs dans le navigateur pour le débogage
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// Assurez-vous que PHPMailer est installé et chargé
+require 'vendor/autoload.php';
 
-// Définir le fuseau horaire par défaut
-date_default_timezone_set('Europe/Paris');
-
-// Vérifier si PHPMailer est installé
-if (!file_exists('vendor/autoload.php')) {
-    die('PHPMailer non installé. Exécutez `composer install`.');
-}
-
-// Charger les classes PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Charger les dépendances Composer
-
-// Récupération de l'email depuis le formulaire
-if (!isset($_POST["Email"])) {
+// Vérifie si l'email est fourni via POST
+if (!isset($_POST["email"])) {
     die("L'email n'a pas été fourni.");
 }
-$Email = $_POST["Email"];
 
-// Génération du token et du hash
-$token = bin2hex(openssl_random_pseudo_bytes(16));
-$token_hash = hash("sha256", $token);
+// Récupération de l'email depuis le formulaire
+$email = $_POST["email"];
 
-// Calcul de la date d'expiration
-$expiry = date("Y-m-d H:i:s", time() + 60 * 30);
-
-// Inclusion du fichier de connexion à la base de données
-require('database.php');
-
-try {
-    // Préparation de la requête de mise à jour
-    $sql = "UPDATE joueur 
-            SET reset_token_hash = :token_hash,
-                reset_token_expires_at = :expiry
-            WHERE Email = :email";
-
-    $stmt = $connexion->prepare($sql);
-
-    // Liaison des paramètres
-    $stmt->bindParam(':token_hash', $token_hash);
-    $stmt->bindParam(':expiry', $expiry);
-    $stmt->bindParam(':email', $Email);
-
-    // Exécution de la requête
-    $stmt->execute();
-
-    // Vérification du nombre de lignes affectées
-    if ($stmt->rowCount() > 0) {
-        // Envoi de l'email en cas de succès de la mise à jour
-        $mail = new PHPMailer(true);
-        try {
-            // Configuration de PHPMailer pour utiliser SMTP
-            $mail->isSMTP(); // Indique à PHPMailer d'utiliser SMTP pour envoyer les mails
-            $mail->Host = '195.221.30.17'; // Adresse IP du serveur SMTP
-            $mail->SMTPAuth = false; // Ou true s'il faut s'authentifier
-            $mail->Port = 25; // Port 25, port 587 pour TLS
-            $mail->CharSet = 'UTF-8';
-            $mail->SMTPSecure = ''; // Désactivé, utiliser 'tls' ou 'ssl' si besoin
-            $mail->SMTPOptions = array( // Sert à désactiver la vérification des certificats SSL
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
-
-            // Active le débogage SMTP
-            // 0 = off (for production use)
-            // 1 = messages client
-            // 2 = messages client et serveurs
-            // 3 = le niveau de debugging le plus détaillé.
-            $mail->SMTPDebug = 0; // Réduire le niveau de débogage pour la production
-
-            // Expéditeur
-            $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
-
-            // Destinataire
-            $mail->addAddress($Email); // Utiliser l'email fourni par le formulaire
-
-            // Contenu de l'email
-            $mail->isHTML(true); // Définir le format de l'email à HTML
-            $mail->Subject = "Password Reset";
-            $mail->Body    = <<<END
-            <p>Bonjour,</p>
-            <p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p>
-            <p><a href="http://195.221.30.16/reset-password.php?token=$token">Réinitialiser votre mot de passe</a></p>
-            <p>Ce lien expirera dans 30 minutes.</p>
-            <p>Cordialement,<br>Monaco Arena</p>
-            END;
-            $mail->AltBody = "Cliquez sur le lien suivant pour réinitialiser votre mot de passe : http://195.221.30.16/reset-password.php?token=$token";
-
-            $mail->send();
-            echo 'Le message a été envoyé.';
-        } catch (Exception $e) {
-            echo 'Le message n\'a pas pu être envoyé. Erreur de Mailer: ' . $mail->ErrorInfo;
-        }
-    } else {
-        echo "Aucune mise à jour n'a été effectuée. Vérifiez que l'adresse e-mail est correcte.";
-    }
-} catch (PDOException $e) {
-    echo "Erreur lors de la mise à jour du token : " . $e->getMessage();
+// Vérifie si l'email se termine par @arena-monaco.fr
+if (!endsWith($email, '@arena-monaco.fr')) {
+    echo "L'adresse email doit se terminer par @arena-monaco.fr";
+    exit();
 }
 
-echo "Message envoyé, vérifiez votre boîte mail."
+// Génération du token de réinitialisation
+$token = bin2hex(openssl_random_pseudo_bytes(16));
+
+// Configuration pour l'accès à l'Active Directory
+$ldap_server = "ldaps://dc.arena-monaco.fr";
+$ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr';
+$ldap_password = 'VotreMotDePasseLDAP';
+$ldap_base_dn = 'dc=arena-monaco,dc=fr';
+
+// Connexion à l'Active Directory
+$ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
+ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+
+if ($ldap_conn) {
+    // Authentification
+    $ldap_bind = ldap_bind($ldap_conn, $ldap_user, $ldap_password);
+
+    if ($ldap_bind) {
+        // Recherche de l'utilisateur par email
+        $filter = "(mail=$email)";
+        $attributes = array("mail");
+        $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
+        $entries = ldap_get_entries($ldap_conn, $search);
+
+        if ($entries['count'] > 0) {
+            // Mettre à jour le jeton de réinitialisation dans Active Directory
+            $user_dn = $entries[0]['dn'];
+            $update = ldap_mod_replace($ldap_conn, $user_dn, array('resetToken' => $token));
+
+            if ($update) {
+                // Envoi de l'email avec le lien de réinitialisation
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = '195.221.30.17';
+                    $mail->SMTPAuth = false;
+                    $mail->Port = 25;
+                    $mail->CharSet = 'UTF-8';
+                    $mail->SMTPSecure = '';
+                    $mail->SMTPOptions = array(
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                            'allow_self_signed' => true
+                        )
+                    );
+
+                    // Configuration de l'email
+                    $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
+                    $mail->addAddress($email);
+                    $mail->isHTML(true);
+                    $mail->Subject = "Réinitialisation de mot de passe";
+                    $mail->Body = "
+                        <p>Bonjour,</p>
+                        <p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p>
+                        <p><a href='http://votre-site.com/reset-password.php?token=$token'>Réinitialiser votre mot de passe</a></p>
+                        <p>Ce lien expirera dans 30 minutes.</p>
+                        <p>Cordialement,<br>Monaco Arena</p>
+                    ";
+
+                    $mail->send();
+                    echo 'Email envoyé avec succès.';
+                } catch (Exception $e) {
+                    echo "Erreur lors de l'envoi de l'email : " . $mail->ErrorInfo;
+                }
+            } else {
+                echo "Erreur lors de la mise à jour du jeton de réinitialisation dans Active Directory.";
+            }
+        } else {
+            echo "Utilisateur non trouvé dans Active Directory.";
+        }
+    } else {
+        echo "Échec de l'authentification LDAP.";
+    }
+
+    // Fermeture de la connexion LDAP
+    ldap_close($ldap_conn);
+} else {
+    echo "Échec de la connexion au serveur LDAP.";
+}
+
+// Fonction utilitaire pour vérifier la fin d'une chaîne
+function endsWith($string, $suffix) {
+    return substr($string, -strlen($suffix)) === $suffix;
+}
+?>
