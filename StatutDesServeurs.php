@@ -19,7 +19,7 @@
         }
 
         function updateStatuses() {
-            getServiceStatus('195.221.50.27', 'http://195.221.50.17', 'status-rouen');
+            getServiceStatus('195.221.50.25', 'http://195.221.50.17', 'status-rouen');
             getServiceStatus('195.221.30.65', 'http://195.221.30.16', 'status-monaco');
             getServiceStatus('195.168.40.129', 'http://195.221.40.131', 'status-paris');
             getServiceStatus('195.168.20.27', 'http://195.221.20.46', 'status-mq');
@@ -30,14 +30,14 @@
 </head>
 
 <body>
-    <?php include('MenuAdminF.php'); ?>
+    <?php include('MenuOrganisateurF.php'); ?>
 
     <main>
         <section class="server-grid">
             <div class="server-info" id="server-rouen">
                 <img src="images/villes/rouen.jpg" alt="Icone Serveur Rouen" class="server-icon">
                 <div class="server-name">Serveur Rouen</div>
-                <div class="server-details">IP: 192.221.50.27</div>
+                <div class="server-details">IP: 195.221.50.25</div>
                 <div class="server-details">URL: <a href="http://195.221.50.17" target="_blank">http://195.221.50.17</a></div>
                 <div id="status-rouen" class="server-details">Vérification en cours...</div>
             </div>
@@ -51,14 +51,14 @@
             <div class="server-info" id="server-paris">
                 <img src="images/villes/paris.jpg" alt="Icone Serveur Paris" class="server-icon">
                 <div class="server-name">Serveur Paris</div>
-                <div class="server-details">IP: 192.168.40.129</div>
+                <div class="server-details">IP: 195.168.40.129</div>
                 <div class="server-details">URL: <a href="http://195.221.40.131" target="_blank">http://195.221.40.131</a></div>
                 <div id="status-paris" class="server-details">Vérification en cours...</div>
             </div>
             <div class="server-info" id="server-mq">
                 <img src="images/villes/montcuq.jpg" alt="Icone Serveur MQ" class="server-icon">
                 <div class="server-name">Serveur MQ</div>
-                <div class="server-details">IP: 192.168.20.27</div>
+                <div class="server-details">IP: 195.168.20.27</div>
                 <div class="server-details">URL: <a href="http://195.221.20.46" target="_blank">http://195.221.20.46</a></div>
                 <div id="status-mq" class="server-details">Vérification en cours...</div>
             </div>
