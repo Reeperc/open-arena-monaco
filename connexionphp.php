@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         } elseif ($entries['count'] == 1) {
                             // L'utilisateur est un joueur
                             $_SESSION['joueur_username'] = $entries[0]['cn'][0];
-                            $_SESSION['joueur_directory'] = $entries[0]['givenName'][0];
+                            $_SESSION['joueur_directory'] = $entries[0]['givenName'];
                             $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
                             header("Location: AccueilJoueurF.php");
                             exit();
