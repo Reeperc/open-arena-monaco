@@ -8,8 +8,8 @@
                 $resultat = ssh2_exec($connexion, 'oxidized');
                 if ($resultat) {
                     stream_set_blocking($resultat, true);
-                    echo stream_get_contents($out);
                     $out = ssh2_fetch_stream($resultat, SSH2_STREAM_STDIO);
+                    echo stream_get_contents($out);
                     echo "configuration enregistrer";
                 } else {
                     echo "Une erreur s'est produite lors de l'envoi du fichier.";
