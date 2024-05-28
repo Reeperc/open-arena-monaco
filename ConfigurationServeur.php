@@ -114,27 +114,34 @@
     </main>
 
     <script>
-        // Fonction pour récupérer les utilisateurs depuis le serveur AD et les mettre à jour dans les listes déroulantes
         function fetchUsersFromAD() {
             fetch('ADutilisateurs.php')
                 .then(response => response.json())
                 .then(data => {
-                    const userList1 = document.getElementById('userList1');
-                    const userList2 = document.getElementById('userList2');
+                    const userList1 = document.getElementById('listeNoms1');
+                    const userList2 = document.getElementById('listeNoms2');
+
+                    // Récupérer les valeurs actuellement sélectionnées dans les listes déroulantes
+                    const selectedUser1 = userList1.value;
+                    const selectedUser2 = userList2.value;
 
                     // Vider les listes déroulantes
                     userList1.innerHTML = '';
                     userList2.innerHTML = '';
 
-                    // Remplir les listes déroulantes avec les utilisateurs récupérés
+                    // Remplir les listes déroulantes avec les utilisateurs récupérés, en excluant les utilisateurs déjà sélectionnés dans l'autre liste
                     data.forEach(user => {
                         const option1 = document.createElement('option');
                         option1.text = user;
-                        userList1.appendChild(option1);
+                        if (user !== selectedUser2) {
+                            userList1.appendChild(option1);
+                        }
 
                         const option2 = document.createElement('option');
                         option2.text = user;
-                        userList2.appendChild(option2);
+                        if (user !== selectedUser1) {
+                            userList2.appendChild(option2);
+                        }
                     });
                 })
                 .catch(error => {
@@ -144,6 +151,9 @@
 
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
+
+
+
 
         const maps = {
             0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
