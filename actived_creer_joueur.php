@@ -12,98 +12,97 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Configuration pour l'accès à l'Active Directory
-    $ldap_server = "ldaps://dc.arena-monaco.fr";
-    $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr';
-    $ldap_password = '1234567890A@';
-    $ldap_base_dn = 'dc=arena-monaco, dc=fr';
-    $ldap_port = 636;
+    // Inclure le fichier de connexion à la base de données
+    include 'database.php';
 
-    // Données à ajouter
-    $usercn = $prenom . " " . $nom;
-    $usersn = $nom;
-    $usergivenname = $prenom;
-    $userpassword = $mot_de_passe;
-    $usermail = $email;
+    // Vérifier la connexion à la base de données
+    if (!$connexion) {
+        echo "Échec de la connexion à la base de données.";
+        exit();
+    }
 
-    // Connexion à l'Active Directory
-    $ldap_conn = ldap_connect($ldap_server, $ldap_port) or die("Impossible de se connecter au serveur LDAP.");
-    ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
-    ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+    // Vérifier si l'utilisateur existe déjà dans la base de données
+    try {
+        $stmt_check = $connexion->prepare("SELECT id FROM Joueur WHERE Email = :email");
+        $stmt_check->bindParam(':email', $email);
+        $stmt_check->execute();
+        $row = $stmt_check->fetch(PDO::FETCH_ASSOC);
 
-    if ($ldap_conn) {
-        // Authentification
-        $ldap_bind = ldap_bind($ldap_conn, $ldap_user, $ldap_password);
+        if ($row) {
+            echo "Email déjà utilisé dans la base de données";
+            exit();
+        }
 
-        if ($ldap_bind) {
-            // Vérifier si l'adresse existe déjà
-            $filter = "(mail=$email)";
-            $attributes = array("mail");
-            $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
-            $entries = ldap_get_entries($ldap_conn, $search);
+        // Si l'utilisateur n'existe pas, l'ajouter à la base de données
+        $stmt_insert = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (:nom, :prenom, :email, :username, :mot_de_passe)");
+        $stmt_insert->bindParam(':nom', $nom);
+        $stmt_insert->bindParam(':prenom', $prenom);
+        $stmt_insert->bindParam(':email', $email);
+        $stmt_insert->bindParam(':username', $prenom); // Utiliser le prénom comme nom d'utilisateur par exemple
+        $hashed_password = password_hash($mot_de_passe, PASSWORD_BCRYPT);
+        $stmt_insert->bindParam(':mot_de_passe', $hashed_password);
 
-            if ($entries['count'] > 0) {
-                echo "Email déjà utilisé";
-                exit();
-            }
+        if ($stmt_insert->execute()) {
+            echo "Utilisateur ajouté à la base de données avec succès.";
 
-            // Ajout d'un nouvel utilisateur
-            $dn = "CN=" . $prenom . " " . $nom . ",OU=utilisateurs,DC=arena-monaco,DC=fr";
-            $info = array(
-                "cn" => $usercn,
-                "sn" => $usersn,
-                "givenName" => $usergivenname,
-                "userPassword" => $userpassword,
-                "mail" => $usermail,
-                "sAMAccountName" => $usergivenname,
-                'userPrincipalName' => $usermail,
-                "unicodePwd" => mb_convert_encoding("\"$userpassword\"", 'UTF-16LE'),
-                "adminCount" => array(0),
-                "userAccountControl" => "66048",
-                "objectClass" => ["top", "person", "organizationalPerson", "user"],
-            );
+            // Configuration pour l'accès à l'Active Directory
+            $ldap_server = "ldaps://dc.arena-monaco.fr";
+            $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr';
+            $ldap_password = '1234567890A@';
+            $ldap_base_dn = 'dc=arena-monaco, dc=fr';
+            $ldap_port = 636;
 
-            $result = ldap_add($ldap_conn, $dn, $info);
-            if ($result) {
-                // Message de succès
-                echo "Ajout de l'utilisateur " . $email . " réussi dans l'Active Directory.";
+            // Connexion à l'Active Directory
+            $ldap_conn = ldap_connect($ldap_server, $ldap_port) or die("Impossible de se connecter au serveur LDAP.");
+            ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+            ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
-                // Inclure le fichier de connexion à la base de données
-                include 'database.php';
+            if ($ldap_conn) {
+                // Authentification
+                $ldap_bind = ldap_bind($ldap_conn, $ldap_user, $ldap_password);
 
-                // Vérifier la connexion à la base de données
-                if ($connexion) {
-                    // Préparer et exécuter la requête d'insertion dans la base de données
-                    try {
-                        $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (:nom, :prenom, :email, :username, :mot_de_passe)");
-                        $stmt->bindParam(':nom', $nom);
-                        $stmt->bindParam(':prenom', $prenom);
-                        $stmt->bindParam(':email', $email);
-                        $stmt->bindParam(':username', $usergivenname); // Utiliser le prénom comme nom d'utilisateur
-                        $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
-                        $stmt->execute();
-                        echo "Utilisateur ajouté à la base de données avec succès.";
+                if ($ldap_bind) {
+                    // Ajout d'un nouvel utilisateur dans l'Active Directory
+                    $dn = "CN=" . $prenom . " " . $nom . ",OU=utilisateurs,DC=arena-monaco,DC=fr";
+                    $info = array(
+                        "cn" => $prenom . " " . $nom,
+                        "sn" => $nom,
+                        "givenName" => $prenom,
+                        "userPassword" => $mot_de_passe,
+                        "mail" => $email,
+                        "sAMAccountName" => $prenom,
+                        'userPrincipalName' => $email,
+                        "unicodePwd" => mb_convert_encoding("\"$mot_de_passe\"", 'UTF-16LE'),
+                        "adminCount" => array(0),
+                        "userAccountControl" => "66048",
+                        "objectClass" => ["top", "person", "organizationalPerson", "user"],
+                    );
+
+                    $result = ldap_add($ldap_conn, $dn, $info);
+                    if ($result) {
+                        // Message de succès dans l'Active Directory
+                        echo "Ajout de l'utilisateur " . $email . " réussi dans l'Active Directory.";
 
                         // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
                         header("Location: AccueilAdminF.php");
                         exit(); // Assurez-vous de terminer l'exécution du script après la redirection
-                    } catch (PDOException $e) {
-                        echo "Erreur lors de l'ajout de l'utilisateur à la base de données : " . $e->getMessage();
+                    } else {
+                        echo "Échec de l'ajout de l'utilisateur dans l'Active Directory.";
                     }
                 } else {
-                    echo "Échec de la connexion à la base de données.";
+                    echo "Échec de l'authentification LDAP.";
                 }
+
+                // Fermeture de la connexion LDAP
+                ldap_close($ldap_conn);
             } else {
-                echo "Échec de l'ajout de l'utilisateur dans l'Active Directory.";
+                echo "Échec de la connexion au serveur LDAP.";
             }
         } else {
-            echo "Échec de l'authentification LDAP.";
+            echo "Échec de l'ajout de l'utilisateur dans la base de données.";
         }
-
-        // Fermeture de la connexion LDAP
-        ldap_close($ldap_conn);
-    } else {
-        echo "Échec de la connexion au serveur LDAP.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
     }
 }
 
