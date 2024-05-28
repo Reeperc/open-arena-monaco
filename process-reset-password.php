@@ -1,23 +1,11 @@
 <?php
-// Afficher toutes les erreurs dans le navigateur pour le débogage
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// Vérifier si PHPMailer est installé
-if (!file_exists('vendor/autoload.php')) {
-    die('PHPMailer non installé. Exécutez `composer install`.');
-}
-
-// Charger les classes PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Charger les dépendances Composer
+// Inclure le fichier de connexion à la base de données
+require('database.php');
 
 // Récupération des données du formulaire
-$token = $_POST["token"];
-$password = $_POST["password"];
-$password_confirmation = $_POST["password_confirmation"];
+$token = $_POST["token"] ?? null;
+$password = $_POST["password"] ?? null;
+$password_confirmation = $_POST["password_confirmation"] ?? null;
 
 // Validation des mots de passe
 if ($password !== $password_confirmation) {
@@ -27,7 +15,21 @@ if ($password !== $password_confirmation) {
 // Génération du hash du mot de passe
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-// Inclure le fichier de connexion à la base de données
-require('database.php');
+try {
+    // Mettre à jour le mot de passe dans la base de données
+    $sql_update = "UPDATE Joueur SET MotDePasse = :password_hash, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = :token_hash";
+    $stmt_update = $connexion->prepare($sql_update);
+    $stmt_update->bindParam(':password_hash', $password_hash);
+    $stmt_update->bindParam(':token_hash', $token);
+    
+    if ($stmt_update->execute()) {
+        echo "Mot de passe réinitialisé avec succès.";
+        // Redirection vers une page de succès ou affichage d'un message approprié
+    } else {
+        die("Erreur lors de la réinitialisation du mot de passe.");
+    }
 
-try
+} catch (PDOException $e) {
+    die("Erreur lors de la mise à jour du mot de passe : " . $e->getMessage());
+}
+?>
