@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("Location: AccueilAdminF.php");
                             exit();
                         } elseif ($entries_organisateur['count'] == 1) {
-                            // L'utilisateur est un organisateur
+                            // L'utilisateur est un organisateur ++++
                             $_SESSION['organisateur_username'] = $entries_organisateur[0]['cn'][0];
                             $_SESSION['welcome_message'] = "Connexion réussie en tant qu'organisateur";
                             header("Location: AccueilOrganisateurF.php");
