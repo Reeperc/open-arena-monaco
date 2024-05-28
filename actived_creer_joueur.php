@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usermail = $email;
 
     // Connexion à l'Active Directory
-    $ldap_conn = ldap_connect("ldaps://dc.arena-monaco.fr", 636) or die("Impossible de se connecter au serveur LDAP.");
+    $ldap_conn = ldap_connect($ldap_server, $ldap_port) or die("Impossible de se connecter au serveur LDAP.");
     ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $result = ldap_add($ldap_conn, $dn, $info);
             if ($result) {
-                // Message de succès dans une variable de session
+                // Message de succès
                 echo "Ajout de l'utilisateur " . $email . " réussi.";
 
                 // Inclure le fichier de connexion à la base de données
@@ -73,20 +73,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Préparer et exécuter la requête d'insertion dans la base de données
                 try {
-                    $stmt = $connexion->prepare("INSERT INTO joueur (nom, prenom, email, mot_de_passe) VALUES (:nom, :prenom, :email, :mot_de_passe)");
+                    $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, password) VALUES (:nom, :prenom, :email, :mot_de_passe)");
                     $stmt->bindParam(':nom', $nom);
                     $stmt->bindParam(':prenom', $prenom);
                     $stmt->bindParam(':email', $email);
                     $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
                     $stmt->execute();
                     echo "Utilisateur ajouté à la base de données avec succès.";
+
+                    // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
+                    header("Location: AccueilAdminF.php");
+                    exit(); // Assurez-vous de terminer l'exécution du script après la redirection
                 } catch (PDOException $e) {
                     echo "Erreur lors de l'ajout de l'utilisateur à la base de données : " . $e->getMessage();
                 }
-
-                // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
-                header("Location: AccueilAdminF.php");
-                exit(); // Assurez-vous de terminer l'exécution du script après la redirection
             } else {
                 echo "Échec de l'ajout de l'utilisateur dans l'Active Directory.";
             }
