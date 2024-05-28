@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
 $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
 $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
-$ldap_base_dn = 'DC=arena-monaco, DC=fr'; // Remplacez par votre base DN
+$ldap_base_dn = 'ou=utilisateurs,dc=arena-monaco,dc=fr'; // Base DN pour le dossier "utilisateurs"
 
 // Connexion au serveur LDAP
 $ldap_conn = ldap_connect($ldap_server) or die(json_encode(['error' => 'Impossible de se connecter au serveur LDAP.']));
