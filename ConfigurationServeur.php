@@ -151,182 +151,182 @@
 
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
+
+
+
+
+        const maps = {
+            0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
+            1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
+            2: ['aggressor', 'am_lavaarena', 'ctf_gate1', 'ctf_inyard', 'mlca1'],
+            3: ['am_lavactf', 'am_lavactfxl', 'ctf_inyard', 'delta', 'hydronext2'],
+            4: ['am_lavactf', 'am_lavactf2', 'delta', 'hydronext2', 'oa_bases3', 'oa_Thor'],
+            5: ['aggressor', 'am_lavaarena', 'mlca1'],
+            6: ['aggressor', 'oa_dm1']
+        };
+
+        function updateMapOptions() {
+            const modeSelect = document.getElementById('mode-select');
+            const mapSelect = document.getElementById('map-select');
+            const mapContainer = document.getElementById('map-container');
+
+            const selectedMode = modeSelect.value;
+
+            // Clear previous options
+            mapSelect.innerHTML = '';
+
+            if (selectedMode !== '') {
+                // Add new options
+                maps[selectedMode].forEach(map => {
+                    const option = document.createElement('option');
+                    option.value = map;
+                    option.text = map;
+                    mapSelect.appendChild(option);
+                });
+                mapContainer.style.display = 'block';
+            } else {
+                mapContainer.style.display = 'none';
+            }
+        }
+
+        function addBot() {
+            const botName = document.getElementById('bot-name').value;
+            const botLevel = document.getElementById('bot-level').value;
+            const botTeam = document.getElementById('bot-team').value; // Récupérer la valeur de l'équipe du bot
+
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+            formData.append('bot_level', botLevel);
+            formData.append('bot_team', botTeam); // Ajouter l'équipe du bot aux données du formulaire
+
+            fetch('add_bot.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-message').innerHTML = data;
+                    document.getElementById('bot-remove-message').innerHTML = ''; // Clear remove message
+                })
+                .catch(error => {
+                    document.getElementById('bot-message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function removeBot() {
+            const botName = document.getElementById('bot-name').value;
+
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+
+            fetch('remove_bot.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-remove-message').innerHTML = data;
+                    document.getElementById('bot-message').innerHTML = ''; // Clear add message
+                })
+                .catch(error => {
+                    document.getElementById('bot-remove-message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function launchGame() {
+            fetch('lance_partie.php', {
+                    method: 'POST',
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message-launchGame').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message-launchGame').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function startServiceAjax() {
+            const map = document.getElementById('map-select').value;
+            const mode = document.getElementById('mode-select').value;
+            const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
+
+            const formData = new FormData();
+            formData.append('selected-map', map);
+            formData.append('selected-mode', mode);
+            formData.append('selected-warmup', warmup);
+
+            // Envoyer les données à start_service.php
+            fetch('start_service.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                    // Envoyer les données à sendMail.php
+                    return fetch('sendMail.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Afficher le message indiquant que les joueurs ont été notifiés
+                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function stopServiceAjax() {
+            fetch('stop_service.php', {
+                    method: 'POST'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function showBotImage() {
+            const botName = document.getElementById('bot-name').value;
+            const botImage = document.getElementById('bot-image');
+
+            // Mapping bot names to images
+            const botImages = {
+                Angelyss: '../images/bots/Angelyss.png',
+                Arachna: '../images/bots/Arachna.png',
+                Assassin: '../images/bots/Assassin.png',
+                Ayumi: '../images/bots/Ayumi.png',
+                Beret: '../images/bots/Beret.png',
+                Gargoyle: '../images/bots/Gargoyle.png',
+                Kyonshi: '../images/bots/Kyonshi.png',
+                Liz: '../images/bots/Liz.png',
+                Major: '../images/bots/Major.png',
+                Merman: '../images/bots/Merman.png',
+                Neko: '../images/bots/Neko.png',
+                Penguin: '../images/bots/Penguin.png',
+                Sarge: '../images/bots/Sarge.png',
+                Sergei: '../images/bots/Sergei.png',
+                Skelebot: '../images/bots/Skelebot.png',
+                S_Marine: '../images/bots/Smarine.png',
+                Sorceress: '../images/bots/Sorceress.png',
+                Tony: '../images/bots/Tony.png',
+                // Ajoutez les autres bots ici
+            };
+
+            botImage.src = botImages[botName] || '';
+            botImage.alt = botName ? `Image du bot ${botName}` : 'Image du Bot';
+        }
+
+        // Initial call to display the image for the selected bot
+        document.addEventListener('DOMContentLoaded', showBotImage);
     </script>
-</body>
-
-
-const maps = {
-0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
-1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
-2: ['aggressor', 'am_lavaarena', 'ctf_gate1', 'ctf_inyard', 'mlca1'],
-3: ['am_lavactf', 'am_lavactfxl', 'ctf_inyard', 'delta', 'hydronext2'],
-4: ['am_lavactf', 'am_lavactf2', 'delta', 'hydronext2', 'oa_bases3', 'oa_Thor'],
-5: ['aggressor', 'am_lavaarena', 'mlca1'],
-6: ['aggressor', 'oa_dm1']
-};
-
-function updateMapOptions() {
-const modeSelect = document.getElementById('mode-select');
-const mapSelect = document.getElementById('map-select');
-const mapContainer = document.getElementById('map-container');
-
-const selectedMode = modeSelect.value;
-
-// Clear previous options
-mapSelect.innerHTML = '';
-
-if (selectedMode !== '') {
-// Add new options
-maps[selectedMode].forEach(map => {
-const option = document.createElement('option');
-option.value = map;
-option.text = map;
-mapSelect.appendChild(option);
-});
-mapContainer.style.display = 'block';
-} else {
-mapContainer.style.display = 'none';
-}
-}
-
-function addBot() {
-const botName = document.getElementById('bot-name').value;
-const botLevel = document.getElementById('bot-level').value;
-const botTeam = document.getElementById('bot-team').value; // Récupérer la valeur de l'équipe du bot
-
-const formData = new FormData();
-formData.append('bot_name', botName);
-formData.append('bot_level', botLevel);
-formData.append('bot_team', botTeam); // Ajouter l'équipe du bot aux données du formulaire
-
-fetch('add_bot.php', {
-method: 'POST',
-body: formData
-})
-.then(response => response.text())
-.then(data => {
-document.getElementById('bot-message').innerHTML = data;
-document.getElementById('bot-remove-message').innerHTML = ''; // Clear remove message
-})
-.catch(error => {
-document.getElementById('bot-message').innerHTML = 'Erreur : ' + error;
-});
-}
-
-function removeBot() {
-const botName = document.getElementById('bot-name').value;
-
-const formData = new FormData();
-formData.append('bot_name', botName);
-
-fetch('remove_bot.php', {
-method: 'POST',
-body: formData
-})
-.then(response => response.text())
-.then(data => {
-document.getElementById('bot-remove-message').innerHTML = data;
-document.getElementById('bot-message').innerHTML = ''; // Clear add message
-})
-.catch(error => {
-document.getElementById('bot-remove-message').innerHTML = 'Erreur : ' + error;
-});
-}
-
-function launchGame() {
-fetch('lance_partie.php', {
-method: 'POST',
-})
-.then(response => response.text())
-.then(data => {
-document.getElementById('message-launchGame').innerHTML = data;
-})
-.catch(error => {
-document.getElementById('message-launchGame').innerHTML = 'Erreur : ' + error;
-});
-}
-
-function startServiceAjax() {
-const map = document.getElementById('map-select').value;
-const mode = document.getElementById('mode-select').value;
-const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
-
-const formData = new FormData();
-formData.append('selected-map', map);
-formData.append('selected-mode', mode);
-formData.append('selected-warmup', warmup);
-
-// Envoyer les données à start_service.php
-fetch('start_service.php', {
-method: 'POST',
-body: formData
-})
-.then(response => response.text())
-.then(data => {
-document.getElementById('message').innerHTML = data;
-// Envoyer les données à sendMail.php
-return fetch('sendMail.php', {
-method: 'POST',
-body: formData
-});
-})
-.then(response => response.text())
-.then(data => {
-// Afficher le message indiquant que les joueurs ont été notifiés
-document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
-})
-.catch(error => {
-document.getElementById('message').innerHTML = 'Erreur : ' + error;
-});
-}
-
-function stopServiceAjax() {
-fetch('stop_service.php', {
-method: 'POST'
-})
-.then(response => response.text())
-.then(data => {
-document.getElementById('message').innerHTML = data;
-})
-.catch(error => {
-document.getElementById('message').innerHTML = 'Erreur : ' + error;
-});
-}
-
-function showBotImage() {
-const botName = document.getElementById('bot-name').value;
-const botImage = document.getElementById('bot-image');
-
-// Mapping bot names to images
-const botImages = {
-Angelyss: '../images/bots/Angelyss.png',
-Arachna: '../images/bots/Arachna.png',
-Assassin: '../images/bots/Assassin.png',
-Ayumi: '../images/bots/Ayumi.png',
-Beret: '../images/bots/Beret.png',
-Gargoyle: '../images/bots/Gargoyle.png',
-Kyonshi: '../images/bots/Kyonshi.png',
-Liz: '../images/bots/Liz.png',
-Major: '../images/bots/Major.png',
-Merman: '../images/bots/Merman.png',
-Neko: '../images/bots/Neko.png',
-Penguin: '../images/bots/Penguin.png',
-Sarge: '../images/bots/Sarge.png',
-Sergei: '../images/bots/Sergei.png',
-Skelebot: '../images/bots/Skelebot.png',
-S_Marine: '../images/bots/Smarine.png',
-Sorceress: '../images/bots/Sorceress.png',
-Tony: '../images/bots/Tony.png',
-// Ajoutez les autres bots ici
-};
-
-botImage.src = botImages[botName] || '';
-botImage.alt = botName ? `Image du bot ${botName}` : 'Image du Bot';
-}
-
-// Initial call to display the image for the selected bot
-document.addEventListener('DOMContentLoaded', showBotImage);
-</script>
 </body>
 
 </html>
