@@ -10,7 +10,7 @@
 </head>
 
 <body class="config">
-    <main>
+<main>
         <h2>Sélection de la Map et du Mode de Jeu</h2>
         <div style="display: flex; align-items: center;">
             <div style="margin-right: 20px;">
@@ -41,8 +41,10 @@
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
-            <select id="listeNoms1"></select>
-            <select id="listeNoms2"></select>
+            <select id="listeNoms1" name="listeNoms1"></select>
+            <input type="password" id="pass1" name="pass1" placeholder="Mot de passe Raspberry 1">
+            <select id="listeNoms2" name="listeNoms2"></select>
+            <input type="password" id="pass2" name="pass2" placeholder="Mot de passe Raspberry 2">
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
 

@@ -1,19 +1,35 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $map = escapeshellarg($_POST['selected-map']);
-    $mode = escapeshellarg($_POST['selected-mode']);
-    $warmup = escapeshellarg($_POST['selected-warmup']);
-    
-    $command = "sshpass -p 'quake' ssh -o StrictHostKeyChecking=no quake@195.221.30.65 'screen -dmS openarena-server openarena-server +set dedicated 2 +set net_port 27961 +set g_gametype $mode +map $map +g_dowarmup 1 +g_warmup $warmup +set sv_hostname \"Tournois Monaco\"'";
-    
-    $output = shell_exec($command);
+    // Récupérer les informations de la première Raspberry
+    $user1 = escapeshellarg($_POST['listeNoms1']);
+    $pass1 = escapeshellarg($_POST['pass1']);
 
-    // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou afficher un message
-    echo "La partie a été démarré avec la map $map et le mode $mode avec un warmup de $warmup seconde(s).";
+    // Récupérer les informations de la deuxième Raspberry
+    $user2 = escapeshellarg($_POST['listeNoms2']);
+    $pass2 = escapeshellarg($_POST['pass2']);
+
+    // Commande SSH pour la première Raspberry
+    $command1 = "sshpass -p $pass1 ssh -o StrictHostKeyChecking=no $user1@195.221.30.2 << INNER_EOF &
+export DISPLAY=:0
+openarena +set cl_renderer opengl1 +set r_mode -1 +set r_customwidth 1280 +set r_customheight 720 +r_fullscreen 1 +connect 195.221.30.65:27961
+INNER_EOF";
+
+    // Commande SSH pour la deuxième Raspberry
+    $command2 = "sshpass -p $pass2 ssh -o StrictHostKeyChecking=no $user2@195.221.30.1 << INNER_EOF &
+export DISPLAY=:0
+openarena +set cl_renderer opengl1 +set r_mode -1 +set r_customwidth 1280 +set r_customheight 720 +r_fullscreen 1 +connect 195.221.30.65:27961
+INNER_EOF";
+
+    // Exécuter les commandes SSH
+    $output1 = shell_exec($command1);
+    $output2 = shell_exec($command2);
+
+    // Afficher un message de confirmation
+    echo "Le jeu a été lancé sur les Raspberry Pi de $user1 et $user2.";
     
 } else {
-    // Redirige vers la page principale si l'accès n'est pas via POST
-    echo "La partie n'a pas démarré avec la map $map et le mode $mode avec un warmup de $warmup seconde(s).";
+    // Rediriger vers la page principale si l'accès n'est pas via POST
+    echo "La partie n'a pas démarré.";
     exit;
 }
 ?>
