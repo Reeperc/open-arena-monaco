@@ -17,7 +17,7 @@ $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 try {
     // Mettre à jour le mot de passe dans la base de données
-    $sql_update = "UPDATE Joueur SET MotDePasse = :password_hash, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = :token_hash";
+    $sql_update = "UPDATE Joueur SET password = :password_hash, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = :token_hash";
     $stmt_update = $connexion->prepare($sql_update);
     $stmt_update->bindParam(':password_hash', $password_hash);
     $stmt_update->bindParam(':token_hash', $token);
