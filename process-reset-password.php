@@ -7,6 +7,13 @@ $token = $_POST["token"] ?? null;
 $password = $_POST["password"] ?? null;
 $password_confirmation = $_POST["password_confirmation"] ?? null;
 
+$token_from_url = $_GET['token'] ?? null;
+if ($token_from_url === null) {
+    die("Token non fourni.");
+}
+
+$token_hash = hash("sha256", $token_from_url);
+
 // Validation des mots de passe
 if ($password !== $password_confirmation) {
     die("Les mots de passe ne correspondent pas");
@@ -16,16 +23,20 @@ if ($password !== $password_confirmation) {
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 try {
-    // Récupérer l'email de l'utilisateur avec le token
+    // Préparation de la requête SQL pour récupérer l'email
     $sql_select_email = "SELECT Email FROM Joueur WHERE reset_token_hash = :token_hash";
     $stmt_select_email = $connexion->prepare($sql_select_email);
-    $stmt_select_email->bindParam(':token_hash', $token);
+    $stmt_select_email->bindParam(':token_hash', $token_hash);
     $stmt_select_email->execute();
     $user = $stmt_select_email->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
         die("Utilisateur non trouvé avec ce token.");
     }
+
+    // L'email associé au token
+    $email = $user['Email'];
+
 
     // Mettre à jour le mot de passe dans la base de données locale
     $sql_update = "UPDATE Joueur SET password = :password_hash, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = :token_hash";
