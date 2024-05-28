@@ -120,3 +120,5 @@ try {
 } catch (PDOException $e) {
     echo "Erreur lors de la mise à jour du token : " . $e->getMessage();
 }
+
+?>
