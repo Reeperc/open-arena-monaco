@@ -1,94 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Lancement partie</title>
     <link rel="stylesheet" href="styles/style-antoine-config.css">
     <link rel="stylesheet" href="style.css">
     <?php include('MenuOrganisateurF.php'); ?>
-    <script>
-        // Fonction pour récupérer le contenu d'un fichier et mettre à jour l'élément HTML correspondant
-        function fetchUserData(url, elementId) {
-            const uniqueUrl = `${url}?t=${new Date().getTime()}`;
-            fetch(uniqueUrl)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(elementId).innerText = data || "Aucun";
-                });
-        }
-
-        // Fonction pour vérifier l'utilisateur actuel pour chaque appareil toutes les secondes
-        function checkUser(device) {
-            const currentUserId = `currentUser${device}`;
-            const authorizedUserId = `authorizedUser${device}`;
-            fetchUserData(`current_user_device${device}.txt`, currentUserId);
-
-            const authorizedUser = document.getElementById(authorizedUserId).innerText;
-            const currentUser = document.getElementById(currentUserId).innerText;
-
-            setTimeout(() => checkUser(device), 1000);
-        }
-
-        // Fonction pour démarrer le contrôle et définir l'utilisateur autorisé pour chaque appareil
-        function startControl(device) {
-            const user = document.getElementById(`inputAuthorizedUser${device}`).value;
-            if (user) {
-                fetch(`authorized_user_device${device}.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'user=' + encodeURIComponent(user)
-                }).then(() => {
-                    document.getElementById(`authorizedUser${device}`).innerText = user;
-                    checkUser(device);
-                });
-            }
-        }
-
-        // Charger les utilisateurs au démarrage de la page
-        window.onload = function() {
-            fetchUsersFromAD();
-            checkUser(1);
-            fetchUserData('current_user_device1.txt', 'currentUser1');
-            fetchUserData('authorized_user_device1.txt', 'authorizedUser1');
-
-            checkUser(2);
-            fetchUserData('current_user_device2.txt', 'currentUser2');
-            fetchUserData('authorized_user_device2.txt', 'authorizedUser2');
-        }
-
-        // Fonction pour récupérer les utilisateurs depuis le serveur AD et les mettre à jour dans les listes déroulantes
-        function fetchUsersFromAD() {
-            fetch('ADutilisateurs.php')
-                .then(response => response.json())
-                .then(data => {
-                    const userList1 = document.getElementById('inputAuthorizedUser1');
-                    const userList2 = document.getElementById('inputAuthorizedUser2');
-
-                    // Vider les listes déroulantes
-                    userList1.innerHTML = '';
-                    userList2.innerHTML = '';
-
-                    // Remplir les listes déroulantes avec les utilisateurs récupérés
-                    data.forEach(user => {
-                        const option1 = document.createElement('option');
-                        option1.text = user;
-                        userList1.appendChild(option1);
-
-                        const option2 = document.createElement('option');
-                        option2.text = user;
-                        userList2.appendChild(option2);
-                    });
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la récupération des utilisateurs depuis le serveur AD :', error);
-                });
-        }
-
-        document.addEventListener('DOMContentLoaded', showBotImage);
-    </script>
 </head>
+
 <body class="config">
     <main>
         <h2>Sélection de la Map et du Mode de Jeu</h2>
@@ -171,6 +91,8 @@
                     </select>
 
                     <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
+
+
                 </form>
             </div>
             <div style="margin-left: 25%;">
@@ -191,45 +113,211 @@
         </section>
     </main>
 
-    <main>
-        <section>
-            <h2>Gestion des Utilisateurs</h2>
-            <div class="user-management" style="display: flex; flex-direction: column;">
-                <div style="display: flex; align-items: center;">
-                    <label for="inputAuthorizedUser1">Utilisateur autorisé pour l'appareil 1:</label>
-                    <select id="inputAuthorizedUser1">
-                        <option value="">Sélectionnez un utilisateur</option>
-                    </select>
-                    <button type="button" onclick="startControl(1)">Définir</button>
-                </div>
-                <div>
-                    <strong>Utilisateur actuel pour l'appareil 1:</strong>
-                    <span id="currentUser1">Aucun</span>
-                </div>
-                <div>
-                    <strong>Utilisateur autorisé pour l'appareil 1:</strong>
-                    <span id="authorizedUser1">Aucun</span>
-                </div>
-            </div>
+    <script>
+        // Fonction pour récupérer les utilisateurs depuis le serveur AD et les mettre à jour dans les listes déroulantes
+        function fetchUsersFromAD() {
+            fetch('ADutilisateurs.php')
+                .then(response => response.json())
+                .then(data => {
+                    const userList1 = document.getElementById('listeNoms1');
+                    const userList2 = document.getElementById('listeNoms2');
 
-            <div class="user-management" style="display: flex; flex-direction: column; margin-top: 20px;">
-                <div style="display: flex; align-items: center;">
-                    <label for="inputAuthorizedUser2">Utilisateur autorisé pour l'appareil 2:</label>
-                    <select id="inputAuthorizedUser2">
-                        <option value="">Sélectionnez un utilisateur</option>
-                    </select>
-                    <button type="button" onclick="startControl(2)">Définir</button>
-                </div>
-                <div>
-                    <strong>Utilisateur actuel pour l'appareil 2:</strong>
-                    <span id="currentUser2">Aucun</span>
-                </div>
-                <div>
-                    <strong>Utilisateur autorisé pour l'appareil 2:</strong>
-                    <span id="authorizedUser2">Aucun</span>
-                </div>
-            </div>
-        </section>
-    </main>
+                    // Vider les listes déroulantes
+                    userList1.innerHTML = '';
+                    userList2.innerHTML = '';
+
+                    // Remplir les listes déroulantes avec les utilisateurs récupérés
+                    data.forEach(user => {
+                        const option1 = document.createElement('option');
+                        option1.text = user;
+                        userList1.appendChild(option1);
+
+                        const option2 = document.createElement('option');
+                        option2.text = user;
+                        userList2.appendChild(option2);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des utilisateurs depuis le serveur AD :', error);
+                });
+        }
+
+        // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
+        document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
+
+
+        const maps = {
+            0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
+            1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
+            2: ['aggressor', 'am_lavaarena', 'ctf_gate1', 'ctf_inyard', 'mlca1'],
+            3: ['am_lavactf', 'am_lavactfxl', 'ctf_inyard', 'delta', 'hydronext2'],
+            4: ['am_lavactf', 'am_lavactf2', 'delta', 'hydronext2', 'oa_bases3', 'oa_Thor'],
+            5: ['aggressor', 'am_lavaarena', 'mlca1'],
+            6: ['aggressor', 'oa_dm1']
+        };
+
+        function updateMapOptions() {
+            const modeSelect = document.getElementById('mode-select');
+            const mapSelect = document.getElementById('map-select');
+            const mapContainer = document.getElementById('map-container');
+
+            const selectedMode = modeSelect.value;
+
+            // Clear previous options
+            mapSelect.innerHTML = '';
+
+            if (selectedMode !== '') {
+                // Add new options
+                maps[selectedMode].forEach(map => {
+                    const option = document.createElement('option');
+                    option.value = map;
+                    option.text = map;
+                    mapSelect.appendChild(option);
+                });
+                mapContainer.style.display = 'block';
+            } else {
+                mapContainer.style.display = 'none';
+            }
+        }
+
+        function addBot() {
+            const botName = document.getElementById('bot-name').value;
+            const botLevel = document.getElementById('bot-level').value;
+            const botTeam = document.getElementById('bot-team').value; // Récupérer la valeur de l'équipe du bot
+
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+            formData.append('bot_level', botLevel);
+            formData.append('bot_team', botTeam); // Ajouter l'équipe du bot aux données du formulaire
+
+            fetch('add_bot.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-message').innerHTML = data;
+                    document.getElementById('bot-remove-message').innerHTML = ''; // Clear remove message
+                })
+                .catch(error => {
+                    document.getElementById('bot-message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function removeBot() {
+            const botName = document.getElementById('bot-name').value;
+
+            const formData = new FormData();
+            formData.append('bot_name', botName);
+
+            fetch('remove_bot.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('bot-remove-message').innerHTML = data;
+                    document.getElementById('bot-message').innerHTML = ''; // Clear add message
+                })
+                .catch(error => {
+                    document.getElementById('bot-remove-message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function launchGame() {
+            fetch('lance_partie.php', {
+                    method: 'POST',
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message-launchGame').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message-launchGame').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function startServiceAjax() {
+            const map = document.getElementById('map-select').value;
+            const mode = document.getElementById('mode-select').value;
+            const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
+
+            const formData = new FormData();
+            formData.append('selected-map', map);
+            formData.append('selected-mode', mode);
+            formData.append('selected-warmup', warmup);
+
+            // Envoyer les données à start_service.php
+            fetch('start_service.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                    // Envoyer les données à sendMail.php
+                    return fetch('sendMail.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Afficher le message indiquant que les joueurs ont été notifiés
+                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function stopServiceAjax() {
+            fetch('stop_service.php', {
+                    method: 'POST'
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('message').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function showBotImage() {
+            const botName = document.getElementById('bot-name').value;
+            const botImage = document.getElementById('bot-image');
+
+            // Mapping bot names to images
+            const botImages = {
+                Angelyss: '../images/bots/Angelyss.png',
+                Arachna: '../images/bots/Arachna.png',
+                Assassin: '../images/bots/Assassin.png',
+                Ayumi: '../images/bots/Ayumi.png',
+                Beret: '../images/bots/Beret.png',
+                Gargoyle: '../images/bots/Gargoyle.png',
+                Kyonshi: '../images/bots/Kyonshi.png',
+                Liz: '../images/bots/Liz.png',
+                Major: '../images/bots/Major.png',
+                Merman: '../images/bots/Merman.png',
+                Neko: '../images/bots/Neko.png',
+                Penguin: '../images/bots/Penguin.png',
+                Sarge: '../images/bots/Sarge.png',
+                Sergei: '../images/bots/Sergei.png',
+                Skelebot: '../images/bots/Skelebot.png',
+                S_Marine: '../images/bots/Smarine.png',
+                Sorceress: '../images/bots/Sorceress.png',
+                Tony: '../images/bots/Tony.png',
+                // Ajoutez les autres bots ici
+            };
+
+            botImage.src = botImages[botName] || '';
+            botImage.alt = botName ? `Image du bot ${botName}` : 'Image du Bot';
+        }
+
+        // Initial call to display the image for the selected bot
+        document.addEventListener('DOMContentLoaded', showBotImage);
+    </script>
 </body>
+
 </html>
