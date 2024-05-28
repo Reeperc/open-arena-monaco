@@ -7,12 +7,9 @@ $token = $_POST["token"] ?? null;
 $password = $_POST["password"] ?? null;
 $password_confirmation = $_POST["password_confirmation"] ?? null;
 
-$token_from_url = $_GET['token'] ?? null;
-if ($token_from_url === null) {
-    die("Token non fourni.");
-}
 
-$token_hash = hash("sha256", $token_from_url);
+
+$token_hash = hash("sha256", $token);
 
 // Validation des mots de passe
 if ($password !== $password_confirmation) {
