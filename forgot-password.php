@@ -81,7 +81,7 @@ try {
 
         if ($row) {
             $Nom = $row['Nom'];
-            $Prenom = $row['Prenom'];
+            $Prenom = $row['Prénom'];
 
             // Envoi de l'email en cas de succès de la mise à jour
             $mail = new PHPMailer(true);

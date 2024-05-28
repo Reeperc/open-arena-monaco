@@ -14,7 +14,7 @@ require('database.php');
 
 try {
     // Préparer la requête SQL pour récupérer l'utilisateur avec le token fourni
-    $sql = "SELECT * FROM joueur WHERE reset_token_hash = :token_hash";
+    $sql = "SELECT * FROM Joueur WHERE reset_token_hash = :token_hash";
     $stmt = $connexion->prepare($sql);
 
     // Lier les paramètres
