@@ -37,10 +37,11 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php'; // Charger les dépendances Composer
 
 // Récupération de l'email depuis le formulaire
-if (!isset($_POST["Email"])) {
+if (!isset($_POST["email"])) {
     die("L'email n'a pas été fourni.");
 }
-$Email = $_POST["Email"];
+$Email = $_POST["email"];
+
 
 // Génération du token et du hash
 $token = bin2hex(openssl_random_pseudo_bytes(16));
