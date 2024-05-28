@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 //utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
 
-                // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
+                // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateurrrr
                 if ($entries_admin['count'] == 1) {
                     $user_dn = $entries_admin[0]['dn'];
                 } elseif ($entries_organisateur['count'] == 1) {
