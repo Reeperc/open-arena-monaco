@@ -73,10 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Préparer et exécuter la requête d'insertion dans la base de données
                 try {
-                    $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, password) VALUES (:nom, :prenom, :email, :mot_de_passe)");
+                    $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (:nom, :prenom, :email, :username, :mot_de_passe)");
                     $stmt->bindParam(':nom', $nom);
                     $stmt->bindParam(':prenom', $prenom);
                     $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':username', $usergivenname); // Utiliser le prénom comme nom d'utilisateur
                     $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
                     $stmt->execute();
                     echo "Utilisateur ajouté à la base de données avec succès.";
