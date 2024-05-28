@@ -16,12 +16,23 @@ if ($password !== $password_confirmation) {
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 try {
+    // Récupérer l'email de l'utilisateur avec le token
+    $sql_select_email = "SELECT Email FROM Joueur WHERE reset_token_hash = :token_hash";
+    $stmt_select_email = $connexion->prepare($sql_select_email);
+    $stmt_select_email->bindParam(':token_hash', $token);
+    $stmt_select_email->execute();
+    $user = $stmt_select_email->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        die("Utilisateur non trouvé avec ce token.");
+    }
+
     // Mettre à jour le mot de passe dans la base de données locale
     $sql_update = "UPDATE Joueur SET password = :password_hash, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE reset_token_hash = :token_hash";
     $stmt_update = $connexion->prepare($sql_update);
     $stmt_update->bindParam(':password_hash', $password_hash);
     $stmt_update->bindParam(':token_hash', $token);
-    
+
     if ($stmt_update->execute()) {
         echo "Mot de passe réinitialisé avec succès dans la base de données locale.";
 
@@ -74,7 +85,6 @@ try {
     } else {
         die("Erreur lors de la réinitialisation du mot de passe dans la base de données.");
     }
-
 } catch (PDOException $e) {
     die("Erreur lors de la mise à jour du mot de passe : " . $e->getMessage());
 }
