@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
     $ldap_bind_dn = 'cn=utilisateur,cn=Users,dc=arena-monaco,dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
     $ldap_bind_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
-    $ldap_base_dn = 'dc=arena-monaco,dc=fr'; // Base DN d
+    $ldap_base_dn = 'dc=arena-monaco,dc=fr'; // Base DN des utilisateurs
     $ldap_base_dn_admin = 'cn=Users,dc=arena-monaco,dc=fr'; // Base DN des administrateurs
     $ldap_base_dn_organisateur = 'ou=organisateurs,dc=arena-monaco,dc=fr'; // Base DN des organisateurs
 
@@ -20,23 +20,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
     if ($ldap_conn) {
-        // Authentification avec l'utilisateur LDAP ++++++
+        // Authentification avec l'utilisateur LDAP
         $ldap_bind = ldap_bind($ldap_conn, $ldap_bind_dn, $ldap_bind_password);
 
         if ($ldap_bind) {
             // Requête de recherche LDAP pour les administrateurs
             $search_filter_admin = "(mail=$email)";
-            $attributes_admin = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+            $attributes_admin = array("cn", "dn", "sAMAccountName"); // Ajouter sAMAccountName
             $search_result_admin = ldap_search($ldap_conn, $ldap_base_dn_admin, $search_filter_admin, $attributes_admin);
 
             // Requête de recherche LDAP pour les organisateurs
             $search_filter_organisateur = "(mail=$email)";
-            $attributes_organisateur = array("cn", "dn"); // Attributs à récupérer (CN et DN)
+            $attributes_organisateur = array("cn", "dn", "sAMAccountName"); // Ajouter sAMAccountName
             $search_result_organisateur = ldap_search($ldap_conn, $ldap_base_dn_organisateur, $search_filter_organisateur, $attributes_organisateur);
 
-            // Requête de recherche LDAP avec le filtre d'adresse e-mail
+            // Requête de recherche LDAP avec le filtre d'adresse e-mail pour les utilisateurs
             $search_filter = "(mail=$email)";
-            $attributes = array("cn", "dn", "sAMAccountName"); // Attributs à récupérer (CN et DN)
+            $attributes = array("cn", "dn", "sAMAccountName"); // Ajouter sAMAccountName
             $search_result = ldap_search($ldap_conn, $ldap_base_dn, $search_filter, $attributes);
 
             if ($search_result_admin !== false && $search_result_organisateur !== false && $search_result != false) {
@@ -46,10 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Récupération des entrées LDAP pour les organisateurs
                 $entries_organisateur = ldap_get_entries($ldap_conn, $search_result_organisateur);
 
-                //utilisateurs
+                // Récupération des entrées LDAP pour les utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
 
-                // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateurrrr
+                // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
                 if ($entries_admin['count'] == 1) {
                     $user_dn = $entries_admin[0]['dn'];
                 } elseif ($entries_organisateur['count'] == 1) {
@@ -67,19 +67,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if ($entries_admin['count'] == 1) {
                             // L'utilisateur est un administrateur
                             $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
+                            $_SESSION['admin_sAMAccountName'] = $entries_admin[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
                             $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
                             header("Location: AccueilAdminF.php");
                             exit();
                         } elseif ($entries_organisateur['count'] == 1) {
-                            // L'utilisateur est un organisateur ++++
+                            // L'utilisateur est un organisateur
                             $_SESSION['organisateur_username'] = $entries_organisateur[0]['cn'][0];
+                            $_SESSION['organisateur_sAMAccountName'] = $entries_organisateur[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
                             $_SESSION['welcome_message'] = "Connexion réussie en tant qu'organisateur";
                             header("Location: AccueilOrganisateurF.php");
                             exit();
                         } elseif ($entries['count'] == 1) {
                             // L'utilisateur est un joueur
                             $_SESSION['joueur_username'] = $entries[0]['cn'][0];
-                            $_SESSION['joueur_sam'] = $entries[0]['sAMAccountName'][0];;
+                            $_SESSION['joueur_sam'] = $entries[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
                             $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
                             header("Location: AccueilJoueurF.php");
                             exit();
@@ -103,3 +105,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color: red;'>Échec de la connexion au serveur LDAP.</p>";
     }
 }
+?>
