@@ -6,34 +6,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $mot_de_passe = $_POST["mot_de_passe"];
 
-    //virifier si l'add se termine par @arena-monaco.fr
+    // Vérifier si l'adresse se termine par @arena-monaco.fr
     if (!endsWith($email, '@arena-monaco.fr')) {
-        echo "Laddresse mail doit se terminer par @arena-monaco.fr";
+        echo "L'adresse mail doit se terminer par @arena-monaco.fr";
         exit();
     }
 
     // Configuration pour l'accès à l'Active Directory
-    $ldap_server = "ldaps://dc.arena-monaco.fr"; // Remplacez par votre serveur LDAP
-    $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez par votre nom d'utilisateur LDAP 
-    $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
-    $ldap_base_dn = 'dc=arena-monaco, dc=fr'; // Remplacez par votre base DN
+    $ldap_server = "ldaps://dc.arena-monaco.fr";
+    $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr';
+    $ldap_password = '1234567890A@';
+    $ldap_base_dn = 'dc=arena-monaco, dc=fr';
     $ldap_port = 636;
 
-    //Donnees à ajouter
+    // Données à ajouter
     $usercn = $prenom . " " . $nom;
     $usersn = $nom;
     $usergivenname = $prenom;
     $userpassword = $mot_de_passe;
     $usermail = $email;
 
-    //function encodePassword($userpassword){
-    //$userpassword="\"".$userpassword."\"";
-    // $encoded= "";
-    // for($i=0; $i <strlen($userpassword); $i++){$encoded.="{$userpassword{$i}}\000";}
-    // return $encoded;
-    //}
     // Connexion à l'Active Directory
-    $ldap_conn = ldap_connect("ldaps://dc.arena-monaco.fr", 636) or die("Impossible de se connecter au serveur LDAP.");
+    $ldap_conn = ldap_connect($ldap_server, $ldap_port) or die("Impossible de se connecter au serveur LDAP.");
     ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
 
@@ -41,22 +35,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Authentification
         $ldap_bind = ldap_bind($ldap_conn, $ldap_user, $ldap_password);
 
-
         if ($ldap_bind) {
-
-            //Verifier si l'addresse exite deja 
+            // Vérifier si l'adresse existe déjà
             $filter = "(mail=$email)";
             $attributes = array("mail");
             $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
             $entries = ldap_get_entries($ldap_conn, $search);
 
             if ($entries['count'] > 0) {
-                echo " Email deja utilisé";
+                echo "Email déjà utilisé";
                 exit();
             }
+
             // Ajout d'un nouvel utilisateur
-            $dn = "CN=" . $prenom . " " . $nom . ",OU=utilisateurs,DC=arena-monaco,DC=fr"; // DN de l'utilisateur à ajouter
-            echo  $dn;
+            $dn = "CN=" . $prenom . " " . $nom . ",OU=utilisateurs,DC=arena-monaco,DC=fr";
             $info = array(
                 "cn" => $usercn,
                 "sn" => $usersn,
@@ -69,19 +61,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "adminCount" => array(0),
                 "userAccountControl" => "66048",
                 "objectClass" => ["top", "person", "organizationalPerson", "user"],
-                //"userAccountControl" => "512",
             );
 
-
-            $result = ldap_add($ldap_conn,  $dn, $info);
+            $result = ldap_add($ldap_conn, $dn, $info);
             if ($result) {
+                // Message de succès
+                echo "Ajout de l'utilisateur " . $email . " réussi.";
 
-                // Message de succès dans une variable de session
-                echo "Ajout du joueur" . $email . "réussi.";
+                // Inclure le fichier de connexion à la base de données
+                include 'database.php';
 
-                // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
-                header("Location: AccueilAdminF.php");
-                exit(); // Assurez-vous de terminer l'exécution du script après la redirection
+                // Préparer et exécuter la requête d'insertion dans la base de données
+                try {
+                    $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, password) VALUES (:nom, :prenom, :email, :mot_de_passe)");
+                    $stmt->bindParam(':nom', $nom);
+                    $stmt->bindParam(':prenom', $prenom);
+                    $stmt->bindParam(':email', $email);
+                    $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
+                    $stmt->execute();
+                    echo "Utilisateur ajouté à la base de données avec succès.";
+
+                    // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
+                    header("Location: AccueilAdminF.php");
+                    exit(); // Assurez-vous de terminer l'exécution du script après la redirection
+                } catch (PDOException $e) {
+                    echo "Erreur lors de l'ajout de l'utilisateur à la base de données : " . $e->getMessage();
+                }
             } else {
                 echo "Échec de l'ajout de l'utilisateur dans l'Active Directory.";
             }
@@ -95,7 +100,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Échec de la connexion au serveur LDAP.";
     }
 }
-function endsWith($string, $suffix)
-{
+
+function endsWith($string, $suffix) {
     return substr($string, -strlen($suffix)) === $suffix;
 }
+?>

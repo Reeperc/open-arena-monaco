@@ -14,7 +14,7 @@
 
 BDD moduleweb
 $serveur = "moduleweb.esigelec.fr";
-$utilisateur = "grp_6_10";
+$utilisateur = "root";
 $motDePasse = "oPkO06vqDtnh";
 $baseDeDonnees = "bdd_6_10";
 
