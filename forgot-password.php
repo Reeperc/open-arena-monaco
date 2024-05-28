@@ -55,7 +55,7 @@ require('database.php');
 
 try {
     // Préparation de la requête de mise à jour
-    $sql = "UPDATE joueur 
+    $sql = "UPDATE Joueur 
             SET reset_token_hash = :token_hash,
                 reset_token_expires_at = :expiry
             WHERE Email = :email";
@@ -73,7 +73,7 @@ try {
     // Vérification du nombre de lignes affectées
     if ($stmt->rowCount() > 0) {
         // Récupérer le nom et le prénom de l'utilisateur pour l'email
-        $sql_select = "SELECT Nom, Prenom FROM joueur WHERE Email = :email";
+        $sql_select = "SELECT Nom, Prénom FROM Joueur WHERE Email = :email";
         $stmt_select = $connexion->prepare($sql_select);
         $stmt_select->bindParam(':email', $Email);
         $stmt_select->execute();
