@@ -66,27 +66,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = ldap_add($ldap_conn, $dn, $info);
             if ($result) {
                 // Message de succès
-                echo "Ajout de l'utilisateur " . $email . " réussi.";
+                echo "Ajout de l'utilisateur " . $email . " réussi dans l'Active Directory.";
 
                 // Inclure le fichier de connexion à la base de données
                 include 'database.php';
 
-                // Préparer et exécuter la requête d'insertion dans la base de données
-                try {
-                    $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (:nom, :prenom, :email, :username, :mot_de_passe)");
-                    $stmt->bindParam(':nom', $nom);
-                    $stmt->bindParam(':prenom', $prenom);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':username', $usergivenname); // Utiliser le prénom comme nom d'utilisateur
-                    $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
-                    $stmt->execute();
-                    echo "Utilisateur ajouté à la base de données avec succès.";
+                // Vérifier la connexion à la base de données
+                if ($connexion) {
+                    // Préparer et exécuter la requête d'insertion dans la base de données
+                    try {
+                        $stmt = $connexion->prepare("INSERT INTO Joueur (Nom, Prénom, Email, username, password) VALUES (:nom, :prenom, :email, :username, :mot_de_passe)");
+                        $stmt->bindParam(':nom', $nom);
+                        $stmt->bindParam(':prenom', $prenom);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':username', $usergivenname); // Utiliser le prénom comme nom d'utilisateur
+                        $stmt->bindParam(':mot_de_passe', password_hash($mot_de_passe, PASSWORD_BCRYPT)); // Hachage du mot de passe
+                        $stmt->execute();
+                        echo "Utilisateur ajouté à la base de données avec succès.";
 
-                    // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
-                    header("Location: AccueilAdminF.php");
-                    exit(); // Assurez-vous de terminer l'exécution du script après la redirection
-                } catch (PDOException $e) {
-                    echo "Erreur lors de l'ajout de l'utilisateur à la base de données : " . $e->getMessage();
+                        // Rediriger vers la page "AccueilAdminF.php" après l'inscription réussie
+                        header("Location: AccueilAdminF.php");
+                        exit(); // Assurez-vous de terminer l'exécution du script après la redirection
+                    } catch (PDOException $e) {
+                        echo "Erreur lors de l'ajout de l'utilisateur à la base de données : " . $e->getMessage();
+                    }
+                } else {
+                    echo "Échec de la connexion à la base de données.";
                 }
             } else {
                 echo "Échec de l'ajout de l'utilisateur dans l'Active Directory.";
