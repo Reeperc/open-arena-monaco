@@ -3,6 +3,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+include('start_service.php');
+
 //chargement des classes PHPMailerrr
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -41,7 +43,11 @@ try {
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
     // Destinataire
-    $mail->addAddress('roger@arena-monaco.fr', 'Roger'); // Modifier par l'adresse de votre destinataire
+    $user1 = 'user1'; // Nom d'utilisateur 1
+    $user2 = 'user2'; // Nom d'utilisateur 2
+
+    $mail->addAddress($user1 . '@arena-monaco.fr', $user1);
+    $mail->addAddress($user2 . '@arena-monaco.fr', $user2);
 
     // Contenu de l'email
     $mail->isHTML(true); // Définir le format de l'email à HTML
