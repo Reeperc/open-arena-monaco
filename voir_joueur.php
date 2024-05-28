@@ -17,7 +17,7 @@ if ($ldap_conn) {
     if ($ldap_bind) {
         // Requête pour récupérer tous les utilisateurs
         $filter = "(objectClass=user)";
-        $attributes = array("sAMAccountName");
+        $attributes = array("cn", "mail", "sn", "givenName");
         $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
         $entries = ldap_get_entries($ldap_conn, $search);
 
