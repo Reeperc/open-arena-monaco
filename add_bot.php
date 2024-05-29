@@ -12,5 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du résultat de la commande
     echo '<div style="color: green; font-weight: bold;">Bot ajouté avec succès.</div>';
+    
 }
 ?>
