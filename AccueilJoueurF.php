@@ -35,7 +35,7 @@ if (isset($_SESSION['welcome_message5'])) {
   </video>
   <main>
     <h1></h1>
-    <p>Répertoire : <?php echo htmlspecialchars($nom) ?> </p>
+    <p>Répertoire : <?php echo $nom ?> </p>
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
