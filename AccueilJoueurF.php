@@ -1,5 +1,6 @@
 <?php
 session_start();
+  $repertoire=$_SESSION['joueur_username']['sAMAccountName'];
 
 // Vérifier si l'utilisateur est connecté en tant que joueur
 if (!isset($_SESSION['joueur_username'])) {
@@ -35,7 +36,7 @@ if (isset($_SESSION['welcome_message5'])) {
   </video>
   <main>
     <h1></h1>
-    <p>Répertoire : <?php echo htmlspecialchars($_SESSION['joueur_sAMAccountName']); ?> </p>
+    <p>Répertoire : <?php echo $repertoire ?> </p>
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
