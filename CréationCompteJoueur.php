@@ -57,7 +57,7 @@ if (isset($_GET['errorMessage'])) {
 
   <button id="return-button" onclick="window.location.href='AccueilAdminF.php'">Retour</button>
   <button type="button" onclick="window.location.href='voir_joueur.php'"> Afficher les joueurs </button>
-  <button type="button" onclick="window.location.href='supp_joueur.php'"> Supprimer un joueur </button>
+  <button type="button" onclick="window.location.href='supprimerJoueur.php'"> Supprimer un joueur </button>
 </body>
 
 </html>
