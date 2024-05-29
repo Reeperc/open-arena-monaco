@@ -511,11 +511,11 @@ $chemin_fichier_local = '/var/www/html/documents_inutiles/q3config.cfg';
 // Écriture du texte dans le fichier local
 if (file_put_contents($chemin_fichier_local, $texte) !== false) {
     // Connexion SSH
-    $connexion = ssh2_connect('195.221.30.2', 22);
+    $connexion = ssh2_connect('195.221.30.1', 22);
     echo "fichier est bien";
     if ($connexion) {
         // Authentification SSH
-        if (ssh2_auth_password($connexion, 'joueur', 'joueur')) {
+        if (ssh2_auth_password($connexion, 'rt', 'rt')) {
             // Transfert du fichier via SCP
             $resultat = ssh2_scp_send($connexion, $chemin_fichier_local, '/home/ARENA-MONACO/'.$nom.'/.openarena/baseoa/q3config.cfg');
             if ($resultat) {
