@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Choisir un utilisateur à supprimer</title>
+    <title>Supprimer un utilisateur</title>
 </head>
 <body>
     <h1>Supprimer un utilisateur</h1>
@@ -62,4 +62,8 @@
     session_start();
     if (isset($_SESSION['message'])) {
         echo "<p>" . $_SESSION['message'] . "</p>";
-        unset($_SESSION['message']);
+        unset($_SESSION['message']); // Supprimer le message après l'affichage
+    }
+    ?>
+</body>
+</html>
