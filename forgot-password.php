@@ -6,14 +6,21 @@
     <title>Réinitialisation de mot de passe</title>
 </head>
 <body>
+<link rel="stylesheet" href="style.css">
+<?php include('MenuVisiteurF.php'); ?>
+<video autoplay loop muted playsinline id="background-video">
+    <source src="videos/video5.mp4" type="video/mp4">
+  </video>
+  <main class='background-transparent'>
     <h1>Réinitialisation de mot de passe</h1>
 
-    <form method="post">
-        <label for="email">Adresse email (doit se terminer par @arena-monaco.fr)</label>
-        <input type="email" id="email" name="email" required>
+    <form method="post" class="login-form">
+        <label class="form-label" for="email">Adresse email :</label>
+        <input class="form-input" type="email" id="email" name="email" required>
 
-        <button type="submit">Envoyer</button>
+        <button class="form-button" type="submit">Envoyer</button>
     </form>
+</main>
 </body>
 </html>
 

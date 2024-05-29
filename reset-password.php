@@ -41,59 +41,31 @@ try {
 ?>
 <!doctype html>
 <html lang="fr">
-<head>
+<head>1
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Réinitialisation de mot de passe</title>
 </head>
 <body>
+<link rel="stylesheet" href="style.css">
+<?php include('MenuVisiteurF.php'); ?>
+<video autoplay loop muted playsinline id="background-video">
+    <source src="videos/video5.mp4" type="video/mp4">
+  </video>
+  <main class='background-transparent'>
     <h1>Réinitialisation de mot de passe</h1>
 
-    <form method="post">
+    <form method="post" class="login-form" action="process-reset-password.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
-        <label for="password">Nouveau mot de passe</label>
-        <input type="password" id="password" name="password" required>
+        <label class="form-label" for="password">Nouveau mot de passe</label>
+        <input class="form-input" type="password" id="password" name="password" required>
 
-        <label for="password_confirmation">Répétez le mot de passe</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" required>
+        <label class="form-label" for="password_confirmation">Répétez le mot de passe</label>
+        <input class="form-input" type="password" id="password_confirmation" name="password_confirmation" required>
 
-        <button type="submit">Envoyer</button>
+        <button class="form-button" type="submit">Envoyer</button>
     </form>
+</main>
 </body>
 </html>
-
-<?php
-// Afficher toutes les erreurs dans le navigateur pour le débogage
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// Vérifier si PHPMailer est installé
-if (!file_exists('vendor/autoload.php')) {
-    die('PHPMailer non installé. Exécutez `composer install`.');
-}
-
-// Charger les classes PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Charger les dépendances Composer
-
-// Récupération des données du formulaire
-$token = $_POST["token"];
-$password = $_POST["password"];
-$password_confirmation = $_POST["password_confirmation"];
-
-// Validation des mots de passe
-if ($password !== $password_confirmation) {
-    die("Les mots de passe ne correspondent pas");
-}
-
-// Génération du hash du mot de passe
-$password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-// Inclure le fichier de connexion à la base de données
-require('database.php');
-
-try
-?>

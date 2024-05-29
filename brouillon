@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Récupération des entrées LDAP pour les utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
-                var_dump($entries);
+
                 // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
                 if ($entries_admin['count'] == 1) {
                     $user_dn = $entries_admin[0]['dn'];
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if ($entries_admin['count'] == 1) {
                             // L'utilisateur est un administrateur
                             $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
-                            $_SESSION['admin_sAMAccountName'] = $entries_admin[0]['samaccountname'][0]; // Récupérer sAMAccountName
+                            $_SESSION['admin_sAMAccountName'] = $entries_admin[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
                             $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
                             header("Location: AccueilAdminF.php");
                             exit();
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         } elseif ($entries['count'] == 1) {
                             // L'utilisateur est un joueur
                             $_SESSION['joueur_username'] = $entries[0]['cn'][0];
-                            $_SESSION['joueur_sAMAccountName'] = $entries[0]['samaccountname'][0]; // Récupérer sAMAccountName
+                            $_SESSION['joueur_sAMAccountName'] = $entries[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
                             $_SESSION['Welcome_message2'] = "Bienvenue ! Connexion réussie";
                             header("Location: AccueilJoueurF.php");
                             exit();
@@ -105,4 +105,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color: red;'>Échec de la connexion au serveur LDAP.</p>";
     }
 }
-?>
