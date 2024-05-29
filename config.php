@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $nom= strtolower($_SESSION['joueur_sAMAccountName']);
 $t1 = $_POST['t_droite'];
 $t2 = $_POST['t_avancer'];
