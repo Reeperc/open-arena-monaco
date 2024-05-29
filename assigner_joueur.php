@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+    
 <head>
+        <link rel="stylesheet" href="styles/style-antoine-config.css">
+    <link rel="stylesheet" href="style.css">
+    <?php include('MenuOrganisateurF.php'); ?>
     <meta charset="UTF-8">
     <title>Contrôle d'utilisateur</title>
     <script>
