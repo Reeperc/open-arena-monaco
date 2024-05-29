@@ -48,6 +48,7 @@ try {
 </head>
 <body>
 <link rel="stylesheet" href="style.css">
+<?php include('MenuVisiteurF.php'); ?>
 <video autoplay loop muted playsinline id="background-video">
     <source src="videos/video5.mp4" type="video/mp4">
   </video>
