@@ -2,7 +2,6 @@
 <html lang="fr">
     
 <head>
-    <?php include('MenuOrganisateurF.php'); ?>
     <meta charset="UTF-8">
     <title>Contrôle d'utilisateur</title>
     <script>
