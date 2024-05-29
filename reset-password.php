@@ -47,18 +47,24 @@ try {
     <title>Réinitialisation de mot de passe</title>
 </head>
 <body>
+<link rel="stylesheet" href="style.css">
+<video autoplay loop muted playsinline id="background-video">
+    <source src="videos/video5.mp4" type="video/mp4">
+  </video>
+  <main class='background-transparent'>
     <h1>Réinitialisation de mot de passe</h1>
 
-    <form method="post" action="process-reset-password.php">
+    <form method="post" class="login-form" action="process-reset-password.php">
         <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
-        <label for="password">Nouveau mot de passe</label>
-        <input type="password" id="password" name="password" required>
+        <label class="form-label" for="password">Nouveau mot de passe</label>
+        <input class="form-input" type="password" id="password" name="password" required>
 
-        <label for="password_confirmation">Répétez le mot de passe</label>
-        <input type="password" id="password_confirmation" name="password_confirmation" required>
+        <label class="form-label" for="password_confirmation">Répétez le mot de passe</label>
+        <input class="form-input" type="password" id="password_confirmation" name="password_confirmation" required>
 
-        <button type="submit">Envoyer</button>
+        <button class="form-button" type="submit">Envoyer</button>
     </form>
+</main>
 </body>
 </html>
