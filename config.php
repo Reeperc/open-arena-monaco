@@ -1,4 +1,5 @@
 <?php
+$nom= strtolower($_SESSION['joueur_sAMAccountName']);
 $t1 = $_POST['t_droite'];
 $t2 = $_POST['t_avancer'];
 $t3 = $_POST['t_gauche'];
@@ -508,13 +509,13 @@ $chemin_fichier_local = '/var/www/html/documents_inutiles/q3config.cfg';
 // Écriture du texte dans le fichier local
 if (file_put_contents($chemin_fichier_local, $texte) !== false) {
     // Connexion SSH
-    $connexion = ssh2_connect('195.221.30.1', 22);
+    $connexion = ssh2_connect('195.221.30.2', 22);
     echo "fichier est bien";
     if ($connexion) {
         // Authentification SSH
-        if (ssh2_auth_password($connexion, 'rt', 'rt')) {
+        if (ssh2_auth_password($connexion, 'joueur', 'joueur')) {
             // Transfert du fichier via SCP
-            $resultat = ssh2_scp_send($connexion, $chemin_fichier_local, '/home/rt/.openarena/baseoa/q3config.cfg');
+            $resultat = ssh2_scp_send($connexion, $chemin_fichier_local, '/home/ARENA-MONACO/'.$nom.'/.openarena/baseoa/q3config.cfg');
             if ($resultat) {
                 echo "Fichier envoyé avec succès !";
             } else {
