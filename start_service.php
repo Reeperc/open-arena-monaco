@@ -26,7 +26,7 @@ INNER_EOF";
 
     // Afficher un message de confirmation
     echo "Le jeu a été lancé sur les Raspberry Pi de $user1 et $user2.";
-    
+    +++
 } else {
     // Rediriger vers la page principale si l'accès n'est pas via POST
     echo "La partie n'a pas démarré.";
