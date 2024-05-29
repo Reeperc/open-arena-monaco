@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if ($entries_admin['count'] == 1) {
                             // L'utilisateur est un administrateur
                             $_SESSION['admin_username'] = $entries_admin[0]['cn'][0];
-                            $_SESSION['admin_sAMAccountName'] = $entries_admin[0]['sAMAccountName'][0]; // Récupérer sAMAccountName
+                            $_SESSION['admin_sAMAccountName'] = $entries_admin[0]['samaccountname'][0]; // Récupérer sAMAccountName
                             $_SESSION['welcome_message'] = "Connexion réussie en tant qu'admin";
                             header("Location: AccueilAdminF.php");
                             exit();
