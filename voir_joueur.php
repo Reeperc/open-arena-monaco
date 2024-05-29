@@ -25,11 +25,13 @@ if ($ldap_conn) {
         echo "<h2>Liste des utilisateurs :</h2>";
         echo "<ul>";
         for ($i = 0; $i < $entries['count']; $i++) {
-            $cn = isset($entries[$i]['cn'][0]) ? $entries[$i]['cn'][0] : "N/A";
-            $email = isset($entries[$i]['mail'][0]) ? $entries[$i]['mail'][0] : "N/A";
-            $nom = isset($entries[$i]['sn'][0]) ? $entries[$i]['sn'][0] : "N/A";
-            $prenom = isset($entries[$i]['givenname'][0]) ? $entries[$i]['givenname'][0] : "N/A";
-            echo "<li>Nom complet : $prenom $nom - Email : $email</li>";
+            if (isset($entries[$i]['cn'][0]) && isset($entries[$i]['mail'][0]) && isset($entries[$i]['sn'][0]) && isset($entries[$i]['givenname'][0])) {
+                $cn = $entries[$i]['cn'][0];
+                $email = $entries[$i]['mail'][0];
+                $nom = $entries[$i]['sn'][0];
+                $prenom = $entries[$i]['givenname'][0];
+                echo "<li>Nom complet : $prenom $nom - Email : $email</li>";
+            }
         }
         echo "</ul>";
     } else {
