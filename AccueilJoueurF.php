@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+  $nom= strtolower($_SESSION['joueur_sAMAccountName']);
 // Vérifier si l'utilisateur est connecté en tant que joueur
 if (!isset($_SESSION['joueur_username'])) {
   // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
@@ -35,7 +35,7 @@ if (isset($_SESSION['welcome_message5'])) {
   </video>
   <main>
     <h1></h1>
-    <p>Répertoire : <?php echo htmlspecialchars($_SESSION['joueur_sAMAccountName']) ?> </p>
+    <p>Répertoire : <?php echo htmlspecialchars($nom) ?> </p>
 
     <!-- Section des six boutons géants -->
     <section class="button-grid">
