@@ -258,7 +258,7 @@ if (isset($_SESSION['welcome_message9'])) {
                 });
         }
 
-        function startServiceAjax() {
+          function startServiceAjax() {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
             const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
@@ -275,15 +275,6 @@ if (isset($_SESSION['welcome_message9'])) {
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
-                    return fetch('sendMail.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-                })
-                .then(response => response.text())
-                .then(data => {
-                    // Afficher le message indiquant que les joueurs ont été notifiés
-                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
                 })
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
