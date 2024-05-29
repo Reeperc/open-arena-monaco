@@ -1,3 +1,18 @@
+<?php
+session_start();
+// Vérifier si l'utilisateur est connecté en tant que admin
+if (!isset($_SESSION['organisateur_username'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: ConnexionF.php");
+    exit();
+}
+
+if (isset($_SESSION['welcome_message9'])) {
+    echo "<p style='color: green;'>" . $_SESSION['welcome_message9'] . "</p>";
+    unset($_SESSION['welcome_message9']); // Supprimer la variable de session après l'affichage
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,6 +23,7 @@
     <link rel="stylesheet" href="style.css">
     <?php include('MenuOrganisateurF.php'); ?>
 </head>
+
 
 <body class="config">
     <main>
@@ -81,7 +97,7 @@
 
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
-
+                    
                     <label for="bot-team">Équipe du Bot:</label>
                     <select id="bot-team" name="bot_team" required>
                         <option value="red">Rouge</option>
@@ -90,7 +106,7 @@
 
                     <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
 
-
+                        
                 </form>
             </div>
             <div style="margin-left: 25%;">
@@ -99,9 +115,9 @@
                 <p></p>
                 <p></p>
                 <button class="button" type="button" onclick="addBot()">Ajouter</button>
-                <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
-                <div id="bot-message" class="bot-message"></div>
-                <div id="bot-remove-message" class="bot-remove-message"></div>
+                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                        <div id="bot-message" class="bot-message"></div>
+                        <div id="bot-remove-message" class="bot-remove-message"></div>
             </div>
         </section>
 
@@ -213,7 +229,6 @@
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
 
-            // Envoyer les données à start_service.php
             fetch('start_service.php', {
                     method: 'POST',
                     body: formData
@@ -221,16 +236,6 @@
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
-                    // Envoyer les données à sendMail.php
-                    return fetch('sendMail.php', {
-                        method: 'POST',
-                        body: formData
-                    });
-                })
-                .then(response => response.text())
-                .then(data => {
-                    // Afficher le message indiquant que les joueurs ont été notifiés
-                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
                 })
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
