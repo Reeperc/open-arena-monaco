@@ -49,7 +49,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Échec de la connexion au serveur LDAP.";
     }
-     // Rediriger vers la page CréationCompteJoueur.php
-     header("Location: supprimerJoueur.php");
-     exit();
+    
 }
