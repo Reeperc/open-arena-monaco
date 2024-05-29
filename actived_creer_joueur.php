@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "givenName" => $prenom,
                         "userPassword" => $mot_de_passe,
                         "mail" => $email,
-                        "sAMAccountName" => $prenom,
+                        "sAMAccountName" => strtolower($prenom),
                         'userPrincipalName' => $email,
                         "unicodePwd" => mb_convert_encoding("\"$mot_de_passe\"", 'UTF-16LE'),
                         "adminCount" => array(0),
