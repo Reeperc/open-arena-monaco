@@ -14,7 +14,7 @@
     <h1>Réinitialisation de mot de passe</h1>
 
     <form method="post" class="login-form">
-        <label class="form-label" for="email">Adresse email (doit se terminer par @arena-monaco.fr)</label>
+        <label class="form-label" for="email">Adresse email :</label>
         <input class="form-input" type="email" id="email" name="email" required>
 
         <button class="form-button" type="submit">Envoyer</button>
