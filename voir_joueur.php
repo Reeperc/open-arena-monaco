@@ -5,7 +5,7 @@ $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez
 $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
 $ldap_base_dn = 'DC=arena-monaco, DC=fr'; // Remplacez par votre base DN
 
-// Connexion à l'Active Directoryyy
+// Connexion à l'Active Directory
 $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
 ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
@@ -25,10 +25,10 @@ if ($ldap_conn) {
         echo "<h2>Liste des utilisateurs :</h2>";
         echo "<ul>";
         for ($i = 0; $i < $entries['count']; $i++) {
-            $cn = $entries[$i]['cn'][0];
-            $email = $entries[$i]['mail'][0];
-            $nom = $entries[$i]['sn'][0];
-            $prenom = $entries[$i]['givenname'][0];
+            $cn = isset($entries[$i]['cn'][0]) ? $entries[$i]['cn'][0] : "N/A";
+            $email = isset($entries[$i]['mail'][0]) ? $entries[$i]['mail'][0] : "N/A";
+            $nom = isset($entries[$i]['sn'][0]) ? $entries[$i]['sn'][0] : "N/A";
+            $prenom = isset($entries[$i]['givenname'][0]) ? $entries[$i]['givenname'][0] : "N/A";
             echo "<li>Nom complet : $prenom $nom - Email : $email</li>";
         }
         echo "</ul>";
@@ -41,3 +41,4 @@ if ($ldap_conn) {
 } else {
     echo "Échec de la connexion au serveur LDAP.";
 }
+?>
