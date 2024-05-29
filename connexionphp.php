@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Récupération des entrées LDAP pour les utilisateurs
                 $entries = ldap_get_entries($ldap_conn, $search_result);
-
+                var_dump($entries);
                 // Tentative de liaison avec le DN et le mot de passe fourni par l'utilisateur
                 if ($entries_admin['count'] == 1) {
                     $user_dn = $entries_admin[0]['dn'];
