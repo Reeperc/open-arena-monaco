@@ -35,19 +35,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Message de succès dans une variable de session
                     $_SESSION['message'] = "Suppression de l'utilisateur $email_utilisateur réussie.";
                 } else {
-                    echo "Échec de la suppression de l'utilisateur dans l'Active Directory.";
+                    $_SESSION['message'] = "Échec de la suppression de l'utilisateur dans l'Active Directory.";
                 }
             } else {
-                echo "Utilisateur non trouvé dans l'Active Directory.";
+                $_SESSION['message'] = "Utilisateur non trouvé dans l'Active Directory.";
             }
         } else {
-            echo "Échec de l'authentification LDAP.";
+            $_SESSION['message'] = "Échec de l'authentification LDAP.";
         }
 
         // Fermeture de la connexion LDAP
         ldap_close($ldap_conn);
     } else {
-        echo "Échec de la connexion au serveur LDAP.";
+        $_SESSION['message'] = "Échec de la connexion au serveur LDAP.";
     }
-    
+
+    // Rediriger vers la page CréationCompteJoueur.php
+    header("Location: supprimerJoueur.php");
+    exit();
 }
+?>
