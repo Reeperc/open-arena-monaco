@@ -57,7 +57,7 @@ if (isset($_SESSION['welcome_message9'])) {
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
-            <select id="listeNoms1" name="listeNoms1"></select>
+                 <select id="listeNoms1" name="listeNoms1"></select>
             <select id="listeNoms2" name="listeNoms2"></select>
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
@@ -99,7 +99,7 @@ if (isset($_SESSION['welcome_message9'])) {
 
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
-
+                    
                     <label for="bot-team">Équipe du Bot:</label>
                     <select id="bot-team" name="bot_team" required>
                         <option value="red">Rouge</option>
@@ -108,7 +108,7 @@ if (isset($_SESSION['welcome_message9'])) {
 
                     <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
 
-
+                        
                 </form>
             </div>
             <div style="margin-left: 25%;">
@@ -117,9 +117,9 @@ if (isset($_SESSION['welcome_message9'])) {
                 <p></p>
                 <p></p>
                 <button class="button" type="button" onclick="addBot()">Ajouter</button>
-                <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
-                <div id="bot-message" class="bot-message"></div>
-                <div id="bot-remove-message" class="bot-remove-message"></div>
+                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                        <div id="bot-message" class="bot-message"></div>
+                        <div id="bot-remove-message" class="bot-remove-message"></div>
             </div>
         </section>
 
@@ -258,21 +258,16 @@ if (isset($_SESSION['welcome_message9'])) {
                 });
         }
 
-        function startServiceAjax() {
+          function startServiceAjax() {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
-            const warmup = document.getElementById('warmup-counter').value;
-            const user1 = document.getElementById('listeNoms1').value;
-            const user2 = document.getElementById('listeNoms2').value;
+            const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
 
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
-            formData.append('user1', user1);
-            formData.append('user2', user2);
 
-            // Premier fetch pour start_service.php
             fetch('start_service.php', {
                     method: 'POST',
                     body: formData
@@ -280,23 +275,11 @@ if (isset($_SESSION['welcome_message9'])) {
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
-
-                    // Deuxième fetch pour sendMail.php après le succès du premier fetch
-                    return fetch('sendMail2.php', {
-                        method: 'POST',
-                        body: formData // Réutilisation des mêmes données de formulaire
-                    });
-                })
-                .then(response => response.text())
-                .then(data => {
-                    // Afficher le message de notification des joueurs
-                    document.getElementById('message').innerHTML += "<br>Joueurs notifiés";
                 })
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
                 });
         }
-
 
         function stopServiceAjax() {
             fetch('stop_service.php', {

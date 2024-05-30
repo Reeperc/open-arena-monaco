@@ -7,9 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Configuration pour l'accès à l'Active Directory
     $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
-    $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
+    $ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
     $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
-    $ldap_base_dn = 'DC=arena-monaco, DC=fr'; // Remplacez par votre base DN
+    $ldap_base_dn = 'DC=arena-monaco,DC=fr'; // Remplacez par votre base DN
 
     // Connexion à l'Active Directory
     $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
@@ -35,18 +35,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Message de succès dans une variable de session
                     $_SESSION['message'] = "Suppression de l'utilisateur $email_utilisateur réussie.";
                 } else {
-                    echo "Échec de la suppression de l'utilisateur dans l'Active Directory.";
+                    $_SESSION['message'] = "Échec de la suppression de l'utilisateur dans l'Active Directory.";
                 }
             } else {
-                echo "Utilisateur non trouvé dans l'Active Directory.";
+                $_SESSION['message'] = "Utilisateur non trouvé dans l'Active Directory.";
             }
         } else {
-            echo "Échec de l'authentification LDAP.";
+            $_SESSION['message'] = "Échec de l'authentification LDAP.";
         }
 
         // Fermeture de la connexion LDAP
         ldap_close($ldap_conn);
     } else {
-        echo "Échec de la connexion au serveur LDAP.";
+        $_SESSION['message'] = "Échec de la connexion au serveur LDAP.";
     }
+
+    // Rediriger vers la page supprimerJoueur.php
+    header("Location: supprimerJoueur.php");
+    exit();
 }
+?>

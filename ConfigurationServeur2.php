@@ -1,18 +1,3 @@
-<?php
-session_start();
-// Vérifier si l'utilisateur est connecté en tant que admin
-if (!isset($_SESSION['organisateur_username'])) {
-    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header("Location: ConnexionF.php");
-    exit();
-}
-
-if (isset($_SESSION['welcome_message9'])) {
-    echo "<p style='color: green;'>" . $_SESSION['welcome_message9'] . "</p>";
-    unset($_SESSION['welcome_message9']); // Supprimer la variable de session après l'affichage
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -23,7 +8,6 @@ if (isset($_SESSION['welcome_message9'])) {
     <link rel="stylesheet" href="style.css">
     <?php include('MenuOrganisateurF.php'); ?>
 </head>
-
 
 <body class="config">
     <main>
@@ -58,7 +42,9 @@ if (isset($_SESSION['welcome_message9'])) {
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
             <select id="listeNoms1" name="listeNoms1"></select>
+            <input type="password" id="pass1" name="pass1" placeholder="Mot de passe Raspberry 1">
             <select id="listeNoms2" name="listeNoms2"></select>
+            <input type="password" id="pass2" name="pass2" placeholder="Mot de passe Raspberry 2">
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
 
@@ -167,6 +153,10 @@ if (isset($_SESSION['welcome_message9'])) {
 
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
+
+
+
+
         const maps = {
             0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
             1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
@@ -261,42 +251,36 @@ if (isset($_SESSION['welcome_message9'])) {
         function startServiceAjax() {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
-            const warmup = document.getElementById('warmup-counter').value;
-            const user1 = document.getElementById('listeNoms1').value;
-            const user2 = document.getElementById('listeNoms2').value;
+            const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
 
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
-            formData.append('user1', user1);
-            formData.append('user2', user2);
 
-            // Premier fetch pour start_service.php
-            fetch('start_service.php', {
+            // Envoyer les données à start_service.php
+            fetch('start_service2.php', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
-
-                    // Deuxième fetch pour sendMail.php après le succès du premier fetch
-                    return fetch('sendMail2.php', {
+                    // Envoyer les données à sendMail.php
+                    return fetch('sendMail.php', {
                         method: 'POST',
-                        body: formData // Réutilisation des mêmes données de formulaire
+                        body: formData
                     });
                 })
                 .then(response => response.text())
                 .then(data => {
-                    // Afficher le message de notification des joueurs
-                    document.getElementById('message').innerHTML += "<br>Joueurs notifiés";
+                    // Afficher le message indiquant que les joueurs ont été notifiés
+                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
                 })
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
                 });
         }
-
 
         function stopServiceAjax() {
             fetch('stop_service.php', {

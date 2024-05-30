@@ -1,16 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
+    
 <head>
     <meta charset="UTF-8">
     <title>Contrôle d'utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 5px #000;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            text-shadow: 1px 1px 3px #000;
+        }
+        select, button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 2px 2px 5px #000;
+            transition: all 0.3s ease;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+            transform: scale(1.1);
+        }
+        select {
+            background: #fff;
+            color: #000;
+        }
+        #currentUser1, #currentUser2, #authorizedUser1, #authorizedUser2 {
+            transition: all 0.5s ease;
+        }
+        .fade-in {
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
     <script>
+        // Fonction pour ajouter la classe fade-in lors de la mise à jour du texte
+        function updateElementText(elementId, text) {
+            const element = document.getElementById(elementId);
+            element.classList.remove('fade-in');
+            setTimeout(() => {
+                element.innerText = text || "Aucun";
+                element.classList.add('fade-in');
+            }, 50);
+        }
+
         // Fonction pour récupérer le contenu d'un fichier et mettre à jour l'élément HTML correspondant
         function fetchUserData(url, elementId) {
             const uniqueUrl = `${url}?t=${new Date().getTime()}`;
             fetch(uniqueUrl)
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById(elementId).innerText = data || "Aucun";
+                    updateElementText(elementId, data);
                 });
         }
 
@@ -54,7 +116,7 @@
                     },
                     body: 'user=' + encodeURIComponent(user)
                 }).then(() => {
-                    document.getElementById(`authorizedUser${device}`).innerText = user;
+                    updateElementText(`authorizedUser${device}`, user);
                     checkUser(device);
                 });
             }
@@ -76,16 +138,16 @@
 </head>
 <body>
     <h1>Appareil 1</h1>
-    <h2>Utilisateur actuel : <span id="currentUser1">Chargement...</span></h2>
-    <h2>Utilisateur autorisé : <span id="authorizedUser1">Chargement...</span></h2>
+    <h2>Utilisateur actuel : <span id="currentUser1" class="fade-in">Chargement...</span></h2>
+    <h2>Utilisateur autorisé : <span id="authorizedUser1" class="fade-in">Chargement...</span></h2>
     <select id="selectAuthorizedUser1">
         <option value="">Sélectionner un utilisateur</option>
     </select>
     <button onclick="startControl(1)">Lancer le contrôle pour l'appareil 1</button>
 
     <h1>Appareil 2</h1>
-    <h2>Utilisateur actuel : <span id="currentUser2">Chargement...</span></h2>
-    <h2>Utilisateur autorisé : <span id="authorizedUser2">Chargement...</span></h2>
+    <h2>Utilisateur actuel : <span id="currentUser2" class="fade-in">Chargement...</span></h2>
+    <h2>Utilisateur autorisé : <span id="authorizedUser2" class="fade-in">Chargement...</span></h2>
     <select id="selectAuthorizedUser2">
         <option value="">Sélectionner un utilisateur</option>
     </select>
