@@ -271,6 +271,10 @@ if (isset($_SESSION['welcome_message9'])) {
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
 
+            const formData2 = new FormData();
+            formData2.append('listeNoms1', userList1);
+            formData2.append('listeNoms2', userList2);
+
             fetch('start_service.php', {
                     method: 'POST',
                     body: formData
@@ -281,7 +285,7 @@ if (isset($_SESSION['welcome_message9'])) {
                     // Envoyer les données à sendMail.php
                     return fetch('sendMail.php', {
                         method: 'POST',
-                        body: formData
+                        body: formData2
                     });
                 })
                 .then(response => response.text())
