@@ -17,6 +17,7 @@
             } else {
                 echo "Échec de l'authentification SSH.";
             }
+            header("Location: AccueilAdminF.php");
         } else {
             echo "Échec de la connexion SSH.";
         }
