@@ -276,12 +276,12 @@ if (isset($_SESSION['welcome_message9'])) {
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
                     // Envoyer les données à sendMail.php
-                    return fetch('sendMail.php', {
-                        method: 'POST',
-                        body: formData
-                    });
                 })
-                .then(response => response.text())
+            return fetch('sendMail.php', {
+                method: 'POST',
+                body: formData
+            });
+            .then(response => response.text())
                 .then(data => {
                     // Afficher le message indiquant que les joueurs ont été notifiés
                     document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
