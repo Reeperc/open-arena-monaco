@@ -1,6 +1,8 @@
 <?php
+
 session_start();
-// Vérifier si l'utilisateur est connecté en tant que admin
+
+// Vérifier si l'utilisateur est connecté en tant qu'admin
 if (!isset($_SESSION['organisateur_username'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ConnexionF.php");
@@ -23,7 +25,6 @@ if (isset($_SESSION['welcome_message9'])) {
     <link rel="stylesheet" href="style.css">
     <?php include('MenuOrganisateurF.php'); ?>
 </head>
-
 
 <body class="config">
     <main>
@@ -57,7 +58,7 @@ if (isset($_SESSION['welcome_message9'])) {
         <h2>Contrôle du Serveur</h2>
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
-                 <select id="listeNoms1" name="listeNoms1"></select>
+            <select id="listeNoms1" name="listeNoms1"></select>
             <select id="listeNoms2" name="listeNoms2"></select>
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
@@ -99,7 +100,7 @@ if (isset($_SESSION['welcome_message9'])) {
 
                     <label for="bot-level">Niveau du Bot:</label>
                     <input type="number" id="bot-level" name="bot_level" min="1" max="5" value="1" required>
-                    
+
                     <label for="bot-team">Équipe du Bot:</label>
                     <select id="bot-team" name="bot_team" required>
                         <option value="red">Rouge</option>
@@ -107,8 +108,6 @@ if (isset($_SESSION['welcome_message9'])) {
                     </select>
 
                     <div style="margin-left: 20px;"> <!-- Nouvelle division pour le compteur de niveau -->
-
-                        
                 </form>
             </div>
             <div style="margin-left: 25%;">
@@ -117,9 +116,9 @@ if (isset($_SESSION['welcome_message9'])) {
                 <p></p>
                 <p></p>
                 <button class="button" type="button" onclick="addBot()">Ajouter</button>
-                        <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
-                        <div id="bot-message" class="bot-message"></div>
-                        <div id="bot-remove-message" class="bot-remove-message"></div>
+                <button class="delete-button" type="button" onclick="removeBot()">Supprimer</button>
+                <div id="bot-message" class="bot-message"></div>
+                <div id="bot-remove-message" class="bot-remove-message"></div>
             </div>
         </section>
 
@@ -258,26 +257,51 @@ if (isset($_SESSION['welcome_message9'])) {
                 });
         }
 
-          function startServiceAjax() {
+        function startServiceAjax() {
             const map = document.getElementById('map-select').value;
             const mode = document.getElementById('mode-select').value;
             const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
+            const selectedUsers = [
+                document.getElementById('listeNoms1').value,
+                document.getElementById('listeNoms2').value
+            ];
 
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
+            formData.append('selectedUsers', selectedUsers);
 
             fetch('start_service.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(data => {
-                    document.getElementById('message').innerHTML = data;
+                    document.getElementById('message').innerHTML = data.message;
+                    if (data.status === 'success') {
+                        sendMails(selectedUsers);
+                    }
                 })
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
+                });
+        }
+
+        function sendMails(selectedUsers) {
+            const formData = new FormData();
+            formData.append('selectedUsers', JSON.stringify(selectedUsers));
+
+            fetch('sendMail.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'envoi des emails :', error);
                 });
         }
 

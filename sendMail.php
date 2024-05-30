@@ -1,79 +1,30 @@
 <?php
-//afficher toutes les erreurs dans le navigateur
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-include('start_service.php');
-include('ConfigurationServeur4.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userList1 = escapeshellarg($_POST['listeNoms1']);
-    $userList2 = escapeshellarg($_POST['listeNoms2']);
-
-
-    // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou afficher un message
-    echo "Les joueurs ont été notifiés du lancement de la partie";
-} else {
-    // Redirige vers la page principale si l'accès n'est pas via POST
-    echo "Echec de l'envoi des mails.";
-    exit;
+function sendMail($to, $subject, $message, $headers)
+{
+    // Utilisation de la fonction mail() pour envoyer l'email
+    return mail($to, $subject, $message, $headers);
 }
-//chargement des classes PHPMailerrr
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // à verifier
+// Récupération des adresses e-mail sélectionnées à partir du POST
+$selectedUsers = json_decode($_POST['selectedUsers']);
 
-//creation d'une instance de PHPMailer et config SMTP
-$mail = new PHPMailer(true);
-try {
-    // Configuration de PHPMailer pour utiliser SMTP
-    $mail->isSMTP(); //indique à PHPMailer d'utiliser smtp pour envoyer les mails
-    $mail->Host = '195.221.30.17'; // adresse IP de du serveur SMTP (serveur mail quoi)
-    $mail->SMTPAuth = false; // ou true s'il faut s'authentifier
-    // $mail->Username = 'username'; //  nom d'utilisateur SMTP
-    // $mail->Password = 'password'; // mot de passe SMTP
-    $mail->Port = 25; // port 25, port 587 pr tls
-    $mail->CharSet = 'UTF-8';
-    $mail->SMTPSecure = ''; // Désactivé, utiliser 'tls' ou 'ssl' si besoin
-    $mail->SMTPOptions = array( //ser t à désactiver la vérification des certificats SSL
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
+$subject = 'Notification de démarrage de partie';
+$message = 'La partie va commencer. Rejoignez-nous!';
+$headers = 'From: noreply@arena-monaco.fr' . "\r\n" .
+    'Reply-To: noreply@arena-monaco.fr' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
 
-    );
+$success = true;
 
-    // Active le débogage SMTP
-    // 0 = off (for production use)
-    // 1 = messages client 
-    // 2 = messages client et serveurs 
-    // 3= le niveau de debugging le plus détaillé .
-    $mail->SMTPDebug = 3;
+foreach ($selectedUsers as $to) {
+    if (!sendMail($to, $subject, $message, $headers)) {
+        $success = false;
+        error_log('Échec de l\'envoi de l\'email à ' . $to);
+    }
+}
 
-    // Expéditeur
-    $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
-
-    // Destinataire
-    $user1 = 'user1'; // Nom d'utiilisateur 1 récupéré dans le code d'antoine
-    $user2 = 'user2'; // Nom d'utiilisateur 2 __pareil
-
-    $mail->addAddress($userList1);
-    $mail->addAddress($userList1);
-
-    // $mail->addAddress($user1 . '@arena-monaco.fr', $user1); bof bof
-    // $mail->addAddress($user2 . '@arena-monaco.fr', $user2);
-    // $mail->addAddress('roger@arena-monaco.fr', 'Roger'); exemple pr un utuilisateur (pour qui ça marche mais pas de l'AD)
-
-    // contenu de l'email
-    $mail->isHTML(true); // définir le format de l'email à HTML
-    $mail->Subject = 'Allez vous échauffez!'; //on evite les accents car non lus sur OE
-    $mail->Body    = 'La<b> Monaco Arena </b> est ouverte et la partie va bientot debuter. Vous pouvez vous echauffer avec les autres joueurs';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+if ($success) {
+    echo 'Emails envoyés avec succès à tous les utilisateurs sélectionnés.';
+} else {
+    echo 'Échec de l\'envoi de certains emails. Veuillez vérifier les logs pour plus de détails.';
 }
