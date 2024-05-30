@@ -3,7 +3,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include('start_service.php');
+// include('ConfigurationServeur.php');
+
 
 //chargement des classes PHPMailerrr
 use PHPMailer\PHPMailer\PHPMailer;
@@ -43,12 +44,12 @@ try {
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
     // Destinataire
-    $user1 = 'user1'; // Nom d'utiilisateur 1 récupéré dans le code d'antoine
-    $user2 = 'user2'; // Nom d'utiilisateur 2 __pareil
+    $user1 = isset($_POST['user1']) ? $_POST['user1'] : '';
+    $user2 = isset($_POST['user2']) ? $_POST['user2'] : '';
 
-    $mail->addAddress($user1 . '@arena-monaco.fr', $user1);
-    $mail->addAddress($user2 . '@arena-monaco.fr', $user2);
-    // $mail->addAddress('roger@arena-monaco.fr', 'Roger'); exemple pr un utuilisateur (pour qui ça marche mais pas de l'AD)
+    $mail->addAddress($user1);
+    $mail->addAddress($user2);
+    // $mail->addAddress('roger@arena-monaco.fr'); //exemple pr un utuilisateur (pour qui ça marche mais pas de l'AD)
 
     // contenu de l'email
     $mail->isHTML(true); // définir le format de l'email à HTML
