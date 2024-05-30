@@ -263,29 +263,34 @@ if (isset($_SESSION['welcome_message9'])) {
             const mode = document.getElementById('mode-select').value;
             const warmup = document.getElementById('warmup-counter').value; // Récupérer la valeur du temps de warmup
 
+            const userList1 = document.getElementById('listeNoms1');
+            const userList2 = document.getElementById('listeNoms2');
+
             const formData = new FormData();
             formData.append('selected-map', map);
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
+
+            const formData2 = new FormData();
+            formData2.append('listeNoms1', userList1);
+            formData2.append('listeNoms2', userList2);
 
             fetch('start_service.php', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.text())
+
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
                     // Envoyer les données à sendMail.php
                     return fetch('sendMail.php', {
                         method: 'POST',
-                        body: formData
+                        body: formData2
                     });
                 })
                 .then(response => response.text())
-                .then(data => {
-                    // Afficher le message indiquant que les joueurs ont été notifiés
-                    document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
-                })
+
 
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
