@@ -18,15 +18,15 @@ if ($ldap_conn) {
     if ($ldap_bind) {
         // Recherche des utilisateurs avec le filtre objectClass=user
         $filter = "(objectClass=user)";
-        $attributes = array("samaccountname");
+        $attributes = array("mail");
         $search = ldap_search($ldap_conn, $ldap_base_dn, $filter, $attributes);
         $entries = ldap_get_entries($ldap_conn, $search);
 
-        // Récupération des noms de compte (sAMAccountName)
+        // Récupération des noms de compte (mail)
         $users = array();
         for ($i = 0; $i < $entries['count']; $i++) {
-            if (isset($entries[$i]['samaccountname'][0])) {
-                $users[] = $entries[$i]['samaccountname'][0];
+            if (isset($entries[$i]['mail'][0])) {
+                $users[] = $entries[$i]['mail'][0];
             }
         }
         // Encodage en JSON et affichage
