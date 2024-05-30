@@ -1,5 +1,5 @@
 <?php
-session_start(); // Démarrer la session
+session_start(); // Démarrer la sessionnn
 
 // Inclure l'autoloader de Composer
 require 'vendor/autoload.php';
