@@ -100,7 +100,7 @@
                             // Parcourir les utilisateurs et créer les options de la liste déroulante
                             for ($i = 0; $i < $entries['count']; $i++) {
                                 $email = isset($entries[$i]['mail'][0]) ? $entries[$i]['mail'][0] : '';
-                                $nom_prenom = isset($entries[$i]['givenname'][0]) ? $entries[$i]['givenname'][0] . ' ' . $entries[$i]['sn'][0] : $entries[$i]['sn'][0];
+                                $nom_prenom = (isset($entries[$i]['givenname'][0]) ? $entries[$i]['givenname'][0] . ' ' : '') . (isset($entries[$i]['sn'][0]) ? $entries[$i]['sn'][0] : '');
                                 echo "<option value='$email'>$nom_prenom ($email)</option>";
                             }
                         } else {

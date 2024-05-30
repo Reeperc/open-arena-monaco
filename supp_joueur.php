@@ -7,9 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Configuration pour l'accès à l'Active Directory
     $ldap_server = 'ldap://195.221.30.4'; // Remplacez par votre serveur LDAP
-    $ldap_user = 'cn=Administrateur, cn=Users, dc=arena-monaco, dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
+    $ldap_user = 'cn=Administrateur,cn=Users,dc=arena-monaco,dc=fr'; // Remplacez par votre nom d'utilisateur LDAP
     $ldap_password = '1234567890A@'; // Remplacez par votre mot de passe LDAP
-    $ldap_base_dn = 'DC=arena-monaco, DC=fr'; // Remplacez par votre base DN
+    $ldap_base_dn = 'DC=arena-monaco,DC=fr'; // Remplacez par votre base DN
 
     // Connexion à l'Active Directory
     $ldap_conn = ldap_connect($ldap_server) or die("Impossible de se connecter au serveur LDAP.");
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['message'] = "Échec de la connexion au serveur LDAP.";
     }
 
-    // Rediriger vers la page CréationCompteJoueur.php
+    // Rediriger vers la page supprimerJoueur.php
     header("Location: supprimerJoueur.php");
     exit();
 }
