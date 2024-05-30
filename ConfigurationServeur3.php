@@ -1,3 +1,18 @@
+<?php
+session_start();
+// Vérifier si l'utilisateur est connecté en tant que admin
+if (!isset($_SESSION['organisateur_username'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: ConnexionF.php");
+    exit();
+}
+
+if (isset($_SESSION['welcome_message9'])) {
+    echo "<p style='color: green;'>" . $_SESSION['welcome_message9'] . "</p>";
+    unset($_SESSION['welcome_message9']); // Supprimer la variable de session après l'affichage
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,6 +23,7 @@
     <link rel="stylesheet" href="style.css">
     <?php include('MenuOrganisateurF.php'); ?>
 </head>
+
 
 <body class="config">
     <main>
@@ -42,9 +58,7 @@
         <div style="display: flex; justify-content: space-between;">
             <button type="button" onclick="startServiceAjax()">Ouvrir la partie</button>
             <select id="listeNoms1" name="listeNoms1"></select>
-            <input type="password" id="pass1" name="pass1" placeholder="Mot de passe Raspberry 1">
             <select id="listeNoms2" name="listeNoms2"></select>
-            <input type="password" id="pass2" name="pass2" placeholder="Mot de passe Raspberry 2">
             <button type="button" onclick="stopServiceAjax()">Fermer la partie</button>
         </div>
 
@@ -153,10 +167,6 @@
 
         // Appeler la fonction pour récupérer les utilisateurs au chargement de la page
         document.addEventListener('DOMContentLoaded', fetchUsersFromAD);
-
-
-
-
         const maps = {
             0: ['czest1dm', 'chaos2', 'mlca1', 'oa_dm1'],
             1: ['am_lavactf', 'am_lavactfxl', 'am_underworks2', 'cbctf1', 'ctf_compromise', 'ctf_gate1', 'ctf_inyard', 'delta'],
@@ -258,8 +268,7 @@
             formData.append('selected-mode', mode);
             formData.append('selected-warmup', warmup);
 
-            // Envoyer les données à start_service.php
-            fetch('start_service2.php', {
+            fetch('start_service.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -277,6 +286,7 @@
                     // Afficher le message indiquant que les joueurs ont été notifiés
                     document.getElementById('message').innerHTML += "<br>Les joueurs ont été notifiés du lancement de la partie";
                 })
+
                 .catch(error => {
                     document.getElementById('message').innerHTML = 'Erreur : ' + error;
                 });

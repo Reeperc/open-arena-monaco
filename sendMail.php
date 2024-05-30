@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 include('start_service.php');
-
+include('ConfigurationServeur3.php');
 //chargement des classes PHPMailerrr
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -46,8 +46,11 @@ try {
     $user1 = 'user1'; // Nom d'utiilisateur 1 récupéré dans le code d'antoine
     $user2 = 'user2'; // Nom d'utiilisateur 2 __pareil
 
-    $mail->addAddress($user1 . '@arena-monaco.fr', $user1);
-    $mail->addAddress($user2 . '@arena-monaco.fr', $user2);
+    $mail->addAddress($userList1);
+    $mail->addAddress($userList1);
+
+    // $mail->addAddress($user1 . '@arena-monaco.fr', $user1); bof bof
+    // $mail->addAddress($user2 . '@arena-monaco.fr', $user2);
     // $mail->addAddress('roger@arena-monaco.fr', 'Roger'); exemple pr un utuilisateur (pour qui ça marche mais pas de l'AD)
 
     // contenu de l'email
