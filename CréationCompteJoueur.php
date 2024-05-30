@@ -8,7 +8,7 @@ if (isset($_SESSION['message'])) {
   unset($_SESSION['message']);
 }
 /*
-// Afficher le message d'erreur de creation de compte s'il est présent dans l'URL
+// Afficher le message d'erreur de creation de compte s'il est présent danns l'URL
 if (isset($_GET['errorMessage'])) {
   echo "<script>window.onload = function() { alert('" . $_GET['errorMessage'] . "'); }</script>";
 }
