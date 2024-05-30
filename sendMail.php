@@ -5,6 +5,19 @@ error_reporting(E_ALL);
 
 include('start_service.php');
 include('ConfigurationServeur3.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userList1 = escapeshellarg($_POST['listeNoms1']);
+    $userList2 = escapeshellarg($_POST['listeNoms2']);
+
+
+    // Vous pouvez rediriger l'utilisateur vers une page de confirmation ou afficher un message
+    echo "Les joueurs ont été notifiés du lancement de la partie";
+} else {
+    // Redirige vers la page principale si l'accès n'est pas via POST
+    echo "Echec de l'envoi des mails.";
+    exit;
+}
 //chargement des classes PHPMailerrr
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
