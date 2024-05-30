@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $email_parts[0];
 
     // Informations de connexion SSH
-    $ssh_host = '195.221.30.4'; // Remplacez par l'adresse de votre serveur
+    $ssh_host = '195.221.30.17'; // Remplacez par l'adresse de votre serveur
     $ssh_port = 22; // Port par défaut pour SSH
-    $ssh_user = 'votre_utilisateur_ssh'; // Remplacez par le nom d'utilisateur SSH
-    $ssh_password = 'votre_mot_de_passe_ssh'; // Remplacez par le mot de passe SSH
+    $ssh_user = 'rt'; // Remplacez par le nom d'utilisateur SSH
+    $ssh_password = 'rt'; // Remplacez par le mot de passe SSH
 
     // Connexion SSH
     $connection = ssh2_connect($ssh_host, $ssh_port);
