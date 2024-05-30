@@ -267,7 +267,7 @@
                 .then(data => {
                     document.getElementById('message').innerHTML = data;
                     // Envoyer les données à sendMail.php
-                    return fetch('sendMail2.php', {
+                    return fetch('sendMail.php', {
                         method: 'POST',
                         body: formData
                     });
