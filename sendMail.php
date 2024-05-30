@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 include('start_service.php');
-include('ConfigurationServeur3.php');
+include('ConfigurationServeur4.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userList1 = escapeshellarg($_POST['listeNoms1']);
