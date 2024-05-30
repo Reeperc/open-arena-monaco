@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include('start_service.php');
+
 
 //chargement des classes PHPMailerrr
 use PHPMailer\PHPMailer\PHPMailer;
