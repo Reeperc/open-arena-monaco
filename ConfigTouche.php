@@ -120,7 +120,7 @@ if (isset($_SESSION['welcome_message5'])) {
     <source src="videos/video6.mp4" type="video/mp4">
   </video>
   <main>
-    <h2>Formulaire de génération de fichier</h2>
+    <h2>Configure tes touches ici</h2>
 
     <div class="form-container">
       <form id="configForm" action="config.php" method="post">
