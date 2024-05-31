@@ -1,6 +1,6 @@
 <?php
 session_start();
-  $nom= strtolower($_SESSION['joueur_sAMAccountName']);
+$nom = strtolower($_SESSION['joueur_sAMAccountName']);
 // Vérifier si l'utilisateur est connecté en tant que joueur
 if (!isset($_SESSION['joueur_username'])) {
   // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
@@ -37,41 +37,11 @@ if (isset($_SESSION['welcome_message5'])) {
     <h1></h1>
     <p>Joueur : <?php echo $nom ?> </p>
 
-    <!-- Section des six boutons géants -->
+    <!-- Section des six boutons géantss -->
     <section class="button-grid">
       <a href="ConfigTouche.php" class="button-item-joueur">
         <img src="image.jpg" alt="">
         <p>Configurer les touches</p>
-      </a>
-
-      <a href="LancerJeu.php" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p>
-      </a>
-
-      <a href="CréationCompteJoueur.php" class="button-item-joueur">
-        <img src="" alt="">
-        <p>un bouton</p>
-      </a>
-
-      <a href="ArretJeu.ph" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p>
-      </a>
-
-      <a href="CompétitionTEST.php" class="button-item">
-        <img src="" alt="">
-        <p>un boutonn</p>
-      </a>
-
-      <a href="ListmapsAdmin.php" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p>
-      </a>
-
-      <a href="StatutService.ph" class="button-item">
-        <img src="" alt="">
-        <p>un bouton</p>
       </a>
     </section>
   </main>
