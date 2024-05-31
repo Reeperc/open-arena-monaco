@@ -8,7 +8,6 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
-$response = array('status' => '', 'message' => '');
 try {
     $mail->isSMTP();
     $mail->Host = '195.221.30.17'; // Adresse IP du serveur de messagerie
@@ -24,6 +23,7 @@ try {
             'allow_self_signed' => true
         )
     );
+    $mail->SMTPDebug = 3;
 
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
@@ -33,17 +33,13 @@ try {
     foreach ($to as $address) {
         $mail->addAddress(trim($address)); // Ajoute chaque adresse au message
     }
-
+    // $mail->addAddress($_POST['to']); // pr une seule addresse
     $mail->Subject = $_POST['subject']; // Objet
     $mail->Body    = $_POST['body']; // Corps du message
     $mail->isHTML(true); // Définir le format de l'email à HTML
 
     $mail->send();
-    $response['status'] = 'success';
-    $response['message'] = 'Message envoyé';
+    echo 'Message envoyé';
 } catch (Exception $e) {
-    $response['status'] = 'error';
-    $response['message'] = 'Message non envoyé. Mailer Error: ' . $mail->ErrorInfo;
+    echo 'Message non envoyé. Mailer Error: ', $mail->ErrorInfo;
 }
-
-echo json_encode($response);
