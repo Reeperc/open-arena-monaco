@@ -5,7 +5,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: 'send_email.php',
+            url: 'sendMail-form-sent2.php',
             data: $(this).serialize(),
             success: function (response) {
                 $('#result').html(response.message);
