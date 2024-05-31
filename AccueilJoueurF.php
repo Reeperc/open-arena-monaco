@@ -122,15 +122,15 @@ if (isset($_SESSION['welcome_message5'])) {
     <!-- Section des six boutons géants -->
     <section class="button-grid">
       <a href="ConfigTouche.php" class="button-item-joueur">
-        <img src="image.jpg" alt="">
+        <!-- <img src="image.jpg" alt=""> -->
         <p>Configurer les touches</p>
       </a>
       <a href="ListMapPourJoueur.php" class="button-item-joueur">
-        <img src="image.jpg" alt="">
+        <!-- <img src="image.jpg" alt=""> -->
         <p>Liste des cartes</p>
       </a>
       <a href="ModesJeuxPourJoueur.php" class="button-item-joueur">
-        <img src="image.jpg" alt="">
+        <!-- <img src="image.jpg" alt=""> -->
         <p>Modes de jeux</p>
       </a>
       <!-- Ajoutez d'autres boutons ici -->
