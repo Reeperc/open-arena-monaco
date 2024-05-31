@@ -2,7 +2,7 @@
 session_start();
 // Vérifier si l'utilisateur est connecté en tant que joueur
 
-
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
