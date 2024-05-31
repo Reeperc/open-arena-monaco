@@ -80,19 +80,7 @@ if (isset($_SESSION['welcome_message'])) {
                     <li>am_lavactfxl</li>
                     <li>ctf_inyard</li>
                     <li>delta</li>
-                    <form action="Chargerdelta.php" method="get">
-                        <input type="submit" value="charger">
-                    </form>
                     <li>delta2</li>
-                    <form action='' method="post">
-                        <input type="submit" name="map" value="delta">
-                    </form>
-                    <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $map = $_POST["map"];
-                        charger_map($map);
-                    }
-
-                    ?>
                     <li>hydronext2</li>
                 </ul>
             </section>
