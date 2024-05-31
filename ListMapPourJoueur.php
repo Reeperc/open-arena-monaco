@@ -1,16 +1,7 @@
 <?php
 session_start();
 // Vérifier si l'utilisateur est connecté en tant que joueur
-if (!isset($_SESSION['joueur_username'])) {
-    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header("Location: ConnexionF.php");
-    exit();
-}
 
-if (isset($_SESSION['welcome_message5'])) {
-    echo "<p style='color: green;'>" . $_SESSION['welcome_message5'] . "</p>";
-    unset($_SESSION['welcome_message5']); // Supprimer la variable de session après l'affichage
-}
 
 
 <!DOCTYPE html>
