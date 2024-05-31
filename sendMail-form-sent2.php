@@ -1,5 +1,4 @@
 <?php
-// afficher toutes les erreurs dans le navigateur
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -9,13 +8,13 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
-$response = [];
-
+$response = array('status' => '', 'message' => '');
 try {
     $mail->isSMTP();
-    $mail->Host = '195.221.30.17';
+    $mail->Host = '195.221.30.17'; // Adresse IP du serveur de messagerie
     $mail->SMTPAuth = false;
-    $mail->Port = 25;
+    $mail->Port = 25; // ou 587 si vous utilisez TLS
+
     $mail->CharSet = 'UTF-8';
     $mail->SMTPSecure = '';
     $mail->SMTPOptions = array(
@@ -26,27 +25,25 @@ try {
         )
     );
 
-    $mail->SMTPDebug = 0;
-
     $mail->setFrom('noreply@arena-monaco.fr', 'Monaco Arena');
 
-    $user1 = isset($_POST['user1']) ? $_POST['user1'] : '';
-    $user2 = isset($_POST['user2']) ? $_POST['user2'] : '';
+    // Récupérer les données du formulaire-------------------------------------------
+    // Traitement des adresses email multiples
+    $to = explode(',', $_POST['to']); // Sépare les adresses par des virgules
+    foreach ($to as $address) {
+        $mail->addAddress(trim($address)); // Ajoute chaque adresse au message
+    }
 
-    $mail->addAddress($user1);
-    $mail->addAddress($user2);
-
-    $mail->isHTML(true);
-    $mail->Subject = 'Allez vous échauffez!';
-    $mail->Body    = 'La<b> Monaco Arena </b> est ouverte et la partie va bientot debuter. Vous pouvez vous echauffer avec les autres joueurs';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $_POST['subject']; // Objet
+    $mail->Body    = $_POST['body']; // Corps du message
+    $mail->isHTML(true); // Définir le format de l'email à HTML
 
     $mail->send();
     $response['status'] = 'success';
-    $response['message'] = 'Message has been sent';
+    $response['message'] = 'Message envoyé';
 } catch (Exception $e) {
     $response['status'] = 'error';
-    $response['message'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    $response['message'] = 'Message non envoyé. Mailer Error: ' . $mail->ErrorInfo;
 }
 
 echo json_encode($response);
