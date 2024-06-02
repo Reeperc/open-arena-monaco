@@ -1,12 +1,3 @@
-<?php
-// Autres codes PHP si nécessaire
-session_start();
-// Afficher le message de déconnexion s'il est présent dans l'URL
-if (isset($_GET['logout_message'])) {
-  echo "<script>window.onload = function() { alert('" . $_GET['logout_message'] . "'); }</script>";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,18 +10,31 @@ if (isset($_GET['logout_message'])) {
 
 <body>
   <link rel="stylesheet" href="style.css">
-  <?php include('MenuVisiteurF.php'); ?>
+
+  <!-- Contenu de MenuVisiteurF.php -->
+  <!-- Ajoutez ici le contenu HTML de MenuVisiteurF.php -->
 
   <div class="wrapper">
     <div class="content">
-
       <video autoplay loop muted playsinline id="background-video">
         <source src="videos/video2.mp4" type="video/mp4">
       </video>
     </div>
 
-    <?php include('FooterF.php'); ?>
+    <!-- Contenu de FooterF.php -->
+    <!-- Ajoutez ici le contenu HTML de FooterF.php -->
   </div>
+
+  <!-- Script pour afficher le message de déconnexion -->
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const logoutMessage = urlParams.get('logout_message');
+      if (logoutMessage) {
+        alert(logoutMessage);
+      }
+    };
+  </script>
 </body>
 
 </html>
