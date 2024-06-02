@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site web</title>
+</head>
+
+<body>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Contenu de MenuVisiteurF.php -->
+  <!-- Ajoutez ici le contenu HTML de MenuVisiteurF.php -->
+  <header>
+    <a href="index.php">
+      <img src="images/akalogo.png" alt="Logo du site">
+    </a>
+    <nav>
+      <a href="ModeJeu.php" class="bouton-dore">Modes de jeu</a>
+      <a href="Listemaps.php" class="bouton-orange">Liste des cartes</a>
+      <a href="Tournois.php" class="bouton-bleu">Tournois</a>
+      <a href="ConnexionF.php" class="accueil-link bouton-vert">Connexion</a>
+    </nav>
+  </header>
+
+  <div class="wrapper">
+    <div class="content">
+      <video autoplay loop muted playsinline id="background-video">
+        <source src="videos/video2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- Contenu de FooterF.php -->
+    <!-- Ajoutez ici le contenu HTML de FooterF.php -->
+    <footer>
+      <article>
+          <h3>Qui sommes-nous ?</h3>
+          <p>Bienvenue sur le site officiel de la plus grande compétition de toute l'histoire du jeu Open Arena ! ce tournois opposera les meilleures équipes de chacunes de ces villes : Monaco, Rouen, Paris et Montcuq.</p>
+  
+          <h3>Remerciements</h3>
+          <p>Merci bien évidemment à Aurélien, Marc, Antoine, Auriace, Baptiste et Taher et pour leur soutien infaillible dans cette mission, et pour leur dévouement sur la configuration du serveur !</p>
+          <p>Nous souhaitons également remercier l'ESIGELEC de nous avoir confié ce projet, digne d'étudiants exceptionnels comme ceux de notre équipe.</p>
+      </article>
+  
+  
+      Ce site a été créé en partenariat avec OpenArena, dans le cadre du projet S8 des étudiants de l'ESIGELEC.
+  
+  </footer>
+  </div>
+
+  <!-- Script pour afficher le message de déconnexion -->
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const logoutMessage = urlParams.get('logout_message');
+      if (logoutMessage) {
+        alert(logoutMessage);
+      }
+    };
+  </script>
+</body>
+
+</html>
