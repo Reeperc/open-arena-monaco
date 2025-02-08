@@ -4,7 +4,7 @@
 Ce site a été conçu dans le cadre d'un projet de fin d'année par un groupe de 6 étudiants.
 
 ### Description
-Le projet simule un Championnat de Quake Français entre les villes suivantes : Rouen, MQ, Paris et Monaco. Notre équipe représente les arènes de Monaco. Nous avons configuré un réseau local comprenant différents serveurs (DNS, jeu, web, Active Directory) pour permettre aux joueurs de s'affronter. Les deux meilleurs champions de chaque ville affronteront ensuite les finalistes des autres villes.
+Le projet simule un Championnat de Quake Français entre les villes suivantes : Rouen, MQ, Paris et Monaco. Notre équipe représente les arènes de Monaco. Nous avons configuré un réseau local comprenant différents serveurs (DNS, jeu, web, Active Directory et Messagerie) pour permettre aux joueurs de s'affronter. Les deux meilleurs champions de chaque ville affronteront ensuite les finalistes des autres villes.
 
 ### Fonctionnalités du Site
 La page de connexion permet d'accéder à trois types de sessions :
