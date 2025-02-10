@@ -29,11 +29,12 @@ La page de connexion permet d'accéder à trois types de sessions :
 Les opérations de connexion étant directement liées à l'Active Directory d'un serveur local, le site ne sera accessible qu'en mode visiteur en dehors du réseau local de jeu.
 
 ## Instructions pour le Déploiement
-### Pré-requis
+### Pré-requis/ Outils utilisés
 - Serveur DNS configuré
 - Raspberry pi
 - Serveur de jeu
 - Serveur web
+- Serveur de messagerie
 - Active Directory
 
 ### Installation
